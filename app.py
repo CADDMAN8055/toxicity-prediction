@@ -12,6 +12,30 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors, AllChem, Draw, Lipinski, Crippen
 from rdkit.Chem.rdMolDescriptors import CalcMolFormula
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve
+import json
+import os
+
+# Load external database files
+@st.cache_data
+def load_database():
+    """Load the 2800+ compound database"""
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    
+    # Load validated experimental data (54 compounds with exact LD50)
+    validated_path = os.path.join(base_path, "validated_experimental.json")
+    with open(validated_path, "r") as f:
+        validated_data = json.load(f)
+    
+    # Load drug names lookup (2787 FDA approved drugs)
+    lookup_path = os.path.join(base_path, "drug_names_lookup.json")
+    with open(lookup_path, "r") as f:
+        drug_lookup = json.load(f)
+    
+    return validated_data, drug_lookup
+
+VALIDATED_DATA, DRUG_LOOKUP = load_database()
+DB_SIZE = 2841
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -24,7 +48,7 @@ st.set_page_config(
 
 # Title
 st.markdown("""
-<h1 style='text-align: center; color: #1f77b4;'>🔬 Toxicity & Dose Prediction System</h1>
+<h1 style='text-align: center; color: #1f77b4;'>🔬 Toxicity & Dose Prediction System (2841+ compounds)</h1>
 <p style='text-align: center; font-size: 1.2rem; color: #666;'>QSAR-based prediction with VALIDATION MATRIX • TP/TN/FP/FN • Accuracy & Precision</p>
 """, unsafe_allow_html=True)
 
@@ -853,6 +877,22 @@ with tab3:
         preset = st.selectbox("Presets:", ["Custom"] + list(presets.keys()))
         if preset != "Custom":
             smiles_input = presets[preset]
+    
+    # Database lookup check
+    if smiles_input:
+        smile = smiles_input.strip()
+        in_database = smile in DRUG_LOOKUP
+        in_validated = any(d['SMILES'] == smile for d in VALIDATED_DATA)
+        
+        if in_validated:
+            for d in VALIDATED_DATA:
+                if d['SMILES'] == smile:
+                    st.success(f"✅ **{d['Drug']}** — Experimental LD50: **{d['Actual_LD50']} mg/kg** ({d['Source']})")
+                    break
+        elif in_database:
+            st.success(f"✅ **{DRUG_LOOKUP[smile]}** — Found in database ({DB_SIZE}+ FDA approved compounds)")
+        else:
+            st.info(f"🔍 Novel compound — Not in database, using QSAR prediction")
     
     with col2:
         st.markdown("")

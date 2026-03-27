@@ -1,6 +1,10 @@
 """
-Toxicity & Dose Prediction App - WITH VALIDATION
-Complete solution with confusion matrix, TP/TN/FP/FN, accuracy, precision
+Toxicity & Dose Prediction - COMPREHENSIVE MULTI-ENDPOINT SYSTEM
+Features:
+- LD50, NOAEL, LOAEL, NOEL, MAT predictions
+- Acute, Subacute, Subchronic duration layers
+- Ensemble accuracy improvement
+- Complete Excel export with all endpoints
 """
 
 import streamlit as st
@@ -11,1087 +15,571 @@ import plotly.graph_objects as go
 from rdkit import Chem
 from rdkit.Chem import Descriptors, AllChem, Draw, Lipinski, Crippen
 from rdkit.Chem.rdMolDescriptors import CalcMolFormula
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 import json
 import os
-
-# Load external database files
-@st.cache_data
-def load_database():
-    """Load the 2800+ compound database"""
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    
-    # Load validated experimental data (54 compounds with exact LD50)
-    validated_path = os.path.join(base_path, "validated_experimental.json")
-    with open(validated_path, "r") as f:
-        validated_data = json.load(f)
-    
-    # Load drug names lookup (2787 FDA approved drugs)
-    lookup_path = os.path.join(base_path, "drug_names_lookup.json")
-    with open(lookup_path, "r") as f:
-        drug_lookup = json.load(f)
-    
-    return validated_data, drug_lookup
-
-VALIDATED_DATA, DRUG_LOOKUP = load_database()
-DB_SIZE = 2841
-
 import warnings
 warnings.filterwarnings('ignore')
 
-# Page config
-st.set_page_config(
-    page_title="🔬 Toxicity Prediction - Validated",
-    page_icon="🔬",
-    layout="wide"
-)
+st.set_page_config(page_title="🔬 Comprehensive Toxicity Prediction", page_icon="🔬", layout="wide")
 
-# Title
+# ============================================================
+# LOAD COMPREHENSIVE TOXICITY DATABASE
+# ============================================================
+@st.cache_data
+def load_comprehensive_data():
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    
+    # Multi-endpoint lookup (49 compounds with full toxicity profiles)
+    with open(os.path.join(base_path, "multi_endpoint_lookup.json"), "r") as f:
+        multi_endpoint = json.load(f)
+    
+    # Comprehensive toxicity data (CSV for pandas)
+    df = pd.read_csv(os.path.join(base_path, "comprehensive_toxicity_data.csv"))
+    
+    return multi_endpoint, df
+
+MULTI_ENDPOINT, COMPREHENSIVE_DF = load_comprehensive_data()
+
 st.markdown("""
-<h1 style='text-align: center; color: #1f77b4;'>🔬 Toxicity & Dose Prediction System (2841+ compounds)</h1>
-<p style='text-align: center; font-size: 1.2rem; color: #666;'>QSAR-based prediction with VALIDATION MATRIX • TP/TN/FP/FN • Accuracy & Precision</p>
+<h1 style='text-align: center; color: #1f77b4;'>🔬 Comprehensive Toxicity & Dose Prediction System</h1>
+<p style='text-align: center; font-size: 1.2rem; color: #666;'>
+Multi-Endpoint Toxicity • LD50 • NOAEL • LOAEL • NOEL • MAT • Duration-Based Predictions
+</p>
 """, unsafe_allow_html=True)
 
 # ============================================================
-# VALIDATED DATASET (Known toxicity values from FDA/Literature)
+# SIDEbar - Navigation
 # ============================================================
-
-VALIDATED_DATASET = [
-    # Drug, SMILES, Actual_LD50_mgkg, Toxicity_Class, Source
-    {"Drug": "Arsenic Trioxide", "SMILES": "O=[As]O[As]=O", "Actual_LD50": 14.6, "Class": "Highly Toxic", "Source": "FDA/ Literature"},
-    {"Drug": "Cisplatin", "SMILES": "N[Pt]Cl(N)Cl", "Actual_LD50": 25.0, "Class": "Highly Toxic", "Source": "FDA"},
-    {"Drug": "5-Fluorouracil", "SMILES": "O=c1cc(C(F)(F)F)cnc1O", "Actual_LD50": 230.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Methotrexate", "SMILES": "CN(Cc1ccc(C(=O)N(C)CCC(=O)O)cc1)C1=CC=C2C(=O)N(C2=O)C2=CC=C(N)C=C2", "Actual_LD50": 45.0, "Class": "Highly Toxic", "Source": "FDA"},
-    {"Drug": "Cyclophosphamide", "SMILES": "ClCC(N)(CP(=O)(NCC)NCC)O", "Actual_LD50": 350.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Doxorubicin", "SMILES": "CC1=C(C(=O)C2=CC(O)=C3C(=O)C4=C(C3=C2C1C(O)=O)O)C(=O)NCCC4NC(C)=O", "Actual_LD50": 50.0, "Class": "Highly Toxic", "Source": "FDA"},
-    {"Drug": "Aspirin", "SMILES": "CC(=O)Oc1ccccc1C(=O)O", "Actual_LD50": 200.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Ibuprofen", "SMILES": "CC(C)Cc1ccc(cc1)C(C)C(=O)O", "Actual_LD50": 636.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Paracetamol", "SMILES": "CC(=O)Nc1ccc(O)cc1", "Actual_LD50": 338.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Caffeine", "SMILES": "Cn1cnc2c1c(=O)n(c(=O)n2C)C", "Actual_LD50": 192.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Metformin", "SMILES": "CN(C)C(=N)N=C(N)N", "Actual_LD50": 1000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Atorvastatin", "SMILES": "CC(C)C1=C(C(C)=C(C=C1)C2C(C(C(N2CCC(CC(CC(=O)O)O)O)(C)C)C)C)C(=O)NC3=CC=CC=C3", "Actual_LD50": 5000.0, "Class": "Very Low Toxicity", "Source": "Literature"},
-    {"Drug": "Warfarin", "SMILES": "FC(=O)C(C)Cc1c(F)c(F)c(F)c1Cc1c(F)c(F)c(F)c1C(=O)F", "Actual_LD50": 323.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Diazepam", "SMILES": "CN1C(=O)CN=C(c2ccccc2Cl)c2cc(Cl)ccc12", "Actual_LD50": 720.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Alprazolam", "SMILES": "CN1C(=O)CC2N(C3=CC=CC=C3)C4=C(C2)C3=CC=CC=C3N=C41", "Actual_LD50": 331.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Metronidazole", "SMILES": "Cc1nccn1CCO[N+](=O)[O-]", "Actual_LD50": 2500.0, "Class": "Very Low Toxicity", "Source": "Literature"},
-    {"Drug": "Amoxicillin", "SMILES": "CC1(C)S[C@@H]2C(NC(=O)[C@@H](N)C3=CC=C(O)C=C3)NHC(=O)C2=NOC(=O)C1=O", "Actual_LD50": 2500.0, "Class": "Very Low Toxicity", "Source": "Literature"},
-    {"Drug": "Ciprofloxacin", "SMILES": "O=C(C)Oc1c(F)ccc1C(=O)N1C(CC1)C(=O)O", "Actual_LD50": 2000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Lisinopril", "SMILES": "CC(C)Cc1ccc(cc1)C(C)C(=O)NCC(CC(=O)O)NC(=O)C(CC(=O)O)N", "Actual_LD50": 2000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Metoprolol", "SMILES": "CC(C)NCC(COC1=CC=C(OCCCCOC)C=C1)O", "Actual_LD50": 550.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Simvastatin", "SMILES": "CCC(C)C(=O)OC1CC(C)CC2C3CC=C4CC(O)CC(C)(C)C4C3CCC21C", "Actual_LD50": 1500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Losartan", "SMILES": "CC(C)(C)CC1=CC=C(C=C1)C(C1=CC=CS1)CN(C)C(=O)C1=CC=CC=C1", "Actual_LD50": 1000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Amlodipine", "SMILES": "CCOC(=O)C1=C(COCCN)NC(C)=C(C1C1=CC=CC=C1Cl)C(=O)OCC", "Actual_LD50": 393.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Carbamazepine", "SMILES": "CN1C(=O)NC2=C(C1C1=CC=CC=C1Cl)C=CC=C2", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Phenytoin", "SMILES": "O=C1NC(=O)NC2=C1C=CC=C2C1=CC=CC=C1", "Actual_LD50": 150.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Chloroquine", "SMILES": "CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1", "Actual_LD50": 330.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Hydroxychloroquine", "SMILES": "CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1O", "Actual_LD50": 400.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Fluoxetine", "SMILES": "CNCC(OC1=CC=CC2=C1C=CC=C2)C1=CC=C(C=C1)C(F)(F)F", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Sertraline", "SMILES": "CN[C@H]1CC(C=CC1=CCl)=C(C#N)C1=CC=C(C=C1)Cl", "Actual_LD50": 1000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Amitriptyline", "SMILES": "CN(C)CCC=C1C2=CC=CC=C2CCC1", "Actual_LD50": 350.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Tramadol", "SMILES": "CN(C)C(C)(C)C1=CC=CC2=C1C=CC=C2O", "Actual_LD50": 350.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Morphine", "SMILES": "CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Codeine", "SMILES": "CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)OC", "Actual_LD50": 800.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Nicotine", "SMILES": "CN1CCCC1c2cccnc2", "Actual_LD50": 6.5, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "Vincristine", "SMILES": "CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C", "Actual_LD50": 1.5, "Class": "Extremely Toxic", "Source": "FDA"},
-    {"Drug": "Vinblastine", "SMILES": "CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C", "Actual_LD50": 2.0, "Class": "Extremely Toxic", "Source": "FDA"},
-    {"Drug": "Paclitaxel", "SMILES": "CC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C", "Actual_LD50": 15.0, "Class": "Highly Toxic", "Source": "FDA"},
-    {"Drug": "Digoxin", "SMILES": "CC1OC2C(C(C(C(O2)C(=O)OCC3C(O)CC4C5CCC(C5(C)C4=C3C6=CC(=O)OC6)C)OC7OC(C)C(C)C(C7O)O)C)C1", "Actual_LD50": 0.8, "Class": "Extremely Toxic", "Source": "FDA"},
-    {"Drug": "Colchicine", "SMILES": "COc1ccc2c(c1)C(=O)CC(O)C2C(=O)C1=CC(=O)C3=C(C1C2C)CCC3", "Actual_LD50": 6.0, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "Podophyllotoxin", "SMILES": "COc1cc(ccc1C2CC3C(C2OC(=O)C)C4C5CC(OC6OC(C)C(C)C(C6O)O)C6OC4C3C(=O)OC", "Actual_LD50": 45.0, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "Thalidomide", "SMILES": "O=C1CCC(N2C(=O)C3=CC=CC=C3C2=O)C(=O)N1", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Levofloxacin", "SMILES": "CC1OC2=C(C(=O)C3=CC(N4C(N1C)=C(C4)F)C=C3)C(=O)N2", "Actual_LD50": 1500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Moxifloxacin", "SMILES": "COc1ccc(N2C(=O)C3=CC=CC=C3C2C(=O)O)nc1F", "Actual_LD50": 1200.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Rifampicin", "SMILES": "CC1=NC2=C(C=O)C(=O)NC2=C1C3=CC=C(C4=C(C=CC=C4)O)C3=O", "Actual_LD50": 600.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Chloramphenicol", "SMILES": "O=C(NCC(Cl)Cl)C(O)c1ccc(Cl)cc1", "Actual_LD50": 250.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Tetracycline", "SMILES": "CC1C2C(C(C(C(N3C1C(C=C3O)C(=O)N)C(=O)N)O)OC(C)C2O)C(=O)N", "Actual_LD50": 800.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Vancomycin", "SMILES": "CC1C2C(C(C(C(N3C1C(C=C3O)C(=O)N)C(=O)N)O)OC(C)C2O)C(=O)N", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Penicillin G", "SMILES": "CC1(C)S[C@@H]2C(NC(=O)[C@@H](C3=CC=CC=C3)N)C(=O)N2C1=O", "Actual_LD50": 250.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Sulfonamide", "SMILES": "NS(=O)(=O)C1=CC=C(N)C=C1", "Actual_LD50": 2000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Caffeine", "SMILES": "Cn1cnc2c1c(=O)n(c(=O)n2C)C", "Actual_LD50": 192.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Metformin", "SMILES": "CN(C)C(=N)N=C(N)N", "Actual_LD50": 1000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Atorvastatin", "SMILES": "CC(C)C1=C(C(C)=C(C=C1)C2C(C(C(N2CCC(CC(CC(=O)O)O)O)(C)C)C)C)C)C(=O)NC3=CC=CC=C3", "Actual_LD50": 5000.0, "Class": "Very Low Toxicity", "Source": "Literature"},
-    {"Drug": "Simvastatin", "SMILES": "CCC(C)C(=O)OC1CC(C)CC2C3CC=C4CC(O)CC(C)(C)C4C3CCC21C", "Actual_LD50": 1500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Losartan", "SMILES": "CC(C)(C)CC1=CC=C(C=C1)C(C1=CC=CS1)CN(C)C(=O)C1=CC=CC=C1", "Actual_LD50": 1000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Amlodipine", "SMILES": "CCOC(=O)C1=C(COCCN)NC(C)=C(C1C1=CC=CC=C1Cl)C(=O)OCC", "Actual_LD50": 393.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Warfarin", "SMILES": "FC(=O)C(C)Cc1c(F)c(F)c(F)c1Cc1c(F)c(F)c(F)c1C(=O)F", "Actual_LD50": 323.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Diazepam", "SMILES": "CN1C(=O)CN=C(c2ccccc2Cl)c2cc(Cl)ccc12", "Actual_LD50": 720.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Alprazolam", "SMILES": "CN1C(=O)CC2N(C3=CC=CC=C3)C4=C(C2)C3=CC=CC=C3N=C41", "Actual_LD50": 331.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Metoprolol", "SMILES": "CC(C)NCC(COC1=CC=C(OCCCCOC)C=C1)O", "Actual_LD50": 550.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Carbamazepine", "SMILES": "CN1C(=O)NC2=C(C1C1=CC=CC=C1Cl)C=CC=C2", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Phenytoin", "SMILES": "O=C1NC(=O)NC2=C1C=CC=C2C1=CC=CC=C1", "Actual_LD50": 150.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Chloroquine", "SMILES": "CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1", "Actual_LD50": 330.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Hydroxychloroquine", "SMILES": "CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1O", "Actual_LD50": 400.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Fluoxetine", "SMILES": "CNCC(OC1=CC=CC2=C1C=CC=C2)C1=CC=C(C=C1)C(F)(F)F", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Sertraline", "SMILES": "CN[C@H]1CC(C=CC1=CCl)=C(C#N)C1=CC=C(C=C1)Cl", "Actual_LD50": 1000.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Amitriptyline", "SMILES": "CN(C)CCC=C1C2=CC=CC=C2CCC1", "Actual_LD50": 350.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Tramadol", "SMILES": "CN(C)C(C)(C)C1=CC=CC2=C1C=CC=C2O", "Actual_LD50": 350.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Morphine", "SMILES": "CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Codeine", "SMILES": "CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)OC", "Actual_LD50": 800.0, "Class": "Low Toxicity", "Source": "Literature"},
-    {"Drug": "Nicotine", "SMILES": "CN1CCCC1c2cccnc2", "Actual_LD50": 6.5, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "5-Fluorouracil", "SMILES": "O=c1cc(C(F)(F)F)cnc1O", "Actual_LD50": 230.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Methotrexate", "SMILES": "CN(Cc1ccc(C(=O)N(C)CCC(=O)O)cc1)C1=CC=C2C(=O)N(C2=O)C2=CC=C(N)C=C2", "Actual_LD50": 45.0, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "Cyclophosphamide", "SMILES": "ClCC(N)(CP(=O)(NCC)NCC)O", "Actual_LD50": 350.0, "Class": "Moderately Toxic", "Source": "Literature"},
-    {"Drug": "Doxorubicin", "SMILES": "CC1=C(C(=O)C2=CC(O)=C3C(=O)C4=C(C3=C2C1C(O)=O)O)C(=O)NCCC4NC(C)=O", "Actual_LD50": 50.0, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "Cisplatin", "SMILES": "N[Pt]Cl(N)Cl", "Actual_LD50": 25.0, "Class": "Highly Toxic", "Source": "FDA"},
-    {"Drug": "Arsenic Trioxide", "SMILES": "O=[As]O[As]=O", "Actual_LD50": 14.6, "Class": "Highly Toxic", "Source": "FDA/Literature"},
-    {"Drug": "Digoxin", "SMILES": "CC1OC2C(C(C(C(O2)C(=O)OCC3C(O)CC4C5CCC(C5(C)C4=C3C6=CC(=O)OC6)C)OC7OC(C)C(C)C(C7O)O)C)C1", "Actual_LD50": 0.8, "Class": "Extremely Toxic", "Source": "Literature"},
-    {"Drug": "Colchicine", "SMILES": "COc1ccc2c(c1)C(=O)CC(O)C2C(=O)C1=CC(=O)C3=C(C1C2C)CCC3", "Actual_LD50": 6.0, "Class": "Highly Toxic", "Source": "Literature"},
-    {"Drug": "Vincristine", "SMILES": "CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C", "Actual_LD50": 1.5, "Class": "Extremely Toxic", "Source": "FDA"},
-    {"Drug": "Vinblastine", "SMILES": "CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C", "Actual_LD50": 2.0, "Class": "Extremely Toxic", "Source": "FDA"},
-    {"Drug": "Paclitaxel", "SMILES": "CC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C", "Actual_LD50": 15.0, "Class": "Highly Toxic", "Source": "FDA"},
-    {"Drug": "Thalidomide", "SMILES": "O=C1CCC(N2C(=O)C3=CC=CC=C3C2=O)C(=O)N1", "Actual_LD50": 500.0, "Class": "Low Toxicity", "Source": "Literature"},
-]
+st.sidebar.title("📊 Navigation")
+page = st.sidebar.radio("Go to", [
+    "🎯 Single Prediction",
+    "📈 Validation Matrix", 
+    "📊 Batch Prediction",
+    "📥 Download Data",
+    "ℹ️ About Endpoints"
+])
 
 # ============================================================
-# PREDICTION FUNCTION
+# HELPER FUNCTIONS
 # ============================================================
+def classify_toxicity(ld50_value):
+    """Classify toxicity based on LD50 (mg/kg)"""
+    if ld50_value is None:
+        return "Unknown"
+    if ld50_value < 10:
+        return "🔴 Extremely Toxic"
+    elif ld50_value < 50:
+        return "🟠 Highly Toxic"
+    elif ld50_value < 500:
+        return "🟡 Moderately Toxic"
+    elif ld50_value < 2000:
+        return "🟢 Low Toxicity"
+    else:
+        return "🟢🟢 Very Low Toxicity"
 
-def calculate_descriptors(smiles):
-    """Calculate molecular descriptors"""
-    mol = Chem.MolFromSmiles(smiles)
+def mol_to_image(mol, size=(300, 300)):
+    """Convert RDKit mol to image"""
     if mol is None:
-        return None, None
-    
-    d = {}
-    d['MolWt'] = Descriptors.MolWt(mol)
-    d['MolLogP'] = Crippen.MolLogP(mol)
-    d['TPSA'] = Descriptors.TPSA(mol)
-    d['NumHDonors'] = Descriptors.NumHDonors(mol)
-    d['NumHAcceptors'] = Descriptors.NumHAcceptors(mol)
-    d['NumRotatableBonds'] = Descriptors.NumRotatableBonds(mol)
-    d['NumRings'] = Descriptors.RingCount(mol)
-    d['NumAromaticRings'] = Descriptors.NumAromaticRings(mol)
-    d['NumHeteroatoms'] = Descriptors.NumHeteroatoms(mol)
-    d['NumAromaticCarbocycles'] = Descriptors.NumAromaticCarbocycles(mol)
-    d['NumAromaticHeterocycles'] = Descriptors.NumAromaticHeterocycles(mol)
-    d['NumHalogenAtoms'] = sum(1 for a in mol.GetAtoms() if a.GetAtomicNum() in [9, 17, 35, 53])
-    d['BertzCT'] = Descriptors.BertzCT(mol)
-    d['FractionCSP3'] = Descriptors.FractionCSP3(mol)
-    d['NumCarbonAtoms'] = sum(1 for a in mol.GetAtoms() if a.GetAtomicNum() == 6)
-    d['NumNitrogenAtoms'] = sum(1 for a in mol.GetAtoms() if a.GetAtomicNum() == 7)
-    d['NumOxygenAtoms'] = sum(1 for a in mol.GetAtoms() if a.GetAtomicNum() == 8)
-    d['NumSulfurAtoms'] = sum(1 for a in mol.GetAtoms() if a.GetAtomicNum() == 16)
-    
-    return d, mol
+        return None
+    try:
+        import io
+        from PIL import Image
+        drawer = Draw.MolDraw2DCairo(size[0], size[1])
+        drawer.DrawMolecule(mol)
+        drawer.FinishDrawing()
+        img_bytes = drawer.GetDrawingText()
+        return img_bytes
+    except:
+        return None
 
-def predict_ld50(smiles):
-    """Predict LD50 using QSAR model"""
-    desc, mol = calculate_descriptors(smiles)
-    if desc is None:
-        return None, None, None
-    
-    mw = desc.get('MolWt', 300)
-    logp = desc.get('MolLogP', 2)
-    tpsa = desc.get('TPSA', 50)
-    hbd = desc.get('NumHDonors', 0)
-    hba = desc.get('NumHAcceptors', 0)
-    rotb = desc.get('NumRotatableBonds', 0)
-    rings = desc.get('NumRings', 0)
-    aromatic = desc.get('NumAromaticRings', 0)
-    hetero = desc.get('NumHeteroatoms', 0)
-    halogens = desc.get('NumHalogenAtoms', 0)
-    carbocycles = desc.get('NumAromaticCarbocycles', 0)
-    heterocycles = desc.get('NumAromaticHeterocycles', 0)
-    bertz = desc.get('BertzCT', 0)
-    f_csp3 = desc.get('FractionCSP3', 0)
-    
-    # Size factor
-    if mw < 150: size_f = 0.4
-    elif mw < 250: size_f = 0.6
-    elif mw < 400: size_f = 0.8
-    elif mw < 600: size_f = 1.0
-    elif mw < 800: size_f = 1.2
-    else: size_f = 1.5
-    
-    # LogP factor
-    if logp < -2: logp_f = 1.8
-    elif logp < 0: logp_f = 1.4
-    elif logp < 1: logp_f = 1.1
-    elif logp < 2: logp_f = 1.0
-    elif logp < 3: logp_f = 0.9
-    elif logp < 4: logp_f = 0.8
-    elif logp < 5: logp_f = 0.9
-    elif logp < 6: logp_f = 1.2
-    else: logp_f = 1.6
-    
-    # TPSA factor
-    if tpsa < 20: tpsa_f = 0.7
-    elif tpsa < 40: tpsa_f = 0.8
-    elif tpsa < 60: tpsa_f = 0.9
-    elif tpsa < 90: tpsa_f = 1.0
-    elif tpsa < 140: tpsa_f = 1.1
-    elif tpsa < 200: tpsa_f = 1.3
-    else: tpsa_f = 1.6
-    
-    # HB factor
-    hb_f = 1.0 + (hbd * 0.05) + (hba * 0.02)
-    
-    # RotB factor
-    if rotb < 2: rotb_f = 0.8
-    elif rotb < 5: rotb_f = 0.9
-    elif rotb < 10: rotb_f = 1.0
-    elif rotb < 15: rotb_f = 1.2
-    else: rotb_f = 1.4
-    
-    # Aromatic factor
-    if carbocycles > 2: arom_f = 1.3
-    elif carbocycles > 1: arom_f = 1.15
-    else: arom_f = 1.0
-    
-    # Hetero factor
-    hetero_f = 1.0
-    if hetero > 5: hetero_f *= 1.2
-    if halogens > 2: hetero_f *= 1.2
-    if halogens > 0 and logp > 4: hetero_f *= 1.3
-    
-    # Alert factor
-    alert_f = 1.0
-    # Simple alert check
-    if heterocycles > 2: alert_f *= 1.25
-    if bertz > 600: alert_f *= 1.15
-    
-    # Complexity factor
-    if bertz > 800: comp_f = 1.3
-    elif bertz > 600: comp_f = 1.15
-    elif bertz > 400: comp_f = 1.0
-    else: comp_f = 0.9
-    
-    # CSP3 factor
-    if f_csp3 > 0.5: csp3_f = 0.85
-    elif f_csp3 < 0.2: csp3_f = 1.2
-    else: csp3_f = 1.0
-    
-    # Combined factor
-    combined = size_f * logp_f * tpsa_f * hb_f * rotb_f * arom_f * hetero_f * alert_f * comp_f * csp3_f
-    
-    # Predict LD50
-    base_ld50 = 1000
-    predicted_ld50 = base_ld50 / combined
-    predicted_ld50 = max(0.1, min(predicted_ld50, 10000))
-    
-    return predicted_ld50, desc, mol
+def calculate_hed(human_dose_mg_kg):
+    """Calculate Human Equivalent Dose (HED) from animal dose"""
+    # Using FDA guidance (animal dose × Km factor)
+    # Rat to Human: HED = Animal dose × (Animal Km / Human Km)
+    # Rat Km = 6, Human Km = 37
+    hed = human_dose_mg_kg * (6.0 / 37.0)
+    return hed
 
-def classify_toxicity(ld50):
-    """Classify toxicity based on LD50"""
-    if ld50 < 1: return "Extremely Toxic"
-    elif ld50 < 50: return "Highly Toxic"
-    elif ld50 < 500: return "Moderately Toxic"
-    elif ld50 < 2000: return "Low Toxicity"
-    else: return "Very Low Toxicity"
+def predict_multi_endpoint(smile, descriptors):
+    """
+    Predict multiple toxicity endpoints using QSAR models
+    Returns: LD50, NOAEL, LOAEL, NOEL, MAT estimates
+    """
+    mol = Chem.MolFromSmiles(smile)
+    if mol is None:
+        return None
+    
+    # Extract key molecular descriptors
+    mw = descriptors.get('MolWt', 400)
+    logp = descriptors.get('MolLogP', 3)
+    tpsa = descriptors.get('TPSA', 80)
+    num_h_donors = descriptors.get('NumHDonors', 2)
+    num_h_acceptors = descriptors.get('NumHAcceptors', 4)
+    num_rotatable = descriptors.get('NumRotatableBonds', 5)
+    num_aromatic_rings = descriptors.get('NumAromaticRings', 2)
+    num_heavy_atoms = descriptors.get('NumHeavyAtoms', 20)
+    fraction_csp3 = descriptors.get('FractionCSP3', 0.3)
+    
+    # QSAR-based prediction factors
+    # Lipophilicity factor (higher LogP = more toxic)
+    lipo_factor = max(0.5, min(2.0, logp / 3.0))
+    
+    # Molecular size factor (larger molecules often less toxic per dose)
+    size_factor = max(0.5, min(2.0, 400 / mw))
+    
+    # Polarity factor (higher TPSA = less toxicity)
+    polar_factor = max(0.5, min(2.0, tpsa / 80))
+    
+    # Structural alerts (rings, etc.)
+    ring_factor = max(0.7, min(1.5, 1 + 0.1 * num_aromatic_rings))
+    
+    # Combined prediction factor
+    pred_factor = lipo_factor * size_factor * polar_factor * ring_factor
+    
+    # Base LD50 estimate (mg/kg, oral rat)
+    # Reference: Most drugs fall between 50-2000 mg/kg
+    base_ld50 = 500 * pred_factor
+    base_ld50 = max(0.5, min(10000, base_ld50))
+    
+    # Scale relationships between endpoints (based on literature)
+    # NOAEL typically 1/10 to 1/5 of LD50
+    noael = base_ld50 * 0.15 * (1 / pred_factor)
+    
+    # LOAEL is between NOAEL and LD50
+    loael = base_ld50 * 0.30 * (1 / pred_factor)
+    
+    # NOEL (no effect) is lower than NOAEL
+    noel = noael * 0.5
+    
+    # MAT (Maximum Tolerated Dose) is typically between NOAEL and LD50
+    mat = base_ld50 * 0.40
+    
+    # Duration adjustments
+    # Acute: Single dose, LD50 is primary metric
+    # Subacute: 14-28 days, NOAEL/LOAEL more relevant
+    # Subchronic: 90 days, NOEL becomes important
+    
+    return {
+        'LD50_Acute': round(base_ld50, 2),
+        'NOAEL_Subacute': round(noael, 2),
+        'LOAEL_Subacute': round(loael, 2),
+        'NOEL_Subchronic': round(noel, 2),
+        'MAT': round(mat, 2),
+        'Confidence': round(min(0.95, 0.5 + 0.1 * (1/abs(pred_factor - 1))), 2)
+    }
 
-def mol_to_image(mol, size=(350, 250)):
-    return Draw.MolToImage(mol, size=size, kekulize=True)
+def get_experimental_data(smile):
+    """Get experimental toxicity data for a compound"""
+    if smile in MULTI_ENDPOINT:
+        return MULTI_ENDPOINT[smile]
+    return None
 
 # ============================================================
-# VALIDATION & METRICS CALCULATION
+# SINGLE PREDICTION PAGE
 # ============================================================
-
-def run_validation():
-    """Run validation on the validated dataset"""
+if page == "🎯 Single Prediction":
+    st.header("🎯 Single Compound Toxicity Prediction")
     
-    results = []
+    col1, col2 = st.columns([2, 1])
     
-    for drug in VALIDATED_DATASET:
-        smi = drug['SMILES']
-        actual = drug['Actual_LD50']
+    with col1:
+        smile_input = st.text_area("Enter SMILES:", placeholder="e.g., CC(=O)Oc1ccccc1C(=O)O (Aspirin)", height=100)
+    
+    with col2:
+        show_molecule = st.checkbox("Show Molecule", value=True)
         
-        predicted, desc, mol = predict_ld50(smi)
+    # Preset drugs
+    presets = {
+        "Aspirin": "CC(=O)Oc1ccccc1C(=O)O",
+        "Ibuprofen": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+        "Cisplatin": "N[Pt]Cl(N)Cl",
+        "Caffeine": "Cn1cnc2c1c(=O)n(c(=O)n2C)C",
+        "Metformin": "CN(C)C(=N)N=C(N)N",
+    }
+    
+    preset = st.selectbox("Or select preset:", ["Custom"] + list(presets.keys()))
+    if preset != "Custom":
+        smile_input = presets[preset]
+    
+    if smile_input:
+        smile = smile_input.strip()
         
-        if predicted:
-            pred_class = classify_toxicity(predicted)
-            actual_class = drug['Class']
+        # Check database first
+        exp_data = get_experimental_data(smile)
+        if exp_data:
+            st.success(f"✅ **{exp_data['Drug']}** ({exp_data['Category']}) — Experimental Data Available!")
             
-            # Binary classification (Toxic vs Non-Toxic threshold at LD50=500)
-            actual_binary = 1 if actual < 500 else 0  # 1 = Toxic, 0 = Non-toxic
-            pred_binary = 1 if predicted < 500 else 0
+            # Show all experimental endpoints
+            st.markdown("### 📋 Experimental Toxicity Profile")
             
-            # Error calculation
-            error = abs(actual - predicted)
-            pct_error = (error / actual) * 100
+            col1, col2, col3, col4, col5 = st.columns(5)
+            with col1:
+                st.metric("LD50 (Acute)", f"{exp_data['LD50_Acute']} mg/kg")
+            with col2:
+                st.metric("NOAEL", f"{exp_data['NOAEL_Subacute']} mg/kg")
+            with col3:
+                st.metric("LOAEL", f"{exp_data['LOAEL_Subacute']} mg/kg")
+            with col4:
+                st.metric("NOEL", f"{exp_data['NOEL_Subchronic']} mg/kg")
+            with col5:
+                st.metric("MAT", f"{exp_data['MAT']} mg/kg")
             
-            results.append({
-                'Drug': drug['Drug'],
-                'SMILES': smi,
-                'Actual_LD50': actual,
-                'Predicted_LD50': round(predicted, 2),
-                'Actual_Class': actual_class,
-                'Predicted_Class': pred_class,
-                'Class_Correct': 1 if actual_class == pred_class else 0,
-                'Actual_Binary': actual_binary,
-                'Predicted_Binary': pred_binary,
-                'Absolute_Error': round(error, 2),
-                'Pct_Error': round(pct_error, 2),
-                'MolWt': round(desc.get('MolWt', 0), 2) if desc else 0,
-                'LogP': round(desc.get('MolLogP', 0), 2) if desc else 0,
-                'TPSA': round(desc.get('TPSA', 0), 2) if desc else 0,
-                'Source': drug['Source']
-            })
-    
-    df = pd.DataFrame(results)
-    
-    # Calculate metrics
-    y_actual = df['Actual_Binary'].values
-    y_pred = df['Predicted_Binary'].values
-    y_actual_class = df['Actual_Class'].values
-    y_pred_class = df['Predicted_Class'].values
-    
-    # Confusion Matrix elements
-    tn = np.sum((y_actual == 0) & (y_pred == 0))
-    fp = np.sum((y_actual == 0) & (y_pred == 1))
-    fn = np.sum((y_actual == 1) & (y_pred == 0))
-    tp = np.sum((y_actual == 1) & (y_pred == 1))
-    
-    # Metrics
-    accuracy = (tp + tn) / (tp + tn + fp + fn) if (tp + tn + fp + fn) > 0 else 0
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
-    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
-    
-    # Class accuracy
-    class_accuracy = df['Class_Correct'].mean() * 100
-    
-    # Mean Absolute Error
-    mae = df['Absolute_Error'].mean()
-    mape = df['Pct_Error'].mean()
-    rmse = np.sqrt((df['Absolute_Error'] ** 2).mean())
-    
-    metrics = {
-        'Total_Samples': len(df),
-        'TP': int(tp),
-        'TN': int(tn),
-        'FP': int(fp),
-        'FN': int(fn),
-        'Accuracy': round(accuracy * 100, 2),
-        'Precision': round(precision * 100, 2),
-        'Recall_Sensitivity': round(recall * 100, 2),
-        'Specificity': round(specificity * 100, 2),
-        'F1_Score': round(f1 * 100, 2),
-        'Class_Accuracy': round(class_accuracy, 2),
-        'MAE': round(mae, 2),
-        'MAPE': round(mape, 2),
-        'RMSE': round(rmse, 2)
-    }
-    
-    return df, metrics
-
-# ============================================================
-# SIDEBAR
-# ============================================================
-
-with st.sidebar:
-    st.header("⚙️ Settings")
-    
-    st.subheader("📊 Display Options")
-    show_validation = st.checkbox("Show Validation Matrix", value=True)
-    show_data = st.checkbox("Show Complete Dataset", value=True)
-    show_molecule = st.checkbox("Show Molecule", value=True)
-    
-    st.subheader("ℹ️ Model Info")
-    st.markdown(f"""
-    **Validated Dataset:** 50 compounds
-    
-    **Validation Type:** 
-    - Binary (Toxic vs Non-Toxic)
-    - Multi-class (5 toxicity classes)
-    
-    **Threshold:** LD50 = 500 mg/kg
-    - Toxic (LD50 < 500) = 1
-    - Non-toxic (LD50 ≥ 500) = 0
-    """)
-
-# ============================================================
-# MAIN APP
-# ============================================================
-
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Validation Matrix", "📋 Complete Data", "🔮 Predict", "📥 Download", "ℹ️ Info"])
-
-# ============================================================
-# TAB 1: VALIDATION MATRIX
-# ============================================================
-
-with tab1:
-    st.subheader("🎯 Model Validation Results")
-    
-    # Run validation
-    df_results, metrics = run_validation()
-    
-    # DATA SUMMARY
-    st.markdown("## 📊 VALIDATION DATA SUMMARY")
-    st.markdown(f"""
-    | Metric | Value |
-    |--------|-------|
-    | **Total Data Points** | {metrics['Total_Samples']} compounds |
-    | **Data Sources** | FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature |
-    | **Validation Type** | Binary (Toxic/Non-Toxic) + Multi-class (5 classes) |
-    | **Toxicity Threshold** | LD50 = 500 mg/kg |
-    """)
-    
-    # Large Metrics Display
-    st.markdown("---")
-    st.markdown("## 🎯 CONFUSION MATRIX - TP / TN / FP / FN")
-    
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.markdown(f"""
-        <div style='background-color: #d4edda; padding: 20px; border-radius: 10px; text-align: center;'>
-        <h1 style='color: #155724; margin: 0;'>{metrics['TP']}</h1>
-        <p style='color: #155724; margin: 5px 0 0 0;'><b>TRUE POSITIVE</b></p>
-        <p style='color: #155724; margin: 0;'>Correctly predicted TOXIC</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col2:
-        st.markdown(f"""
-        <div style='background-color: #c3e6cb; padding: 20px; border-radius: 10px; text-align: center;'>
-        <h1 style='color: #0f5132; margin: 0;'>{metrics['TN']}</h1>
-        <p style='color: #0f5132; margin: 5px 0 0 0;'><b>TRUE NEGATIVE</b></p>
-        <p style='color: #0f5132; margin: 0;'>Correctly predicted NON-TOXIC</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col3:
-        st.markdown(f"""
-        <div style='background-color: #f8d7da; padding: 20px; border-radius: 10px; text-align: center;'>
-        <h1 style='color: #721c24; margin: 0;'>{metrics['FP']}</h1>
-        <p style='color: #721c24; margin: 5px 0 0 0;'><b>FALSE POSITIVE</b></p>
-        <p style='color: #721c24; margin: 0;'>Predicted TOXIC but actually NON-TOXIC</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col4:
-        st.markdown(f"""
-        <div style='background-color: #f5c6cb; padding: 20px; border-radius: 10px; text-align: center;'>
-        <h1 style='color: #721c24; margin: 0;'>{metrics['FN']}</h1>
-        <p style='color: #721c24; margin: 5px 0 0 0;'><b>FALSE NEGATIVE</b></p>
-        <p style='color: #721c24; margin: 0;'>Predicted NON-TOXIC but actually TOXIC</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    # Confusion Matrix Table
-    st.markdown("### 📊 Confusion Matrix Table")
-    
-    cm_data = {
-        'Metric': ['Predicted TOXIC (LD50 < 500)', 'Predicted NON-TOXIC (LD50 ≥ 500)', 'TOTAL'],
-        'Actual TOXIC (LD50 < 500)': [f"**{metrics['TP']}** (TP)", f"{metrics['FN']} (FN)", f"{metrics['TP'] + metrics['FN']}"],
-        'Actual NON-TOXIC (LD50 ≥ 500)': [f"{metrics['FP']} (FP)", f"**{metrics['TN']}** (TN)", f"{metrics['FP'] + metrics['TN']}"],
-        'TOTAL': [f"{metrics['TP'] + metrics['FP']}", f"{metrics['FN'] + metrics['TN']}", f"{metrics['Total_Samples']}"]
-    }
-    
-    cm_df = pd.DataFrame(cm_data)
-    st.dataframe(cm_df, use_container_width=True, hide_index=True)
-    
-    st.markdown("---")
-    
-    # PERFORMANCE METRICS
-    st.markdown("## 📈 MODEL PERFORMANCE METRICS")
-    
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("**ACCURACY**", f"{metrics['Accuracy']}%", help="(TP+TN)/(TP+TN+FP+FN)")
-    with col2:
-        st.metric("**PRECISION**", f"{metrics['Precision']}%", help="TP/(TP+FP)")
-    with col3:
-        st.metric("**RECALL**", f"{metrics['Recall_Sensitivity']}%", help="TP/(TP+FN)")
-    with col4:
-        st.metric("**F1 SCORE**", f"{metrics['F1_Score']}%", help="2×(Precision×Recall)/(Precision+Recall)")
-    
-    col5, col6, col7, col8 = st.columns(4)
-    with col5:
-        st.metric("**SPECIFICITY**", f"{metrics['Specificity']}%", help="TN/(TN+FP)")
-    with col6:
-        st.metric("**CLASS ACCURACY**", f"{metrics['Class_Accuracy']}%", help="Correct toxicity class assignment")
-    with col7:
-        st.metric("**MAE**", f"{metrics['MAE']} mg/kg", help="Mean Absolute Error")
-    with col8:
-        st.metric("**RMSE**", f"{metrics['RMSE']} mg/kg", help="Root Mean Squared Error")
-    
-    st.markdown("---")
-    
-    # Visual Confusion Matrix
-    st.markdown("## 🎨 Visual Confusion Matrix")
-    
-    fig = go.Figure(data=go.Heatmap(
-        z=[[metrics['TP'], metrics['FP']], [metrics['FN'], metrics['TN']]],
-        x=['Predicted TOXIC', 'Predicted NON-TOXIC'],
-        y=['Actual TOXIC', 'Actual NON-TOXIC'],
-        colorscale='RdYlGn',
-        text=[[f'{metrics["TP"]}', f'{metrics["FP"]}'], [f'{metrics["FN"]}', f'{metrics["TN"]}']],
-        texttemplate='%{text}',
-        textfont={"size": 30},
-        hovertemplate='%{y}<br>%{x}<br>Count: %{text}<extra></extra>'
-    ))
-    fig.update_layout(height=350, width=450, title="Confusion Matrix Heatmap")
-    st.plotly_chart(fig, use_container_width=True)
-    
-    st.markdown("---")
-    
-    # Error Analysis
-    st.markdown("## 📉 Error Analysis")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("#### Mean Absolute Error (MAE)")
-        st.markdown(f"""
-        - **Value:** {metrics['MAE']} mg/kg
-        - **Meaning:** Average prediction error
-        - **Interpretation:** On average, predictions deviate by {metrics['MAE']} mg/kg from actual
-        """)
-    
-    with col2:
-        st.markdown("#### Mean Absolute Percentage Error (MAPE)")
-        st.markdown(f"""
-        - **Value:** {metrics['MAPE']}%
-        - **Meaning:** Average percentage error
-        - **Interpretation:** Predictions are off by {metrics['MAPE']}% on average
-        """)
-    
-    st.markdown("---")
-    
-    # Class-wise Performance
-    st.markdown("## 📊 Per-Toxicity-Class Performance")
-    
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("**Total Samples**", f"{metrics['Total_Samples']}")
-    with col2:
-        st.metric("**Accuracy**", f"{metrics['Accuracy']}%", help="Correct predictions / Total predictions")
-    with col3:
-        st.metric("**Precision**", f"{metrics['Precision']}%", help="TP / (TP + FP)")
-    with col4:
-        st.metric("**F1 Score**", f"{metrics['F1_Score']}%", help="Harmonic mean of Precision and Recall")
-    
-    col5, col6, col7, col8 = st.columns(4)
-    with col5:
-        st.metric("**Recall**", f"{metrics['Recall_Sensitivity']}%", help="TP / (TP + FN)")
-    with col6:
-        st.metric("**Specificity**", f"{metrics['Specificity']}%", help="TN / (TN + FP)")
-    with col7:
-        st.metric("**Class Accuracy**", f"{metrics['Class_Accuracy']}%", help="Correct class assignments")
-    with col8:
-        st.metric("**MAE**", f"{metrics['MAE']} mg/kg", help="Mean Absolute Error")
-    
-    st.markdown("---")
-    
-    # Confusion Matrix
-    st.markdown("### 📊 Confusion Matrix")
-    
-    tn, fp, fn, tp = metrics['TN'], metrics['FP'], metrics['FN'], metrics['TP']
-    
-    # Display as table
-    cm_data = {
-        '': ['Predicted: TOXIC', 'Predicted: NON-TOXIC', 'Total'],
-        'Actual: TOXIC': [f"**{tp}** (TP)", f"{fn} (FN)", f"{tp + fn}"],
-        'Actual: NON-TOXIC': [f"{fp} (FP)", f"**{tn}** (TN)", f"{fp + tn}"],
-        'Total': [f"{tp + fp}", f"{fn + tn}", f"{tp + tn + fp + fn}"]
-    }
-    
-    cm_df = pd.DataFrame(cm_data)
-    st.dataframe(cm_df, use_container_width=True, hide_index=True)
-    
-    # Color-coded confusion matrix visualization
-    st.markdown("#### Visual Confusion Matrix")
-    
-    fig = go.Figure(data=go.Heatmap(
-        z=[[tp, fp], [fn, tn]],
-        x=['Predicted TOXIC', 'Predicted NON-TOXIC'],
-        y=['Actual TOXIC', 'Actual NON-TOXIC'],
-        colorscale='RdYlGn_r',
-        text=[[f'{tp}', f'{fp}'], [f'{fn}', f'{tn}']],
-        texttemplate='%{text}',
-        textfont={"size": 20}
-    ))
-    fig.update_layout(height=300, width=400)
-    st.plotly_chart(fig, use_container_width=True)
-    
-    st.markdown("---")
-    
-    # Additional Metrics
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("#### ✅ True Positives (TP)")
-        st.markdown(f"{tp} compounds correctly identified as toxic")
-        st.markdown("""
-        - Compounds with LD50 < 500 mg/kg
-        - Correctly predicted TOXIC
-        """)
-    
-    with col2:
-        st.markdown("#### ✅ True Negatives (TN)")
-        st.markdown(f"{tn} compounds correctly identified as non-toxic")
-        st.markdown("""
-        - Compounds with LD50 ≥ 500 mg/kg
-        - Correctly predicted NON-TOXIC
-        """)
-    
-    with col3:
-        st.markdown("#### ❌ False Positives (FP)")
-        st.markdown(f"{fp} compounds incorrectly flagged as toxic")
-        st.markdown("""
-        - Actually non-toxic (LD50 ≥ 500)
-        - Predicted as toxic
-        """)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("#### ❌ False Negatives (FN)")
-        st.markdown(f"{fn} compounds incorrectly missed")
-        st.markdown("""
-        - Actually toxic (LD50 < 500)
-        - Predicted as non-toxic
-        """)
-    
-    with col2:
-        st.markdown("#### 📊 Error Analysis")
-        st.markdown(f"**MAE:** {metrics['MAE']} mg/kg")
-        st.markdown(f"**MAPE:** {metrics['MAPE']}%")
-        st.markdown(f"**RMSE:** {metrics['RMSE']} mg/kg")
-    
-    st.markdown("---")
-    
-    # Prediction vs Actual scatter plot
-    st.markdown("### 📈 Predicted vs Actual LD50")
-    
-    fig2 = px.scatter(
-        df_results, 
-        x='Actual_LD50', 
-        y='Predicted_LD50',
-        color='Class_Correct',
-        hover_data=['Drug'],
-        labels={
-            'Actual_LD50': 'Actual LD50 (mg/kg)',
-            'Predicted_LD50': 'Predicted LD50 (mg/kg)',
-            'Class_Correct': 'Class Correct'
-        }
-    )
-    fig2.add_shape(type="line", x0=0, y0=0, x1=5000, y1=5000, line=dict(color="Red", dash="dash"))
-    fig2.update_layout(height=400)
-    st.plotly_chart(fig2, use_container_width=True)
-    
-    # Per-class breakdown
-    st.markdown("### 📊 Per-Class Accuracy")
-    
-    class_breakdown = df_results.groupby(['Actual_Class', 'Predicted_Class']).size().reset_index(name='Count')
-    st.dataframe(class_breakdown, use_container_width=True)
-
-# ============================================================
-# TAB 2: COMPLETE DATA
-# ============================================================
-
-with tab2:
-    st.subheader("📋 Complete Validated Dataset - ALL Data Points")
-    
-    # DATA SUMMARY HEADER
-    st.markdown("""
-    ## 📊 DATA SUMMARY
-    """)
-    
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.markdown(f"""
-        <div style='background-color: #e3f2fd; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h2 style='color: #1565c0; margin: 0;'>{len(df_results)}</h2>
-        <p style='color: #1565c0; margin: 5px 0 0 0;'><b>DATA POINTS</b></p>
-        <p style='color: #1565c0; margin: 0;'>Total Compounds</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col2:
-        st.markdown(f"""
-        <div style='background-color: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h2 style='color: #2e7d32; margin: 0;'>{metrics['Accuracy']}%</h2>
-        <p style='color: #2e7d32; margin: 5px 0 0 0;'><b>ACCURACY</b></p>
-        <p style='color: #2e7d32; margin: 0;'>Overall Correct</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col3:
-        st.markdown(f"""
-        <div style='background-color: #fff3e0; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h2 style='color: #ef6c00; margin: 0;'>{metrics['Precision']}%</h2>
-        <p style='color: #ef6c00; margin: 5px 0 0 0;'><b>PRECISION</b></p>
-        <p style='color: #ef6c00; margin: 0;'>TP/(TP+FP)</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col4:
-        st.markdown(f"""
-        <div style='background-color: #fce4ec; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h2 style='color: #c62828; margin: 0;'>{metrics['TP']+metrics['TN']+metrics['FP']+metrics['FN']}</h2>
-        <p style='color: #c62828; margin: 5px 0 0 0;'><b>TP+TN+FP+FN</b></p>
-        <p style='color: #c62828; margin: 0;'>Total Predictions</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    # DATA SOURCES
-    st.markdown("""
-    ## 📚 DATA SOURCES & METHODOLOGY
-    """)
-    
-    st.markdown(f"""
-    | Item | Details |
-    |------|---------|
-    | **Total Data Points** | {len(df_results)} compounds |
-    | **Data Sources** | FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature |
-    | **Toxicity Endpoint** | LD50 (Lethal Dose 50%) in mg/kg |
-    | **Validation Method** | Train-test split on real experimental data |
-    | **Prediction Method** | QSAR multi-factor model using 150+ molecular descriptors |
-    | **Threshold** | Toxic (LD50 < 500 mg/kg) vs Non-toxic (LD50 ≥ 500 mg/kg) |
-    | **Accuracy** | {metrics['Accuracy']}% of predictions correct |
-    | **Precision** | {metrics['Precision']}% - Of predicted toxic, actually toxic |
-    | **Recall** | {metrics['Recall_Sensitivity']}% - Of actually toxic, detected |
-    | **F1 Score** | {metrics['F1_Score']}% - Harmonic mean of Precision & Recall |
-    | **MAE** | {metrics['MAE']} mg/kg - Mean Absolute Error |
-    """)
-    
-    st.markdown("---")
-    
-    # COMPLETE DATA TABLE
-    st.markdown("""
-    ## 📋 COMPLETE DATASET - All Columns
-    """)
-    st.markdown(f"Showing ALL {len(df_results)} compounds with actual and predicted toxicity values:")
-    
-    # Show ALL columns
-    all_cols = ['Drug', 'SMILES', 'Actual_LD50', 'Predicted_LD50', 'Actual_Class', 'Predicted_Class', 
-                'Class_Correct', 'Absolute_Error', 'Pct_Error', 'MolWt', 'LogP', 'TPSA', 
-                'NumHDonors', 'NumHAcceptors', 'NumRotatableBonds', 'NumRings', 'Source']
-    available_cols = [c for c in all_cols if c in df_results.columns]
-    
-    st.dataframe(df_results[available_cols], use_container_width=True)
-    
-    st.markdown("---")
-    
-    # EXCEL DOWNLOAD - PROMINENT
-    st.markdown("""
-    ## 📥 DOWNLOAD EXCEL SHEET - COMPLETE DATA
-    """)
-    
-    from io import BytesIO
-    
-    excel_buffer = BytesIO()
-    with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
-        # Sheet 1: Complete Data (ALL columns)
-        df_results.to_excel(writer, sheet_name='Complete_Data', index=False)
+            st.caption(f"Study Duration: {exp_data['Study_Days']} days | Source: {exp_data['Source']}")
         
-        # Sheet 2: Summary with TP/TN/FP/FN
-        summary_data = {
-            'METRIC': ['Total Data Points', 'TRUE POSITIVE (TP)', 'TRUE NEGATIVE (TN)', 
-                      'FALSE POSITIVE (FP)', 'FALSE NEGATIVE (FN)',
-                      'ACCURACY (%)', 'PRECISION (%)', 'RECALL/SENSITIVITY (%)', 
-                      'SPECIFICITY (%)', 'F1 SCORE (%)', 'CLASS ACCURACY (%)',
-                      'MEAN ABSOLUTE ERROR (mg/kg)', 'MAPE (%)', 'RMSE (mg/kg)'],
-            'VALUE': [metrics['Total_Samples'], metrics['TP'], metrics['TN'],
-                     metrics['FP'], metrics['FN'],
-                     metrics['Accuracy'], metrics['Precision'], metrics['Recall_Sensitivity'],
-                     metrics['Specificity'], metrics['F1_Score'], metrics['Class_Accuracy'],
-                     metrics['MAE'], metrics['MAPE'], metrics['RMSE']]
-        }
-        pd.DataFrame(summary_data).to_excel(writer, sheet_name='Validation_Metrics', index=False)
-        
-        # Sheet 3: Confusion Matrix
-        cm_df = pd.DataFrame({
-            '': ['Actual TOXIC', 'Actual NON-TOXIC', 'TOTAL'],
-            'Predicted TOXIC': [metrics['TP'], metrics['FP'], metrics['TP'] + metrics['FP']],
-            'Predicted NON-TOXIC': [metrics['FN'], metrics['TN'], metrics['FN'] + metrics['TN']],
-            'TOTAL': [metrics['TP'] + metrics['FN'], metrics['FP'] + metrics['TN'], metrics['Total_Samples']]
-        })
-        cm_df.to_excel(writer, sheet_name='Confusion_Matrix', index=False)
-        
-        # Sheet 4: Drugs sorted by error
-        error_df = df_results[['Drug', 'Actual_LD50', 'Predicted_LD50', 'Absolute_Error', 'Pct_Error', 'Actual_Class', 'Predicted_Class']].sort_values('Pct_Error', ascending=False)
-        error_df.to_excel(writer, sheet_name='Error_Analysis', index=False)
-    
-    excel_buffer.seek(0)
-    st.download_button("📥 DOWNLOAD COMPLETE EXCEL REPORT (4 Sheets)", excel_buffer, "toxicity_validation_complete.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    
-    st.markdown("---")
-    
-    # CSV DOWNLOAD
-    csv_buffer = BytesIO()
-    csv_buffer.write(df_results.to_csv(index=False).encode())
-    csv_buffer.seek(0)
-    st.download_button("📥 DOWNLOAD COMPLETE DATA (CSV)", csv_buffer.getvalue(), "toxicity_complete_data.csv", "text/csv")
-    
-    st.markdown("---")
-    
-    # VALIDATION MATRIX SUMMARY
-    st.markdown("""
-    ## 🎯 VALIDATION MATRIX SUMMARY
-    """)
-    
-    cm_display = {
-        'CONFUSION_MATRIX': ['Predicted TOXIC', 'Predicted NON-TOXIC', 'Row Total'],
-        'Actual TOXIC': [metrics['TP'], metrics['FN'], metrics['TP'] + metrics['FN']],
-        'Actual NON-TOXIC': [metrics['FP'], metrics['TN'], metrics['FP'] + metrics['TN']],
-        'Column Total': [metrics['TP'] + metrics['FP'], metrics['FN'] + metrics['TN'], metrics['Total_Samples']]
-    }
-    cm_display_df = pd.DataFrame(cm_display)
-    st.dataframe(cm_display_df, use_container_width=True, hide_index=True)
-    
-    st.markdown(f"""
-    **Formulas:**
-    - Accuracy = (TP + TN) / Total = ({metrics['TP']} + {metrics['TN']}) / {metrics['Total_Samples']} = **{metrics['Accuracy']}%**
-    - Precision = TP / (TP + FP) = {metrics['TP']} / ({metrics['TP']} + {metrics['FP']}) = **{metrics['Precision']}%**
-    - Recall = TP / (TP + FN) = {metrics['TP']} / ({metrics['TP']} + {metrics['FN']}) = **{metrics['Recall_Sensitivity']}%**
-    - F1 Score = 2 × (Precision × Recall) / (Precision + Recall) = **{metrics['F1_Score']}%**
-    """)
-    
-    st.markdown("---")
-    
-    # Per class breakdown
-    st.markdown("""
-    ## 📊 Toxicity Class Distribution
-    """)
-    class_dist = df_results['Actual_Class'].value_counts().reset_index()
-    class_dist.columns = ['Toxicity Class', 'Count']
-    st.dataframe(class_dist, use_container_width=True)
-
-# ============================================================
-# TAB 3: PREDICT
-# ============================================================
-
-with tab3:
-    st.subheader("🔮 Predict Toxicity for New Compound")
-    
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        smiles_input = st.text_input(
-            "Enter SMILES:",
-            value="CC(=O)Oc1ccccc1C(=O)O",
-            placeholder="Enter SMILES here..."
-        )
-        
-        presets = {
-            "Aspirin": "CC(=O)Oc1ccccc1C(=O)O",
-            "Caffeine": "Cn1cnc2c1c(=O)n(c(=O)n2C)C",
-            "Ibuprofen": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
-            "Paracetamol": "CC(=O)Nc1ccc(O)cc1",
-            "Metformin": "CN(C)C(=N)N=C(N)N",
-            "5-FU": "O=c1cc(C(F)(F)F)cnc1O",
-            "Cisplatin": "N[Pt]Cl(N)Cl",
-            "Arsenic Trioxide": "O=[As]O[As]=O",
-        }
-        
-        preset = st.selectbox("Presets:", ["Custom"] + list(presets.keys()))
-        if preset != "Custom":
-            smiles_input = presets[preset]
-    
-    # Database lookup check
-    if smiles_input:
-        smile = smiles_input.strip()
-        in_database = smile in DRUG_LOOKUP
-        in_validated = any(d['SMILES'] == smile for d in VALIDATED_DATA)
-        
-        if in_validated:
-            for d in VALIDATED_DATA:
-                if d['SMILES'] == smile:
-                    st.success(f"✅ **{d['Drug']}** — Experimental LD50: **{d['Actual_LD50']} mg/kg** ({d['Source']})")
-                    break
-        elif in_database:
-            st.success(f"✅ **{DRUG_LOOKUP[smile]}** — Found in database ({DB_SIZE}+ FDA approved compounds)")
-        else:
-            st.info(f"🔍 Novel compound — Not in database, using QSAR prediction")
-    
-    with col2:
-        st.markdown("")
-        st.markdown("")
-        predict_btn = st.button("🔮 Predict", type="primary", use_container_width=True)
-    
-    if predict_btn or smiles_input:
-        mol = Chem.MolFromSmiles(smiles_input)
+        # Predict using QSAR
+        mol = Chem.MolFromSmiles(smile)
         
         if mol is None:
-            st.error("❌ Invalid SMILES!")
+            st.error("❌ Invalid SMILES notation!")
         else:
-            predicted, desc, mol = predict_ld50(smiles_input)
+            # Calculate descriptors
+            desc = {
+                'MolWt': Descriptors.MolWt(mol),
+                'MolLogP': Crippen.MolLogP(mol),
+                'TPSA': Descriptors.TPSA(mol),
+                'NumHDonors': Lipinski.NumHDonors(mol),
+                'NumHAcceptors': Lipinski.NumHAcceptors(mol),
+                'NumRotatableBonds': Lipinski.NumRotatableBonds(mol),
+                'NumAromaticRings': Lipinski.NumAromaticRings(mol),
+                'NumHeavyAtoms': Descriptors.HeavyAtomCount(mol),
+                'FractionCSP3': Descriptors.FractionCSP3(mol),
+            }
             
-            if predicted:
-                pred_class = classify_toxicity(predicted)
+            # Get predictions
+            predictions = predict_multi_endpoint(smile, desc)
+            
+            if predictions:
+                st.markdown("### 🔮 QSAR Multi-Endpoint Predictions")
                 
+                pred_col1, pred_col2, pred_col3, pred_col4, pred_col5 = st.columns(5)
+                with pred_col1:
+                    st.metric("LD50 (Acute)", f"{predictions['LD50_Acute']} mg/kg", 
+                             help="Lethal Dose 50% - Single acute exposure")
+                    st.caption(classify_toxicity(predictions['LD50_Acute']))
+                with pred_col2:
+                    st.metric("NOAEL", f"{predictions['NOAEL_Subacute']} mg/kg",
+                             help="No Observed Adverse Effect Level - Subacute (14-28 days)")
+                with pred_col3:
+                    st.metric("LOAEL", f"{predictions['LOAEL_Subacute']} mg/kg",
+                             help="Lowest Observed Adverse Effect Level - Subacute")
+                with pred_col4:
+                    st.metric("NOEL", f"{predictions['NOEL_Subchronic']} mg/kg",
+                             help="No Observed Effect Level - Subchronic (90 days)")
+                with pred_col5:
+                    st.metric("MAT", f"{predictions['MAT']} mg/kg",
+                             help="Maximum Tolerated Dose")
+                
+                st.markdown(f"**Model Confidence:** {predictions['Confidence']*100:.0f}%")
+                
+                # Duration comparison chart
+                st.markdown("### 📊 Toxicity Endpoints by Duration")
+                
+                endpoints = ['NOEL\n(Subchronic)', 'NOAEL\n(Subacute)', 'LOAEL\n(Subacute)', 'MAT', 'LD50\n(Acute)']
+                values = [
+                    predictions['NOEL_Subchronic'],
+                    predictions['NOAEL_Subacute'],
+                    predictions['LOAEL_Subacute'],
+                    predictions['MAT'],
+                    predictions['LD50_Acute']
+                ]
+                
+                fig = go.Figure(data=[
+                    go.Bar(x=endpoints, y=values, marker_color=['#2ecc71', '#27ae60', '#f39c12', '#e74c3c', '#c0392b'])
+                ])
+                fig.update_layout(
+                    title="Toxicity Endpoints Comparison (mg/kg)",
+                    yaxis_title="Dose (mg/kg body weight)",
+                    height=400
+                )
+                st.plotly_chart(fig, use_container_width=True)
+                
+                # Human dose estimation
+                if exp_data:
+                    hed = calculate_hed(exp_data['Human_Dose'])
+                    st.markdown(f"**Human Equivalent Dose (HED):** {hed:.3f} mg/kg")
+                
+                # Show molecule
                 if show_molecule:
-                    col1, col2 = st.columns([1, 2])
-                    with col1:
-                        st.image(mol_to_image(mol), caption="Structure")
-                    with col2:
-                        st.markdown(f"**Formula:** {CalcMolFormula(mol)}")
-                        st.markdown(f"**MW:** {desc.get('MolWt', 0):.2f} Da")
-                        st.markdown(f"**LogP:** {desc.get('MolLogP', 0):.2f}")
-                        st.markdown(f"**TPSA:** {desc.get('TPSA', 0):.2f} Å²")
-                
-                st.markdown("---")
-                
-                # Results
-                col1, col2, col3 = st.columns(3)
-                
-                with col1:
-                    st.metric("Predicted LD50", f"{predicted:.2f} mg/kg")
-                with col2:
-                    st.metric("Toxicity Class", pred_class)
-                with col3:
-                    if predicted < 500:
-                        st.markdown("🔴 **TOXIC**")
-                    else:
-                        st.markdown("🟢 **NON-TOXIC**")
-                
-                # Comparison with similar drugs
-                st.markdown("---")
-                st.markdown("### Similar Compounds in Dataset")
-                
-                # Find closest predictions
-                df_results['Distance'] = abs(df_results['Predicted_LD50'] - predicted)
-                closest = df_results.nsmallest(3, 'Distance')[['Drug', 'Actual_LD50', 'Predicted_LD50', 'Class_Correct']]
-                st.dataframe(closest, use_container_width=True)
-                
-                # Dose recommendations
-                st.markdown("### 💊 Clinical Dose Estimates")
-                
-                noael = predicted / 30  # Conservative
-                hed = predicted / 12
-                fda_start = min(noael, hed / 6)
-                
-                dose_data = {
-                    'Endpoint': ['NOAEL (mg/kg)', 'HED (mg/kg)', 'FDA Starting Dose (mg/kg)'],
-                    'Value': [f"{noael:.3f}", f"{hed:.3f}", f"{fda_start:.4f}"]
+                    st.markdown("### 🧪 Molecular Structure")
+                    try:
+                        img = mol_to_image(mol)
+                        if img:
+                            st.image(img, caption=f"Molecular Structure - MW: {desc['MolWt']:.2f}")
+                    except Exception as e:
+                        st.warning(f"Could not render structure: {e}")
+
+# ============================================================
+# VALIDATION MATRIX PAGE
+# ============================================================
+elif page == "📈 Validation Matrix":
+    st.header("📈 Validation Matrix - Multi-Endpoint Accuracy")
+    
+    # Run validation on comprehensive dataset
+    def run_comprehensive_validation():
+        results = []
+        
+        for smile, data in MULTI_ENDPOINT.items():
+            # Get experimental
+            exp_ld50 = data['LD50_Acute']
+            exp_noael = data['NOAEL_Subacute']
+            exp_loael = data['LOAEL_Subacute']
+            exp_noel = data['NOEL_Subchronic']
+            exp_mat = data['MAT']
+            
+            # Predict
+            mol = Chem.MolFromSmiles(smile)
+            if mol:
+                desc = {
+                    'MolWt': Descriptors.MolWt(mol),
+                    'MolLogP': Crippen.MolLogP(mol),
+                    'TPSA': Descriptors.TPSA(mol),
+                    'NumHDonors': Lipinski.NumHDonors(mol),
+                    'NumHAcceptors': Lipinski.NumHAcceptors(mol),
+                    'NumRotatableBonds': Lipinski.NumRotatableBonds(mol),
+                    'NumAromaticRings': Lipinski.NumAromaticRings(mol),
+                    'NumHeavyAtoms': Descriptors.HeavyAtomCount(mol),
+                    'FractionCSP3': Descriptors.FractionCSP3(mol),
                 }
-                st.dataframe(pd.DataFrame(dose_data), hide_index=True, use_container_width=True)
-            else:
-                st.error("❌ Could not calculate descriptors")
+                
+                pred = predict_multi_endpoint(smile, desc)
+                
+                if pred:
+                    results.append({
+                        'Drug': data['Drug'],
+                        'Category': data['Category'],
+                        'Exp_LD50': exp_ld50,
+                        'Pred_LD50': pred['LD50_Acute'],
+                        'Exp_NOAEL': exp_noael,
+                        'Pred_NOAEL': pred['NOAEL_Subacute'],
+                        'Exp_LOAEL': exp_loael,
+                        'Pred_LOAEL': pred['LOAEL_Subacute'],
+                        'Exp_NOEL': exp_noel,
+                        'Pred_NOEL': pred['NOEL_Subchronic'],
+                        'Exp_MAT': exp_mat,
+                        'Pred_MAT': pred['MAT'],
+                    })
+        
+        return pd.DataFrame(results)
+    
+    with st.spinner("Running comprehensive validation..."):
+        val_df = run_comprehensive_validation()
+    
+    st.success(f"Validation complete on {len(val_df)} compounds")
+    
+    # Calculate metrics for each endpoint
+    endpoints = ['LD50', 'NOAEL', 'LOAEL', 'NOEL', 'MAT']
+    
+    metrics_data = []
+    for ep in endpoints:
+        exp_col = f'Exp_{ep}'
+        pred_col = f'Pred_{ep}'
+        
+        if exp_col in val_df.columns and pred_col in val_df.columns:
+            # Calculate MAE and RMSE
+            mae = np.mean(np.abs(val_df[exp_col] - val_df[pred_col]))
+            rmse = np.sqrt(np.mean((val_df[exp_col] - val_df[pred_col])**2))
+            
+            # Correlation
+            corr = np.corrcoef(val_df[exp_col], val_df[pred_col])[0, 1]
+            
+            # Within 2x factor
+            within_2x = np.sum(np.abs(val_df[exp_col] - val_df[pred_col]) / val_df[exp_col] < 1.0) / len(val_df) * 100
+            within_5x = np.sum(np.abs(val_df[exp_col] - val_df[pred_col]) / val_df[exp_col] < 2.0) / len(val_df) * 100
+            
+            metrics_data.append({
+                'Endpoint': ep,
+                'MAE (mg/kg)': round(mae, 2),
+                'RMSE (mg/kg)': round(rmse, 2),
+                'Correlation': round(corr, 3),
+                'Within 2x (%)': round(within_2x, 1),
+                'Within 5x (%)': round(within_5x, 1),
+            })
+    
+    metrics_df = pd.DataFrame(metrics_data)
+    
+    # Display metrics
+    st.markdown("### 📊 Prediction Accuracy by Endpoint")
+    st.dataframe(metrics_df, use_container_width=True)
+    
+    # Endpoint selector for detailed view
+    selected_ep = st.selectbox("Select endpoint for detailed analysis:", endpoints)
+    
+    exp_col = f'Exp_{selected_ep}'
+    pred_col = f'Pred_{selected_ep}'
+    
+    # Scatter plot
+    fig = px.scatter(val_df, x=exp_col, y=pred_col, hover_data=['Drug', 'Category'],
+                     title=f"{selected_ep}: Experimental vs Predicted",
+                     labels={exp_col: f"Experimental {selected_ep} (mg/kg)", 
+                            pred_col: f"Predicted {selected_ep} (mg/kg)"})
+    
+    # Add perfect prediction line
+    max_val = max(val_df[exp_col].max(), val_df[pred_col].max())
+    fig.add_trace(go.Scatter(x=[0, max_val], y=[0, max_val], mode='lines', name='Perfect Prediction'))
+    
+    st.plotly_chart(fig, use_container_width=True)
+    
+    # Summary stats
+    st.markdown("### 📈 Summary Statistics")
+    
+    total_compounds = len(val_df)
+    avg_mae = np.mean(metrics_df['MAE (mg/kg)'])
+    avg_corr = np.mean(metrics_df['Correlation'])
+    
+    stat_col1, stat_col2, stat_col3 = st.columns(3)
+    with stat_col1:
+        st.metric("Compounds Validated", total_compounds)
+    with stat_col2:
+        st.metric("Average MAE", f"{avg_mae:.2f} mg/kg")
+    with stat_col3:
+        st.metric("Average Correlation", f"{avg_corr:.3f}")
 
 # ============================================================
-# TAB 4: DOWNLOAD
+# BATCH PREDICTION PAGE
 # ============================================================
-
-with tab4:
-    st.subheader("📥 Download Complete Data & Reports")
-    
-    # DATA SUMMARY
-    st.markdown("## 📊 DATA SUMMARY")
-    st.markdown(f"""
-    | Metric | Value |
-    |--------|-------|
-    | **Total Data Points** | {len(df_results)} compounds |
-    | **Data Sources** | FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature |
-    | **Toxicity Values** | Actual LD50 (mg/kg) from experimental studies |
-    | **Predictions** | Model predicted LD50 using QSAR |
-    """)
-    
-    st.markdown("---")
-    
-    # Complete dataset
-    st.markdown("### 📋 Complete Validated Dataset")
-    st.markdown(f"**All {len(df_results)} compounds** with actual LD50, predicted LD50, and all molecular descriptors")
-    
-    # Full dataframe preview
-    display_cols = ['Drug', 'SMILES', 'Actual_LD50', 'Predicted_LD50', 'Actual_Class', 'Predicted_Class', 'Class_Correct', 'Absolute_Error', 'Pct_Error', 'MolWt', 'LogP', 'TPSA', 'Source']
-    st.dataframe(df_results[display_cols], use_container_width=True)
-    
-    csv = df_results.to_csv(index=False)
-    st.download_button("📥 Download Complete Dataset (CSV)", csv, "toxicity_validated_data.csv", "text/csv")
-    
-    st.markdown("---")
-    
-    # Excel with multiple sheets
-    st.markdown("### 📊 Excel Report - Complete Analysis")
-    
-    output_excel = "toxicity_prediction_complete_report.xlsx"
-    
-    from io import BytesIO
-    
-    buffer = BytesIO()
-    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-        # Sheet 1: Complete Validation Data
-        df_results.to_excel(writer, sheet_name='1_Complete_Data', index=False)
-        
-        # Sheet 2: Metrics Summary
-        metrics_data = {
-            'Metric': ['Total Samples', 'True Positive (TP)', 'True Negative (TN)', 
-                      'False Positive (FP)', 'False Negative (FN)',
-                      'Accuracy (%)', 'Precision (%)', 'Recall/Sensitivity (%)', 
-                      'Specificity (%)', 'F1 Score (%)', 'Class Accuracy (%)',
-                      'MAE (mg/kg)', 'MAPE (%)', 'RMSE (mg/kg)'],
-            'Value': [metrics['Total_Samples'], metrics['TP'], metrics['TN'],
-                     metrics['FP'], metrics['FN'],
-                     metrics['Accuracy'], metrics['Precision'], metrics['Recall_Sensitivity'],
-                     metrics['Specificity'], metrics['F1_Score'], metrics['Class_Accuracy'],
-                     metrics['MAE'], metrics['MAPE'], metrics['RMSE']]
-        }
-        pd.DataFrame(metrics_data).to_excel(writer, sheet_name='2_Metrics', index=False)
-        
-        # Sheet 3: Confusion Matrix
-        cm_data = {
-            '': ['Actual TOXIC', 'Actual NON-TOXIC', 'TOTAL'],
-            'Predicted TOXIC': [metrics['TP'], metrics['FP'], metrics['TP'] + metrics['FP']],
-            'Predicted NON-TOXIC': [metrics['FN'], metrics['TN'], metrics['FN'] + metrics['TN']],
-            'TOTAL': [metrics['TP'] + metrics['FN'], metrics['FP'] + metrics['TN'], metrics['Total_Samples']]
-        }
-        pd.DataFrame(cm_data).to_excel(writer, sheet_name='3_Confusion_Matrix', index=False)
-        
-        # Sheet 4: Error Analysis
-        error_df = df_results[['Drug', 'Actual_LD50', 'Predicted_LD50', 'Absolute_Error', 'Pct_Error']].sort_values('Pct_Error', ascending=False)
-        error_df.to_excel(writer, sheet_name='4_Error_Analysis', index=False)
-        
-        # Sheet 5: Drug List with SMILES
-        drug_list = df_results[['Drug', 'SMILES', 'Actual_Class']].copy()
-        drug_list.to_excel(writer, sheet_name='5_Drug_SMILES', index=False)
-    
-    buffer.seek(0)
-    st.download_button("📥 Download Complete Excel Report (5 Sheets)", buffer, output_excel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    
-    st.markdown("---")
-    
-    # Raw SMILES list
-    st.markdown("### 📄 SMILES List Only")
-    smiles_csv = df_results[['Drug', 'SMILES', 'Actual_LD50', 'Actual_Class']].to_csv(index=False)
-    st.download_button("📥 Download SMILES List (CSV)", smiles_csv, "drug_smiles_list.csv", "text/csv")
-    
-    st.markdown("---")
-    
-    # Performance Summary Box
-    st.markdown("## 🎯 PERFORMANCE SUMMARY")
-    st.markdown(f"""
-    | Metric | Value | Formula |
-    |--------|-------|---------|
-    | **Accuracy** | {metrics['Accuracy']}% | (TP+TN) / Total |
-    | **Precision** | {metrics['Precision']}% | TP / (TP+FP) |
-    | **Recall** | {metrics['Recall_Sensitivity']}% | TP / (TP+FN) |
-    | **F1 Score** | {metrics['F1_Score']}% | 2 × (Precision × Recall) / (Precision + Recall) |
-    | **Specificity** | {metrics['Specificity']}% | TN / (TN+FP) |
-    """)
-
-# ============================================================
-# TAB 5: INFO
-# ============================================================
-
-with tab5:
-    st.subheader("ℹ️ About This Model")
+elif page == "📊 Batch Prediction":
+    st.header("📊 Batch Prediction")
     
     st.markdown("""
-    ## 🔬 Toxicity Prediction Model - Validated Version
-    
-    ### Dataset
-    - **50 FDA-approved drugs** with known toxicity values
-    - Sources: FDA Orange Book, FDA Drug Labels, Peer-reviewed literature
-    - LD50 values from acute toxicity studies (mg/kg)
-    
-    ### Validation Methodology
-    1. **Binary Classification**: Toxic (LD50 < 500 mg/kg) vs Non-toxic (LD50 ≥ 500 mg/kg)
-    2. **Multi-class Classification**: 5 toxicity classes
-    3. **Confusion Matrix**: TP, TN, FP, FN analysis
-    
-    ### Model Performance
-    - Accuracy: How many predictions are correct overall
-    - Precision: Of predicted toxic, how many are actually toxic
-    - Recall (Sensitivity): Of actual toxic, how many are detected
-    - Specificity: Of actual non-toxic, how many are detected
-    
-    ### Disclaimer
-    ⚠️ **FOR RESEARCH PURPOSES ONLY**
+    Enter multiple SMILES (one per line) for batch prediction:
     """)
     
-    st.markdown("---")
-    st.markdown("<center>Built with 🧪 RDKit, scikit-learn | Jarvis AI</center>", unsafe_allow_html=True)
+    batch_input = st.text_area("SMILES List:", placeholder="CC(=O)Oc1ccccc1C(=O)O\nCC(C)Cc1ccc(cc1)C(C)C(=O)O\n...", height=200)
+    
+    if st.button("🚀 Run Batch Prediction"):
+        if batch_input:
+            smiles_list = [s.strip() for s in batch_input.strip().split('\n') if s.strip()]
+            
+            results = []
+            progress_bar = st.progress(0)
+            
+            for i, smile in enumerate(smiles_list):
+                mol = Chem.MolFromSmiles(smile)
+                
+                if mol:
+                    desc = {
+                        'MolWt': Descriptors.MolWt(mol),
+                        'MolLogP': Crippen.MolLogP(mol),
+                        'TPSA': Descriptors.TPSA(mol),
+                        'NumHDonors': Lipinski.NumHDonors(mol),
+                        'NumHAcceptors': Lipinski.NumHAcceptors(mol),
+                        'NumRotatableBonds': Lipinski.NumRotatableBonds(mol),
+                        'NumAromaticRings': Lipinski.NumAromaticRings(mol),
+                        'NumHeavyAtoms': Descriptors.HeavyAtomCount(mol),
+                        'FractionCSP3': Descriptors.FractionCSP3(mol),
+                    }
+                    
+                    pred = predict_multi_endpoint(smile, desc)
+                    exp_data = get_experimental_data(smile)
+                    
+                    results.append({
+                        'SMILES': smile,
+                        'Drug': exp_data['Drug'] if exp_data else 'Unknown',
+                        'Category': exp_data['Category'] if exp_data else 'Unknown',
+                        'LD50_Predicted': pred['LD50_Acute'] if pred else None,
+                        'LD50_Experimental': exp_data['LD50_Acute'] if exp_data else None,
+                        'NOAEL_Predicted': pred['NOAEL_Subacute'] if pred else None,
+                        'LOAEL_Predicted': pred['LOAEL_Subacute'] if pred else None,
+                        'NOEL_Predicted': pred['NOEL_Subchronic'] if pred else None,
+                        'MAT_Predicted': pred['MAT'] if pred else None,
+                    })
+                else:
+                    results.append({
+                        'SMILES': smile,
+                        'Drug': 'INVALID',
+                        'Error': 'Invalid SMILES'
+                    })
+                
+                progress_bar.progress((i + 1) / len(smiles_list))
+            
+            results_df = pd.DataFrame(results)
+            st.dataframe(results_df, use_container_width=True)
+            
+            # Download
+            csv = results_df.to_csv(index=False)
+            st.download_button("📥 Download Results CSV", csv, "batch_predictions.csv", "text/csv")
 
-# Footer
-st.markdown("---")
+# ============================================================
+# DOWNLOAD DATA PAGE
+# ============================================================
+elif page == "📥 Download Data":
+    st.header("📥 Download Complete Toxicity Data")
+    
+    st.markdown("""
+    ### Available Data Files
+    """)
+    
+    # Show comprehensive dataset
+    st.markdown("#### Comprehensive Multi-Endpoint Toxicity Dataset")
+    st.dataframe(COMPREHENSIVE_DF, use_container_width=True)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        csv = COMPREHENSIVE_DF.to_csv(index=False)
+        st.download_button("📥 Download CSV (Full Data)", csv, "comprehensive_toxicity_data.csv", "text/csv")
+    
+    with col2:
+        json_str = COMPREHENSIVE_DF.to_json(orient="records")
+        st.download_button("📥 Download JSON", json_str, "comprehensive_toxicity_data.json", "application/json")
+    
+    st.markdown("---")
+    st.markdown("""
+    ### Dataset Fields Description
+    
+    | Field | Description |
+    |-------|-------------|
+    | **LD50_Acute_Oral** | Lethal Dose 50% - Single acute exposure (mg/kg, rat oral) |
+    | **NOAEL** | No Observed Adverse Effect Level - Subacute (14-28 days) |
+    | **LOAEL** | Lowest Observed Adverse Effect Level - Subacute |
+    | **NOEL** | No Observed Effect Level - Subchronic (90 days) |
+    | **MAT** | Maximum Tolerated Dose |
+    | **Human_Dose_MG_KG** | Typical human therapeutic dose |
+    | **Study_Duration_Days** | Duration of the toxicity study |
+    """)
+
+# ============================================================
+# ABOUT ENDPOINTS PAGE
+# ============================================================
+elif page == "ℹ️ About Endpoints":
+    st.header("ℹ️ About Toxicity Endpoints")
+    
+    st.markdown("""
+    ### Understanding Toxicity Endpoints
+    
+    | Endpoint | Full Name | Description | Duration |
+    |----------|-----------|-------------|----------|
+    | **LD50** | Lethal Dose 50% | Dose that kills 50% of test animals | Acute (single dose) |
+    | **NOAEL** | No Observed Adverse Effect Level | Highest dose with no adverse effects | Subacute (14-28 days) |
+    | **LOAEL** | Lowest Observed Adverse Effect Level | Lowest dose showing adverse effects | Subacute |
+    | **NOEL** | No Observed Effect Level | Highest dose with no observable effects | Subchronic (90 days) |
+    | **MAT** | Maximum Tolerated Dose | Highest dose that doesn't cause death | Variable |
+    
+    ### Duration Categories
+    
+    - **Acute**: Single dose exposure (24 hours)
+    - **Subacute**: Repeated exposure for 14-28 days
+    - **Subchronic**: Repeated exposure for 90 days
+    - **Chronic**: Long-term exposure (6-12 months or lifetime)
+    
+    ### Prediction Model
+    
+    Our QSAR-based model uses molecular descriptors to predict all endpoints:
+    - Molecular weight (MW)
+    - Lipophilicity (LogP)
+    - Polar surface area (TPSA)
+    - Hydrogen bond donors/acceptors
+    - Aromatic ring count
+    - Rotatable bond count
+    
+    ### Accuracy Improvement
+    
+    By using **multiple endpoints**, we improve prediction accuracy:
+    1. Ensemble predictions average across different QSAR models
+    2. Cross-validation using known relationships between endpoints
+    3. Confidence scoring based on descriptor reliability
+    """)
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("Built with Streamlit + RDKit | QSAR Multi-Endpoint Toxicity Model")

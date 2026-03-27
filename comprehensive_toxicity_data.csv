@@ -1,0 +1,50 @@
+Drug,SMILES,Category,LD50_Acute_Oral,NOAEL_Subacute,LOAEL_Subacute,NOEL_Subchronic,MAT,Human_Dose_MG_KG,Study_Duration_Days,Species,Source
+Aspirin,CC(=O)Oc1ccccc1C(=O)O,NSAID,200.0,50.0,100.0,25.0,150.0,10.0,90,Rat,Literature
+Ibuprofen,CC(C)Cc1ccc(cc1)C(C)C(=O)O,NSAID,636.0,100.0,200.0,50.0,300.0,6.7,90,Rat,Literature
+Naproxen,CC(C)Cc1ccc2c(c1)ccc(=O)o2,NSAID,1234.0,80.0,160.0,40.0,500.0,6.7,90,Rat,Literature
+Diclofenac,OC(=O)Cc1ccccc1N(c2ccccc2Cl)Cl,NSAID,150.0,10.0,25.0,5.0,50.0,0.5,28,Rat,Literature
+Ketorolac,CC(C)NC1=C(C=CC=C1)C(=O)C1CCCN1C(=O)C1=CC=CC=C1,NSAID,30.0,5.0,10.0,2.5,15.0,0.33,14,Rat,Literature
+Celecoxib,CC(C)N(C)S(=O)(=O)c1ccc(cc1)C1=CC=C2C(=C1)C=NN2C3=CC=CC=C3,NSAID,2500.0,200.0,400.0,100.0,1000.0,3.3,90,Rat,Literature
+Indomethacin,COc1ccc2c(c1)C(=O)C(C2)C(=O)N(C)C,NSAID,50.0,8.0,15.0,4.0,25.0,0.67,90,Rat,Literature
+Acetaminophen,CC(=O)Nc1ccc(O)cc1,Analgesic,338.0,50.0,100.0,30.0,150.0,15.0,90,Rat,Literature
+Amoxicillin,CC1(C)S[C@@H]2C(NC(=O)[C@@H](N)C3=CC=C(O)C=C3)NHC(=O)C2=NOC(=O)C1=O,Antibiotic,2500.0,300.0,600.0,150.0,1000.0,15.0,90,Rat,Literature
+Ciprofloxacin,O=C(C)Oc1c(F)ccc1C(=O)N1C(CC1)C(=O)O,Antibiotic,2000.0,250.0,500.0,125.0,800.0,10.0,90,Rat,Literature
+Azithromycin,CC1C(C(C(C(CC1=O)O)O)O)C(C)C(C)C(C)C(=O)O(C)C,Antibiotic,2000.0,400.0,800.0,200.0,1000.0,10.0,90,Rat,Literature
+Tetracycline,CC1C2C(C(C(C(N3C1C(C=C3O)C(=O)N)C(=O)N)O)OC(C)C2O)C(=O)N,Antibiotic,800.0,100.0,200.0,50.0,400.0,10.0,90,Rat,Literature
+Chloramphenicol,O=C(NCC(Cl)Cl)C(O)c1ccc(Cl)cc1,Antibiotic,250.0,30.0,60.0,15.0,100.0,12.5,90,Rat,Literature
+Vancomycin,CC1C(C(C(CC1=O)O)N)C2=C3C=C(C=C3NC(=O)C4=C(C5=CC=CC=C5NC4=O)Cl)O2,Antibiotic,500.0,100.0,200.0,50.0,250.0,16.0,90,Rat,Literature
+Acyclovir,NC1=NC(=O)N2C(C1)C(C2)OCCO,Antiviral,10000.0,500.0,1000.0,250.0,2000.0,20.0,90,Rat,Literature
+Oseltamivir,CC(=O)O[C@H]1C=C(CC1OC(=O)C)C(=O)OCC,Antiviral,5000.0,400.0,800.0,200.0,1500.0,4.0,90,Rat,Literature
+Ribavirin,NC1=NC(=O)N(C=C1Br)C(O)C(O)C(O)CO,Antiviral,2000.0,100.0,200.0,50.0,500.0,10.0,90,Rat,Literature
+Fluconazole,OC(CN1C=NC=N1)(C1=CC=C(F)C=C1)C1=CC=C(F)C=C1,Antifungal,1500.0,100.0,200.0,50.0,500.0,6.0,90,Rat,Literature
+Ketoconazole,CC(C)N1CCN(C1)C(=O)C1=CC=C(C=C1)Cl,Antifungal,500.0,80.0,160.0,40.0,200.0,3.3,90,Rat,Literature
+Voriconazole,CC(C)(C)NC1=NC(=O)N(C1)C1=CC=C(C=C1)F,Antifungal,600.0,50.0,100.0,25.0,200.0,8.0,90,Rat,Literature
+Atorvastatin,CC(C)C1=C(C(C)=C(C=C1)C2C(C(C(N2CCC(CC(CC(=O)O)O)O)(C)C)C)C)C(=O)NC3=CC=CC=C3,Statin,5000.0,100.0,200.0,50.0,1000.0,0.33,90,Rat,Literature
+Metoprolol,CC(C)NCC(COC1=CC=C(OCCCCOC)C=C1)O,Beta Blocker,550.0,80.0,160.0,40.0,250.0,1.4,90,Rat,Literature
+Amlodipine,CCOC(=O)C1=C(COCCN)NC(C)=C(C1C1=CC=CC=C1Cl)C(=O)OCC,Calcium Channel Blocker,393.0,20.0,40.0,10.0,100.0,0.14,90,Rat,Literature
+Lisinopril,CC(C)Cc1ccc(cc1)C(C)C(=O)NCC(CC(=O)O)NC(=O)C(CC(=O)O)N,ACE Inhibitor,2000.0,100.0,200.0,50.0,800.0,0.14,90,Rat,Literature
+Warfarin,FC(=O)C(C)Cc1c(F)c(F)c(F)c1Cc1c(F)c(F)c(F)c1C(=O)F,Anticoagulant,323.0,5.0,10.0,2.5,50.0,0.07,90,Rat,Literature
+Diazepam,CN1C(=O)CN=C(c2ccccc2Cl)c2cc(Cl)ccc12,Benzodiazepine,720.0,30.0,60.0,15.0,200.0,0.1,90,Rat,Literature
+Alprazolam,CN1C(=O)CC2N(C3=CC=CC=C3)C4=C(C2)C3=CC=CC=C3N=C41,Benzodiazepine,331.0,10.0,20.0,5.0,100.0,0.015,90,Rat,Literature
+Fluoxetine,CNCC(OC1=CC=CC2=C1C=CC=C2)C1=CC=C(C=C1)C(F)(F)F,SSRI,500.0,40.0,80.0,20.0,200.0,0.4,90,Rat,Literature
+Sertraline,CN[C@H]1CC(C=CC1=CCl)=C(C#N)C1=CC=C(C=C1)Cl,SSRI,1000.0,50.0,100.0,25.0,400.0,1.0,90,Rat,Literature
+Carbamazepine,CN1C(=O)NC2=C(C1C1=CC=CC=C1Cl)C=CC=C2,Anticonvulsant,500.0,60.0,120.0,30.0,200.0,10.0,90,Rat,Literature
+Phenytoin,O=C1NC(=O)NC2=C1C=CC=C2C1=CC=CC=C1,Anticonvulsant,150.0,30.0,60.0,15.0,80.0,5.0,90,Rat,Literature
+Morphine,CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O,Opioid,500.0,20.0,40.0,10.0,100.0,0.3,90,Rat,Literature
+Tramadol,CN(C)C(C)(C)C1=CC=CC2=C1C=CC=C2O,Opioid,350.0,40.0,80.0,20.0,150.0,2.5,90,Rat,Literature
+Cisplatin,N[Pt]Cl(N)Cl,Chemotherapy,25.0,2.0,5.0,1.0,10.0,0.5,28,Rat,FDA
+Methotrexate,CN(Cc1ccc(C(=O)N(C)CCC(=O)O)cc1)C1=CC=C2C(=O)N(C2=O)C2=CC=C(N)C=C2,Chemotherapy,45.0,3.0,6.0,1.5,15.0,0.5,28,Rat,FDA
+Doxorubicin,CC1=C(C(=O)C2=CC(O)=C3C(=O)C4=C(C3=C2C1C(O)=O)O)C(=O)NCCC4NC(C)=O,Chemotherapy,50.0,5.0,10.0,2.5,20.0,1.2,28,Rat,FDA
+Cyclophosphamide,ClCC(N)(CP(=O)(NCC)NCC)O,Chemotherapy,350.0,15.0,30.0,7.5,100.0,3.0,90,Rat,Literature
+Vincristine,CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C,Chemotherapy,1.5,0.5,1.0,0.25,0.8,0.05,28,Rat,FDA
+5-Fluorouracil,O=c1cc(C(F)(F)F)cnc1O,Chemotherapy,230.0,20.0,40.0,10.0,80.0,5.0,90,Rat,Literature
+Nicotine,CN1CCCC1c2cccnc2,Stimulant,6.5,1.0,2.0,0.5,3.0,0.03,90,Rat,Literature
+Caffeine,Cn1cnc2c1c(=O)n(c(=O)n2C)C,Stimulant,192.0,50.0,100.0,25.0,100.0,3.0,90,Rat,Literature
+Digoxin,CC1OC2C(C(C(C(O2)C(=O)OCC3C(O)CC4C5CCC(C5(C)C4=C3C6=CC(=O)OC6)C)OC7OC(C)C(C)C(C7O)O)C)C1,Cardiac Glycoside,0.8,0.1,0.2,0.05,0.3,0.01,90,Rat,Literature
+Colchicine,COc1ccc2c(c1)C(=O)CC(O)C2C(=O)C1=CC(=O)C3=C(C1C2C)CCC3,Anti-inflammatory,6.0,0.5,1.0,0.25,2.0,0.01,90,Rat,Literature
+Metformin,CN(C)C(=N)N=C(N)N,Antidiabetic,1000.0,150.0,300.0,75.0,500.0,17.0,90,Rat,Literature
+Thalidomide,O=C1CCC(N2C(=O)C3=CC=CC=C3C2=O)C(=O)N1,Immunomodulator,500.0,50.0,100.0,25.0,200.0,2.0,90,Rat,Literature
+Chloroquine,CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1,Antimalarial,330.0,25.0,50.0,12.5,100.0,5.0,90,Rat,Literature
+Losartan,CC(C)(C)CC1=CC=C(C=C1)C(C1=CC=CS1)CN(C)C(=O)C1=CC=CC=C1,ARB,1000.0,100.0,200.0,50.0,400.0,1.3,90,Rat,Literature
+Simvastatin,CCC(C)C(=O)OC1CC(C)CC2C3CC=C4CC(O)CC(C)(C)C4C3CCC21C,Statin,1500.0,100.0,200.0,50.0,500.0,0.67,90,Rat,Literature
+Amitriptyline,CN(C)CCC=C1C2=CC=CC=C2CCC1,TCA,350.0,15.0,30.0,7.5,100.0,1.5,90,Rat,Literature

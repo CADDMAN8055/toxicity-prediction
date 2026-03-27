@@ -1,0 +1,581 @@
+Drug,SMILES,LD50,NOAEL,LOAEL,NOEL,MAT,Category,Source,Species,Data_Quality
+5-Fluorouracil,O=c1cc(C(F)(F)F)cnc1O,230.0,20.0,40.0,10.0,80.0,Chemotherapy,Literature,Rat,Experimental
+Abiraterone,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Acamprosate,CC1=CC=C(C=C1)C(=O)NCC(=O)O,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Acetaminophen,CC(=O)Nc1ccc(O)cc1,338.0,50.0,100.0,30.0,150.0,Analgesic,Literature,Rat,Experimental
+Acyclovir,NC1=NC(=O)N2C(C1)C(C2)OCCO,10000.0,500.0,1000.0,250.0,2000.0,Antiviral,Literature,Rat,Experimental
+Adalimumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature
+Adefovir,CCCN(CC)C(=O)C(=N)N,500.0,50.0,100.0,25.0,200.0,Antiviral,Literature,,Literature
+Albendazole,CC1=CC=C(N1C(=O)NC1=CC=C(OCC)C=C1)C,2500.0,300.0,600.0,150.0,1000.0,Anthelmintic,Literature,,Literature
+Albuterol,CC(C)(C)NCC(C1=CC=CC=C1C(O)=O)O,500.0,60.0,120.0,30.0,200.0,Beta Agonist,Literature,,Literature
+Alfentanil,CCC(=O)N(C1=CC=CC=C1)C1=CC=CC=C1,50.0,5.0,10.0,2.5,20.0,Opioid,Literature,,Literature
+Allopurinol,O=C1N=CN(C2=CC=CC=C21)C,2500.0,300.0,600.0,150.0,1000.0,Antigout,Literature,,Literature
+Alprazolam,CN1C(=O)CC2N(C3=CC=CC=C3)C4=C(C2)C3=CC=CC=C3N=C41,331.0,10.0,20.0,5.0,100.0,Benzodiazepine,Literature,Rat,Experimental
+Alteplase,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature
+Amiodarone,CCOc1ccc(Oc2ccc(I)cc2)c(c1)C(=O)CCCCCC,178.0,20.0,40.0,10.0,80.0,Antiarrhythmic,Literature,,Literature
+Amitriptyline,CN(C)CCC=C1C2=CC=CC=C2CCC1,350.0,15.0,30.0,7.5,100.0,TCA,Literature,Rat,Experimental
+Amlodipine,CCOC(=O)C1=C(COCCN)NC(C)=C(C1C1=CC=CC=C1Cl)C(=O)OCC,393.0,20.0,40.0,10.0,100.0,Calcium Channel Blocker,Literature,Rat,Experimental
+Amoxapine,CC1=CC=C(C=C1)C1=CC=NN1C,200.0,25.0,50.0,12.5,80.0,Antidepressant,Literature,,Literature
+Amoxicillin,CC1(C)S[C@@H]2C(NC(=O)[C@@H](N)C3=CC=C(O)C=C3)NHC(=O)C2=NOC(=O)C1=O,2500.0,300.0,600.0,150.0,1000.0,Antibiotic,Literature,Rat,Experimental
+Amphetamine,CC(N)CC1=CC=CC=C1,100.0,15.0,30.0,7.5,50.0,Stimulant,Literature,,Literature
+Anastrozole,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,Aromatase Inhibitor,Literature,,Literature
+Apixaban,CC1=CC(=NN1C)C(=O)NC1=CC=CC=C1N,1000.0,150.0,300.0,75.0,400.0,Anticoagulant,Literature,,Literature
+Aripiprazole,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Armodafinil,CC(C)(C)N1C(=O)C(=C(N)C2=CC=CC=C12)C(=O)N,1000.0,150.0,300.0,75.0,400.0,Stimulant,Literature,,Literature
+Artemisinin,CC1CCC2C3C(C(C4C(C3)C2O4)OO1)C,5000.0,500.0,1000.0,250.0,2000.0,Antimalarial,Literature,,Literature
+Asenapine,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Aspirin,CC(=O)Oc1ccccc1C(=O)O,200.0,50.0,100.0,25.0,150.0,NSAID,Literature,Rat,Experimental
+Atenolol,CC(C)NCC(COC1=CC=C(C=C1)C(=O)N)O,1000.0,150.0,300.0,75.0,400.0,Beta Blocker,Literature,,Literature
+Atomoxetine,CC(N)CC1=CC=CC=C1OC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Norepinephrine Reuptake Inhibitor,Literature,,Literature
+Atorvastatin,CC(C)C1=C(C(C)=C(C=C1)C2C(C(C(N2CCC(CC(CC(=O)O)O)O)(C)C)C)C)C(=O)NC3=CC=CC=C3,5000.0,100.0,200.0,50.0,1000.0,Statin,Literature,Rat,Experimental
+Atovaquone,CC1=CC(=C(C=C1)C(C)(C)C1=CC=C(C=C1)Cl)C(C)(C)C,500.0,50.0,100.0,25.0,200.0,Antimalarial,Literature,,Literature
+Azacitidine,O=C1N=CN(C(=O)C1)C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Azithromycin,CC1C(C(C(C(CC1=O)O)O)O)C(C)C(C)C(C)C(=O)O(C)C,2000.0,400.0,800.0,200.0,1000.0,Antibiotic,Literature,Rat,Experimental
+Baclofen,NCC(CC1=CC=CC=C1Cl)S(=O)(=O)O,200.0,25.0,50.0,12.5,80.0,Muscle Relaxant,Literature,,Literature
+Balsalazide,O=Nc1ccc(cc1)N=NC1=CC(=NN1C2=CC=C(C=C2)C(=O)O)C(=O)O,2000.0,250.0,500.0,125.0,800.0,NSAID,Literature,,Literature
+Benzoylecgonine,CN1C(=O)OCC1C2=CC=CC=C2,500.0,60.0,120.0,30.0,200.0,Stimulant,Literature,,Literature
+Betamethasone,CC1CC2C(C(C3C(C2=O)CC(O3)C(=O)CO)F)(C(F)F)C1,2000.0,250.0,500.0,125.0,800.0,Corticosteroid,Literature,,Literature
+Bicalutamide,CC1=CC=C(C=C1)C(=O)NC1=CC=C(C=C1)C(F)(F)F,500.0,50.0,100.0,25.0,200.0,Antiandrogen,Literature,,Literature
+Bortezomib,CC(C)C1=CC=CC(=C1)C(=O)NC(C(C)C)C(=O)NC2=CC=CC=C2,5.0,0.5,1.0,0.25,2.0,Chemotherapy,Literature,,Literature
+Brexpiprazole,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Brivaracetam,CCC(C)C(=O)N1CCC2C1C=CC(=O)N2,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Bupivacaine,CCN(CC)CC(=O)NC1=C(C=CC=C1C)C,100.0,15.0,30.0,7.5,50.0,Anesthetic,Literature,,Literature
+Buprenorphine,CCC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,100.0,10.0,20.0,5.0,40.0,Opioid,Literature,,Literature
+Bupropion,CC(C)NC(C)(C)C1=CC=CC=C1Cl,600.0,80.0,160.0,40.0,250.0,Antidepressant,Literature,,Literature
+Buspirone,OB(N1CCCC1C(=O)N1CCCCC1)N1CCCCC1,655.0,80.0,160.0,40.0,250.0,Anxiolytic,Literature,,Literature
+Busulfan,CS(=O)(=O)OCCCCOS(=O)(=O)C,100.0,10.0,20.0,5.0,40.0,Chemotherapy,Literature,,Literature
+Cabergoline,CC1=CC=C(C=C1)C1=CC=NC2=CC=CC=C21,200.0,25.0,50.0,12.5,80.0,Dopamine Agonist,Literature,,Literature
+Caffeine,Cn1cnc2c1c(=O)n(c(=O)n2C)C,192.0,50.0,100.0,25.0,100.0,Stimulant,Literature,Rat,Experimental
+Canagliflozin,CC1C2C(C(C(N2C1O)C(=O)NC1=CC=CC=C1F)O)O,500.0,60.0,120.0,30.0,200.0,SGLT2 Inhibitor,Literature,,Literature
+Capecitabine,CCC(=O)OC1CC(N2C=NC(=O)C2=O)C(OC)C1,2000.0,250.0,500.0,125.0,800.0,Chemotherapy,Literature,,Literature
+Captopril,CC(C)SCC(C(=O)O)N,1000.0,150.0,300.0,75.0,400.0,ACE Inhibitor,Literature,,Literature
+Carbamazepine,CN1C(=O)NC2=C(C1C1=CC=CC=C1Cl)C=CC=C2,500.0,60.0,120.0,30.0,200.0,Anticonvulsant,Literature,Rat,Experimental
+Carbidopa,N[C@@H](CC1=CC(=O)NC(=O)C1)C(=O)O,2500.0,300.0,600.0,150.0,1000.0,Antiparkinson,Literature,,Literature
+Cariprazine,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Celecoxib,CC(C)N(C)S(=O)(=O)c1ccc(cc1)C1=CC=C2C(=C1)C=NN2C3=CC=CC=C3,2500.0,200.0,400.0,100.0,1000.0,NSAID,Literature,Rat,Experimental
+Cenobamate,CC1=CC=C(C=C1)C(=O)NCC(=O)O,500.0,60.0,120.0,30.0,200.0,Anticonvulsant,Literature,,Literature
+Cetirizine,Clc1ccc(C2CCNCC2)cc1C(=O)O,2000.0,250.0,500.0,125.0,800.0,Antihistamine,Literature,,Literature
+Chloramphenicol,O=C(NCC(Cl)Cl)C(O)c1ccc(Cl)cc1,250.0,30.0,60.0,15.0,100.0,Antibiotic,Literature,Rat,Experimental
+Chloroquine,CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1,330.0,25.0,50.0,12.5,100.0,Antimalarial,Literature,Rat,Experimental
+Chlorpromazine,CN(C)CCCN1C2=CC=CC=C2SC2=C1C=C(C=C2)Cl,500.0,30.0,60.0,15.0,150.0,Antipsychotic,Literature,,Literature
+Ciprofloxacin,O=C(C)Oc1c(F)ccc1C(=O)N1C(CC1)C(=O)O,2000.0,250.0,500.0,125.0,800.0,Antibiotic,Literature,Rat,Experimental
+Cisplatin,N[Pt]Cl(N)Cl,25.0,2.0,5.0,1.0,10.0,Chemotherapy,FDA,Rat,Experimental
+Cladribine,ClC1=C(C2=CN(C3=CC=NC=C3)C(=O)N=C2N)C(N)=NC=C1,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature
+Clindamycin,CCC1C(C(C(CC1OC(=O)C)O)C)N1C2=CC=CC=C2S(=O)(=O)C1,375.0,50.0,100.0,25.0,150.0,Antibiotic,Literature,,Literature
+Clonazepam,O=C1N(C2=CC=CC=C2)C3=CC(Cl)=C(C4=CC=CN=C41)N,2000.0,100.0,200.0,50.0,800.0,Benzodiazepine,Literature,,Literature
+Clonidine,ClC1=CC=C(N=C1N2CCNCC2)C,150.0,20.0,40.0,10.0,60.0,Antihypertensive,Literature,,Literature
+Clopidogrel,CC1=CC=C(C=C1)C1=CC=NN1C(C)CC(=O)O,500.0,60.0,120.0,30.0,200.0,Antiplatelet,Literature,,Literature
+Cocaine,CN1C(=O)OCC1C2=CC=CC=C2,100.0,15.0,30.0,7.5,50.0,Stimulant,Literature,,Literature
+Colchicine,COc1ccc2c(c1)C(=O)CC(O)C2C(=O)C1=CC(=O)C3=C(C1C2C)CCC3,6.0,0.5,1.0,0.25,2.0,Anti-inflammatory,Literature,Rat,Experimental
+Cyclobenzaprine,CN(C)CC=C1C2=CC=CC=C2C=CC1Cl,350.0,40.0,80.0,20.0,150.0,Muscle Relaxant,Literature,,Literature
+Cyclophosphamide,ClCC(N)(CP(=O)(NCC)NCC)O,350.0,15.0,30.0,7.5,100.0,Chemotherapy,Literature,Rat,Experimental
+Cyclosporine,CC1C(=O)N(CC(=O)N(C)C)CCC(C)NC(=O)C(CC(C)C)N(C)C,25.0,2.0,5.0,1.0,10.0,Immunosuppressant,Literature,,Literature
+Dabrafenib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Dantrolene,O=C1C=CC(=O)N1C1=CC(=O)NC(=O)C1,200.0,25.0,50.0,12.5,80.0,Muscle Relaxant,Literature,,Literature
+Dapagliflozin,CC1C2C(C(C(N2C1O)C(=O)NC1=CC=CC=C1F)O)O,500.0,60.0,120.0,30.0,200.0,SGLT2 Inhibitor,Literature,,Literature
+Dasatinib,CC1=CC(=NN1C1=CC=CC=N1)C(=O)NC1=CC(=C(C=C1)Cl)Cl,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Decitabine,O=C1N=CN(C(=O)C1)C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Desflurane,FC(F)C(F)C(F)C(F)C(F)F,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature
+Desipramine,CNCCC1=C2C=CC=CC2=CC=C1,440.0,30.0,60.0,15.0,150.0,TCA,Literature,,Literature
+Deutetrabenazine,CC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,60.0,120.0,30.0,200.0,VMAT Inhibitor,Literature,,Literature
+Dexamethasone,CC1CC2C(C(C3C(C2=O)CC(O3)C(=O)CO)F)(C(F)F)C1,2000.0,250.0,500.0,125.0,800.0,Corticosteroid,Literature,,Literature
+Dextroamphetamine,CC(N)CC1=CC=CC=C1,100.0,15.0,30.0,7.5,50.0,Stimulant,Literature,,Literature
+Diazepam,CN1C(=O)CN=C(c2ccccc2Cl)c2cc(Cl)ccc12,720.0,30.0,60.0,15.0,200.0,Benzodiazepine,Literature,Rat,Experimental
+Diclofenac,OC(=O)Cc1ccccc1N(c2ccccc2Cl)Cl,150.0,10.0,25.0,5.0,50.0,NSAID,Literature,Rat,Experimental
+Diflunisal,CC1=C(C=C(C=C1)C(F)(F)C2=CC(=C(C=C2)O)C(=O)O)C,250.0,40.0,80.0,20.0,100.0,NSAID,Literature,,Literature
+Digoxin,CC1OC2C(C(C(C(O2)C(=O)OCC3C(O)CC4C5CCC(C5(C)C4=C3C6=CC(=O)OC6)C)OC7OC(C)C(C)C(C7O)O)C)C1,0.8,0.1,0.2,0.05,0.3,Cardiac Glycoside,Literature,Rat,Experimental
+Diltiazem,CC(=O)N1C(CSc2ccccc2)C2=CC=CC=C2C1C(=O)OCC,640.0,80.0,160.0,40.0,250.0,CCB,Literature,,Literature
+Diphenhydramine,CN(C)CCOC(C1=CC=CC=C1)C1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Antihistamine,Literature,,Literature
+Disulfiram,CC1=CC=C(C=C1)C(S)SSC,500.0,60.0,120.0,30.0,200.0,Aldehyde Dehydrogenase Inhibitor,Literature,,Literature
+Donepezil,CC(=O)N1C(=O)CC2C1C=CC(=O)N2,50.0,5.0,10.0,2.5,20.0,Alzheimer,Literature,,Literature
+Doxazosin,CC1=CC=C(C=C1)C1=NN=C(N1)N1CCCC1,1000.0,150.0,300.0,75.0,400.0,Alpha Blocker,Literature,,Literature
+Doxorubicin,CC1=C(C(=O)C2=CC(O)=C3C(=O)C4=C(C3=C2C1C(O)=O)O)C(=O)NCCC4NC(C)=O,50.0,5.0,10.0,2.5,20.0,Chemotherapy,FDA,Rat,Experimental
+Doxycycline,CC1C2C(C(C(N2C1O)C(=O)N)C(O)=O)C(CC3=CC=CC=C3N)=O,500.0,80.0,160.0,40.0,250.0,Antibiotic,Literature,,Literature
+Duloxetine,CNCC(OC1=CC=CC2=C1C=CC=C2)C1=CC=C(C=C1)S(=O)(=O)C,500.0,60.0,120.0,30.0,200.0,SNRI,Literature,,Literature
+Dutasteride,CC1C(C(C(N1C(=O)C)CC2=CC=CC=C2)C)C(=O)O,2000.0,250.0,500.0,125.0,800.0,5-alpha Reductase Inhibitor,Literature,,Literature
+Edaravone,CC1=CC=C(N1C1=CC=CC=C1)C,1000.0,150.0,300.0,75.0,400.0,Neuroprotective,Literature,,Literature
+Empagliflozin,CC1C2C(C(C(N2C1O)C(=O)NC1=CC=CC=C1F)O)O,500.0,60.0,120.0,30.0,200.0,SGLT2 Inhibitor,Literature,,Literature
+Enalapril,CCOC(=O)C(C)C1C=CC=C1CCCC(C)C(=O)OCC,2500.0,300.0,600.0,150.0,1000.0,ACE Inhibitor,Literature,,Literature
+Enflurane,FC(F)C(O)CC(F)F,5000.0,500.0,1000.0,250.0,2000.0,Anesthetic,Literature,,Literature
+Enzalutamide,CC1=CC=C(C=C1)C(=O)NC1=CC=C(C=C1)C(F)(F)F,500.0,50.0,100.0,25.0,200.0,Antiandrogen,Literature,,Literature
+Erlotinib,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature
+Etanercept,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature
+Ethambutol,CC(C)NCC(O)COCC(C)N,2500.0,300.0,600.0,150.0,1000.0,Antibiotic,Literature,,Literature
+Ethosuximide,CCC1(C)NC(=O)CC1,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Etodolac,CC1CCC(C2=CC=CC3=C2C=CC3)O1,800.0,100.0,200.0,50.0,300.0,NSAID,Literature,,Literature
+Etoposide,CC1C(C(OC2=CC3C(C2C1)C1=CC=CC=C1OC(=O)C)OC(=O)C)O,50.0,5.0,10.0,2.5,20.0,Chemotherapy,Literature,,Literature
+Exemestane,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,Aromatase Inhibitor,Literature,,Literature
+Exenatide,SEQUENCE_NOT_SMALL_MOLECULE,500.0,60.0,120.0,30.0,200.0,GLP-1 Agonist,Literature,,Literature
+Ezogabine,CC1=CC=C(C=C1)C(=O)NCC(=O)O,1000.0,150.0,300.0,75.0,400.0,Anticonvulsant,Literature,,Literature
+Famotidine,CC1=C(N=C(N1)N)C(=O)NCCCSC,5000.0,500.0,1000.0,250.0,2000.0,H2 Blocker,Literature,,Literature
+Febuxostat,CC1=CC=C(C=C1)C1=CC=NN1CC(=O)O,1000.0,150.0,300.0,75.0,400.0,Antigout,Literature,,Literature
+Felbamate,CC1=CC=C(C=C1)C(=O)NCC(=O)O,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Fentanyl,CCC(=O)N(C1=CC=CC=C1)C1=CC=CC=C1,30.0,5.0,10.0,2.5,15.0,Opioid,Literature,,Literature
+Fexofenadine,CC1=CC=C(C=C1)C(C2=CC=CC=C2)NCCC,2000.0,250.0,500.0,125.0,800.0,Antihistamine,Literature,,Literature
+Finasteride,CC1C(C(C(N1C(=O)C)CC2=CC=CC=C2)C)C(=O)O,2000.0,250.0,500.0,125.0,800.0,5-alpha Reductase Inhibitor,Literature,,Literature
+Fluconazole,OC(CN1C=NC=N1)(C1=CC=C(F)C=C1)C1=CC=C(F)C=C1,1500.0,100.0,200.0,50.0,500.0,Antifungal,Literature,Rat,Experimental
+Fludarabine,FC1C2C(O1)C3C(C(=O)N3C4=NC(N)=NC=4)C(O)2,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature
+Fluoxetine,CNCC(OC1=CC=CC2=C1C=CC=C2)C1=CC=C(C=C1)C(F)(F)F,500.0,40.0,80.0,20.0,200.0,SSRI,Literature,Rat,Experimental
+Fluphenazine,CCN(CC)CCCN1C2=CC=CC=C2SC2=C1C=C(C=C2)Cl,400.0,40.0,80.0,20.0,150.0,Antipsychotic,Literature,,Literature
+Flurbiprofen,CC(C1=CC=C(C=C1)C2=CC=CC=C2)C(=O)O,437.0,50.0,100.0,25.0,200.0,NSAID,Literature,,Literature
+Flutamide,CC1=CC=C(C=C1)C(=O)NC1=CC=C(C=C1)C(F)(F)F,500.0,50.0,100.0,25.0,200.0,Antiandrogen,Literature,,Literature
+Fluvastatin,CC(C)C1=C(C(C)=C(C=C1)C1=CC=C(C=C1)F)C(=O)NS(=O)(=O)C,2000.0,250.0,500.0,125.0,800.0,Statin,Literature,,Literature
+Formoterol,CC(C)(C)NCC(C1=CC=CC=C1C(O)=O)O,500.0,60.0,120.0,30.0,200.0,Beta Agonist,Literature,,Literature
+Furosemide,CC1=CC=C(C=C1)C(=O)NC1=CC=CC=C1C(=O)NS(=O)(=O)O,2000.0,250.0,500.0,125.0,800.0,Diuretic,Literature,,Literature
+Gabapentin,CC(CC(CC(=O)O)N)CC,2500.0,300.0,600.0,150.0,1000.0,Anticonvulsant,Literature,,Literature
+Gefitinib,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature
+Gentamicin,CC1CCC(C(N2C(C(C(C(C2OC1OC(C3C(O)CC(O)C(C3O)N)O)N)NC)O)N)O,125.0,20.0,40.0,10.0,60.0,Antibiotic,Literature,,Literature
+Glipizide,CC1=CC=C(C=C1)C(=O)NCC1=CC=CC=C1,2500.0,300.0,600.0,150.0,1000.0,Sulfonylurea,Literature,,Literature
+Glyburide,CC1=CC=C(C=C1)C(=O)NCC1=CC=CC=C1,2000.0,250.0,500.0,125.0,800.0,Sulfonylurea,Literature,,Literature
+Haloperidol,Clc1ccc(C2=CC=CC=C2C(=O)CCCN3CCCCC3)cc1Cl,120.0,10.0,20.0,5.0,50.0,Antipsychotic,Literature,,Literature
+Halothane,FC(Br)C(F)Cl,5000.0,500.0,1000.0,250.0,2000.0,Anesthetic,Literature,,Literature
+Hydralazine,CC1=CC(=NN1C)NN,207.0,25.0,50.0,12.5,80.0,Antihypertensive,Literature,,Literature
+Hydrochlorothiazide,CC1=CC(=C(N1C(=O)C(Cl)S(=O)(=O)N)Cl)C,2500.0,300.0,600.0,150.0,1000.0,Diuretic,Literature,,Literature
+Hydrocortisone,CC1CC2C(C(C3C(C2=O)CCC4=CC(=O)CC34)F)C1,2500.0,300.0,600.0,150.0,1000.0,Corticosteroid,Literature,,Literature
+Hydromorphone,CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O,300.0,30.0,60.0,15.0,100.0,Opioid,Literature,,Literature
+Hydroxyurea,NC(=O)NO,5760.0,500.0,1000.0,250.0,2000.0,Chemotherapy,Literature,,Literature
+Ibuprofen,CC(C)Cc1ccc(cc1)C(C)C(=O)O,636.0,100.0,200.0,50.0,300.0,NSAID,Literature,Rat,Experimental
+Iloperidone,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Imatinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature
+Imipramine,CN(C)CCC1=C2C=CC=CC2=CC=C1,490.0,30.0,60.0,15.0,150.0,TCA,Literature,,Literature
+Indomethacin,COc1ccc2c(c1)C(=O)C(C2)C(=O)N(C)C,50.0,8.0,15.0,4.0,25.0,NSAID,Literature,Rat,Experimental
+Infliximab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature
+Ipratropium,CC(C)(C)NCC(C1=CC=CC=C1C(O)=O)O,500.0,60.0,120.0,30.0,200.0,Anticholinergic,Literature,,Literature
+Irinotecan,CC1=CC2=C(C=C1)C(=O)N1C2=CCOC1C(=O)O,250.0,25.0,50.0,12.5,100.0,Chemotherapy,Literature,,Literature
+Isoflurane,FC(F)C(O)C(F)Cl,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature
+Isoniazid,NC(=O)C1=CC=NC=C1,1000.0,150.0,300.0,75.0,400.0,Antibiotic,Literature,,Literature
+Isosorbide dinitrate,O=NOCC1OC(O2)OC(O1)C(O)C2O,2000.0,250.0,500.0,125.0,800.0,Vasodilator,Literature,,Literature
+Ketamine,CN1C2CCC1C(C2)OC(=O)C,400.0,50.0,100.0,25.0,150.0,Anesthetic,Literature,,Literature
+Ketoconazole,CC(C)N1CCN(C1)C(=O)C1=CC=C(C=C1)Cl,500.0,80.0,160.0,40.0,200.0,Antifungal,Literature,Rat,Experimental
+Ketoprofen,CC(C1=CC=CC=C1)C(=O)C1=CC=CC=C1C(=O)O,149.0,20.0,40.0,10.0,80.0,NSAID,Literature,,Literature
+Ketorolac,CC(C)NC1=C(C=CC=C1)C(=O)C1CCCN1C(=O)C1=CC=CC=C1,30.0,5.0,10.0,2.5,15.0,NSAID,Literature,Rat,Experimental
+Lacosamide,CC1=CC=C(C=C1)C(=O)NCC(=O)O,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Lamivudine,OCC1C(O)OC(C1F)N1CCC(=O)NC1=O,2500.0,300.0,600.0,150.0,1000.0,Antiviral,Literature,,Literature
+Lamotrigine,NC1=CC(Cl)=C(C=C1)C2=NN=C(N)N2,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Lansoprazole,CC(C)CNC1=CC=C(C=C1)OC(=O)NS(=O)(=O)C,2500.0,300.0,600.0,150.0,1000.0,PPI,Literature,,Literature
+Lapatinib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Leflunomide,CC1=CC=C(C=C1)C(=O)C1=CC=NN1C,100.0,10.0,20.0,5.0,40.0,Immunosuppressant,Literature,,Literature
+Lenalidomide,O=C1CCC(N2C(=O)C3=CC=CC=C3C2=O)C(=O)N1,500.0,50.0,100.0,25.0,200.0,Immunomodulator,Literature,,Literature
+Letrozole,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,Aromatase Inhibitor,Literature,,Literature
+Levetiracetam,CCC(C)C(=O)N1CCC2C1C=CC(=O)N2,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Levodopa,N[C@@H](Cc1ccc(O)cc1)C(=O)O,2500.0,300.0,600.0,150.0,1000.0,Antiparkinson,Literature,,Literature
+Lidocaine,CCN(CC)CC(=O)NC1=C(C=CC=C1C)C,220.0,30.0,60.0,15.0,80.0,Anesthetic,Literature,,Literature
+Linagliptin,CC1=CC=C(C=C1)C1=NN=C(N1)C1=CC=C(C=C1)C1=CC=CC=C1,1000.0,150.0,300.0,75.0,400.0,DPP-4 Inhibitor,Literature,,Literature
+Linezolid,CN1C(=O)C(=C(N)C2=CC=CC=C12)C(=O)NCC#N,1000.0,150.0,300.0,75.0,400.0,Antibiotic,Literature,,Literature
+Liraglutide,SEQUENCE_NOT_SMALL_MOLECULE,500.0,60.0,120.0,30.0,200.0,GLP-1 Agonist,Literature,,Literature
+Lisdexamfetamine,CCC(N)N1C(=O)C(=C(N)C2=CC=CC=C12)C(=O)N,500.0,60.0,120.0,30.0,200.0,Stimulant,Literature,,Literature
+Lisinopril,CC(C)Cc1ccc(cc1)C(C)C(=O)NCC(CC(=O)O)NC(=O)C(CC(=O)O)N,2000.0,100.0,200.0,50.0,800.0,ACE Inhibitor,Literature,Rat,Experimental
+Loratadine,Clc1ccc(C2=CC=CO2)cc1C1=CC=CO1,5000.0,500.0,1000.0,250.0,2000.0,Antihistamine,Literature,,Literature
+Lorazepam,OC1=CC=C(C2=CC=CC=C2)C3=C(C1)N(C(=O)CCl)C(=O)N3,2000.0,100.0,200.0,50.0,800.0,Benzodiazepine,Literature,,Literature
+Losartan,CC(C)(C)CC1=CC=C(C=C1)C(C1=CC=CS1)CN(C)C(=O)C1=CC=CC=C1,1000.0,100.0,200.0,50.0,400.0,ARB,Literature,Rat,Experimental
+Lovastatin,CCC(C)C(=O)OC1CC(C)CC2C3CC=C4CC(O)CC(C)(C)C4C3CCC21C,2000.0,250.0,500.0,125.0,800.0,Statin,Literature,,Literature
+Loxapine,CC1=CC=C(C=C1)C1=CC=NN1C,200.0,25.0,50.0,12.5,80.0,Antipsychotic,Literature,,Literature
+Lurasidone,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Magnesium choline trisalicylate,CC(N)(C)C(=O)OCC[N+](C)(C)C,1100.0,150.0,300.0,75.0,500.0,NSAID,Literature,,Literature
+Magnesium salicylate,[Mg+2].[O-]C(=O)c1ccccc1O,1200.0,150.0,300.0,75.0,500.0,NSAID,Literature,,Literature
+Maprotiline,CN(C)CCC1=C2C=CC=CC2=CC=C1,400.0,40.0,80.0,20.0,150.0,Antidepressant,Literature,,Literature
+Mebendazole,CC1=CC=C(N1C(=O)NC1=CC=CC=C1)C(=O)OC,2000.0,250.0,500.0,125.0,800.0,Anthelmintic,Literature,,Literature
+Mefenamic Acid,CC1=CC(C2=CC=CC=C2N1C(=O)C)CC(=O)O,780.0,80.0,160.0,40.0,300.0,NSAID,Literature,,Literature
+Mefloquine,CC(C)C1=CC(=C(C=C1)C2=CC=NN2C(C)C)C(=O)C3=CC=CC=C3F,1250.0,100.0,200.0,50.0,400.0,Antimalarial,Literature,,Literature
+Meloxicam,CC1=CC(=NO1)C2=CC(=NN2C3=CC=CC=C3S(=O)(=O)N)C(=O)O,98.0,15.0,30.0,7.5,50.0,NSAID,Literature,,Literature
+Memantine,CC12CC(C)(CC1)C3=CC=CC=C3C2,200.0,25.0,50.0,12.5,80.0,Alzheimer,Literature,,Literature
+Mercaptopurine,Sc1ncnc2ncsc12,870.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature
+Mesalamine,CC1=CC=C(C=C1)C(=O)O,2000.0,250.0,500.0,125.0,800.0,NSAID,Literature,,Literature
+Mesoridazine,CC1=CC=C(C=C1)C1=CC=CC=N1,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Metformin,CN(C)C(=N)N=C(N)N,1000.0,150.0,300.0,75.0,500.0,Antidiabetic,Literature,Rat,Experimental
+Methadone,CCC(C)N(C)CCC(=O)C1=CC=CC=C1,200.0,20.0,40.0,10.0,80.0,Opioid,Literature,,Literature
+Methohexital,CCC1=C(N)C(=O)NC(=O)C1C2=CC=CC=C2,200.0,25.0,50.0,12.5,80.0,Barbiturate,Literature,,Literature
+Methotrexate,CN(Cc1ccc(C(=O)N(C)CCC(=O)O)cc1)C1=CC=C2C(=O)N(C2=O)C2=CC=C(N)C=C2,45.0,3.0,6.0,1.5,15.0,Chemotherapy,FDA,Rat,Experimental
+Methsuximide,CCC1(C)NC(=O)CC1,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Methylene Blue,CN(C)C1=CC2=C(C=C1)C3=CC=CC=C3N(C)C,500.0,60.0,120.0,30.0,200.0,Dye/Antidote,Literature,,Literature
+Methylphenidate,CN(C)C(=O)C1CC2CCC1C2,200.0,25.0,50.0,12.5,80.0,Stimulant,Literature,,Literature
+Metoclopramide,CC1=CC(=C(N1C)Cl)C(=O)NCC1=CC=CO1,600.0,80.0,160.0,40.0,250.0,Prokinetic,Literature,,Literature
+Metoprolol,CC(C)NCC(COC1=CC=C(OCCCCOC)C=C1)O,550.0,80.0,160.0,40.0,250.0,Beta Blocker,Literature,Rat,Experimental
+Mianserin,CN1C2=CC=CC=C2C(C3=CC=CC=C31)C4CNCC4,500.0,50.0,100.0,25.0,200.0,Antidepressant,Literature,,Literature
+Midazolam,FC1=CC=C(C=C1)C2N(C3=CC=CC=C3)C4=NOC(=C4)C(=N2)N,820.0,40.0,80.0,20.0,300.0,Benzodiazepine,Literature,,Literature
+Minocycline,CN(C)C1=CC=CC2C3C(=CC(=C)C(=O)C3=C(N2C1=O)C(=O)N)N,750.0,100.0,200.0,50.0,300.0,Antibiotic,Literature,,Literature
+Mirtazapine,CN1C2=CC=CC=C2C(C3=CC=CC=C31)C4CNCC4,810.0,100.0,200.0,50.0,300.0,Antidepressant,Literature,,Literature
+Modafinil,CC(C)(C)N1C(=O)C(=C(N)C2=CC=CC=C12)C(=O)N,1000.0,150.0,300.0,75.0,400.0,Stimulant,Literature,,Literature
+Montelukast,CC1=CC=C(C=C1)C(C(SC1=CC=C(C=C1)Cl)N)CC(=O)O,500.0,60.0,120.0,30.0,200.0,Leukotriene Inhibitor,Literature,,Literature
+Morphine,CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O,500.0,20.0,40.0,10.0,100.0,Opioid,Literature,Rat,Experimental
+Mycophenolic acid,COCC1=C(C2=CC=CC=C2C(=O)O)C=C(C1)O,500.0,50.0,100.0,25.0,200.0,Immunosuppressant,Literature,,Literature
+N-Acetylcysteine,CC(=O)NC(CS)C(=O)O,2500.0,300.0,600.0,150.0,1000.0,Mucolytic,Literature,,Literature
+Naloxone,CCC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,50.0,100.0,25.0,200.0,Opioid Antagonist,Literature,,Literature
+Naltrexone,CCC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,50.0,100.0,25.0,200.0,Opioid Antagonist,Literature,,Literature
+Naproxen,CC(C)Cc1ccc2c(c1)ccc(=O)o2,1234.0,80.0,160.0,40.0,500.0,NSAID,Literature,Rat,Experimental
+Neomycin,CC1C(C(C(N+1C(C2C(C(C(O2)C(C1O)O)O)N)OC(C=3C(=COC3)C)O)N)CO)O)O,225.0,30.0,60.0,15.0,100.0,Antibiotic,Literature,,Literature
+Nicotine,CN1CCCC1c2cccnc2,6.5,1.0,2.0,0.5,3.0,Stimulant,Literature,Rat,Experimental
+Nifedipine,CC1=CC(C)=C(C(N1C(=O)C)=C(C(=O)OC)C#N)C,1050.0,100.0,200.0,50.0,400.0,CCB,Literature,,Literature
+Nitrofurantoin,O=C1C=C(N(N1C(=O)C2=CC=N+[O-])N+[O-])C(=O)N,300.0,40.0,80.0,20.0,150.0,Antibiotic,Literature,,Literature
+Nitroglycerin,O=NOCC(O)CO,100.0,10.0,20.0,5.0,40.0,Vasodilator,Literature,,Literature
+Nortriptyline,CNCCC1=C2C=CC=CC2=CC=C1,310.0,15.0,30.0,7.5,100.0,TCA,Literature,,Literature
+Olanzapine,CC1=CC=C(C=C1)C2=NC3=CC=CC=C3ON2,100.0,15.0,30.0,7.5,50.0,Antipsychotic,Literature,,Literature
+Omalizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature
+Omeprazole,CC1=CC=C(C=C1)C(=O)COC2=CC=C(C=C2)Cl,2210.0,250.0,500.0,125.0,800.0,PPI,Literature,,Literature
+Ondansetron,CC1=CC(=NN1C)CCCN2C3=CC=CC=C3OC2=O,500.0,60.0,120.0,30.0,200.0,Antiemetic,Literature,,Literature
+Oseltamivir,CC(=O)O[C@H]1C=C(CC1OC(=O)C)C(=O)OCC,5000.0,400.0,800.0,200.0,1500.0,Antiviral,Literature,Rat,Experimental
+Oxaprozin,OC(=O)C1=CC=C(C=C1)C1=CC=C(O)C=C1,1800.0,200.0,400.0,100.0,800.0,NSAID,Literature,,Literature
+Oxycodone,CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O,400.0,40.0,80.0,20.0,150.0,Opioid,Literature,,Literature
+Palbociclib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Paliperidone,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Pantoprazole,COCC1=CC=C(C=C1)OC(=O)NS(=O)(=O)C,2000.0,250.0,500.0,125.0,800.0,PPI,Literature,,Literature
+Papaverine,COc1ccc(C2=CC=CC=C2C2=CC=CC=C2O)cc1,500.0,60.0,120.0,30.0,200.0,Vasodilator,Literature,,Literature
+Paramethadione,CC1C(=O)OC(=O)C1(C)C,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Pazopanib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Pemetrexed,CC1=CC2=C(C=C1C(=O)O)C(=O)NCC(=O)NC2,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Pentamidine,N=C(N)NC1=CC=C(C=C1)OCCO,250.0,30.0,60.0,15.0,100.0,Antiprotozoal,Literature,,Literature
+Pentobarbital,CCCC(C)C1=C(N)C(=O)NC(=O)C1C,250.0,30.0,60.0,15.0,100.0,Barbiturate,Literature,,Literature
+Perampanel,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,60.0,120.0,30.0,200.0,Anticonvulsant,Literature,,Literature
+Perphenazine,CCN(CC)CCCN1C2=CC=CC=C2SC2=C1C=C(C=C2)Cl,400.0,40.0,80.0,20.0,150.0,Antipsychotic,Literature,,Literature
+Phencyclidine,CN1C2CCCCC2C1C3=CC=CC=C3,50.0,5.0,10.0,2.5,20.0,Dissociative,Literature,,Literature
+Phenobarbital,CCC1=C(N)C(=O)NC(=O)C1C2=CC=CC=C2,660.0,80.0,160.0,40.0,250.0,Barbiturate,Literature,,Literature
+Phenylbutazone,CC1=CC(=CC=C1)C2=CC(=NN2C(=O)C)C,245.0,30.0,60.0,15.0,100.0,NSAID,Literature,,Literature
+Phenytoin,O=C1NC(=O)NC2=C1C=CC=C2C1=CC=CC=C1,150.0,30.0,60.0,15.0,80.0,Anticonvulsant,Literature,Rat,Experimental
+Pioglitazone,CC1=CC=C(C=C1)C1=CC=NN1C,2500.0,300.0,600.0,150.0,1000.0,Thiazolidinedione,Literature,,Literature
+Piroxicam,CN1C(C(=O)Nc2ccc(O)nc2)=C(C2=CC=CS2)N1C,180.0,20.0,40.0,10.0,80.0,NSAID,Literature,,Literature
+Pralatrexate,CC1=CC2=C(C=C1)C(=O)NCC(=O)NC2,100.0,10.0,20.0,5.0,40.0,Chemotherapy,Literature,,Literature
+Pramipexole,CC1=CC=C(C=C1)C1CCCC1N,500.0,60.0,120.0,30.0,200.0,Dopamine Agonist,Literature,,Literature
+Pravastatin,CC1C(C(C(C(CC1=O)O)O)O)C(C)C(=O)O,2000.0,250.0,500.0,125.0,800.0,Statin,Literature,,Literature
+Praziquantel,CC1C(C(OC2=CC3C(C2C1)C1=CC=CC=C1OC(=O)C)OC(=O)C)O,2000.0,250.0,500.0,125.0,800.0,Anthelmintic,Literature,,Literature
+Prazosin,CC1=CC=C(C=C1)C1=NN=C(N1)N1CCCC1,500.0,60.0,120.0,30.0,200.0,Alpha Blocker,Literature,,Literature
+Prednisolone,CC1CC2C(C(C3C(C2=O)CC(O3)C(=O)CO)F)C1,2000.0,250.0,500.0,125.0,800.0,Corticosteroid,Literature,,Literature
+Prednisone,CC1CC2C(C(C3C(C2=O)CC(O3)C(=O)CO)F)C1,2500.0,300.0,600.0,150.0,1000.0,Corticosteroid,Literature,,Literature
+Primaquine,CC(C)NCC(C)CC1=CC=CC2=CC=CC=C21,150.0,20.0,40.0,10.0,60.0,Antimalarial,Literature,,Literature
+Primidone,CCC1=C(N)C(=O)NC(=O)C1C2=CC=CC=C2,1000.0,150.0,300.0,75.0,400.0,Anticonvulsant,Literature,,Literature
+Probenecid,CC1=CC=C(C=C1)C(=O)NCCC,1000.0,150.0,300.0,75.0,400.0,Uricosuric,Literature,,Literature
+Procaine,CCN(CC)CC(=O)NC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Anesthetic,Literature,,Literature
+Procarbazine,CC(C)NNC(=O)C1=CC=C(N)C=C1,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Promethazine,CC(C)N1C2=CC=CC=C2SC2=C1C=C(C=C2)Cl,400.0,50.0,100.0,25.0,150.0,Antihistamine,Literature,,Literature
+Propofol,CC(C)C1=C(C=CC=C1O)C(C)C,700.0,80.0,160.0,40.0,300.0,Anesthetic,Literature,,Literature
+Propranolol,CC(C)NCC(COC1=CC=CC2=C1C=CC=C2)O,565.0,80.0,160.0,40.0,250.0,Beta Blocker,Literature,,Literature
+Pyrazinamide,NC(=O)C1=CC=NC=N1,2000.0,250.0,500.0,125.0,800.0,Antibiotic,Literature,,Literature
+Quetiapine,COCCC1=CC=C(C=C1)N1CCCCC1C1=CC=CC=N1,1500.0,150.0,300.0,75.0,500.0,Antipsychotic,Literature,,Literature
+Raloxifene,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,SERM,Literature,,Literature
+Ranitidine,CC(C)NCC(=O)NC1=CC=C(N)N=C1,2500.0,300.0,600.0,150.0,1000.0,H2 Blocker,Literature,,Literature
+Reboxetine,CC(N)CC1=CC=CC=C1OC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Norepinephrine Reuptake Inhibitor,Literature,,Literature
+Regorafenib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Remifentanil,CCC(=O)N(C1=CC=CC=C1)C1=CC=CC=C1,50.0,5.0,10.0,2.5,20.0,Opioid,Literature,,Literature
+Retigabine,CC1=CC=C(C=C1)C(=O)NCC(=O)O,1000.0,150.0,300.0,75.0,400.0,Anticonvulsant,Literature,,Literature
+Ribavirin,NC1=NC(=O)N(C=C1Br)C(O)C(O)C(O)CO,2000.0,100.0,200.0,50.0,500.0,Antiviral,Literature,Rat,Experimental
+Ribociclib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Rifampin,CC1=CC=CC=C1C(C)C1C=CC2C=C(C=C2C(=O)NC1=O)O,500.0,80.0,160.0,40.0,250.0,Antibiotic,Literature,,Literature
+Riluzole,Fc1ccccc1C(=O)NCC2=CC=CC=C2,500.0,60.0,120.0,30.0,200.0,Neuroprotective,Literature,,Literature
+Risperidone,Clc1cccc(C2=CC=NC=C2C2=NCCOCC2)N3CCN(CC3)CC,200.0,20.0,40.0,10.0,80.0,Antipsychotic,Literature,,Literature
+Rituximab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature
+Rivaroxaban,FC1=CC=C(C=C1)C1=NN=C(N1)C1=CC=CC=C1,1000.0,150.0,300.0,75.0,400.0,Anticoagulant,Literature,,Literature
+Ropinirole,CC1=CC=C(C=C1)C1CCCC1O,1000.0,150.0,300.0,75.0,400.0,Dopamine Agonist,Literature,,Literature
+Rosiglitazone,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,150.0,300.0,75.0,400.0,Thiazolidinedione,Literature,,Literature
+Rosuvastatin,CC(C)C1=C(C(C)=C(C=C1)C2C(C(C(N2CCC(CC(CC(=O)O)O)O)(C)C)C)C)C)C(=O)NS(=O)(=O)C,5000.0,500.0,1000.0,250.0,2000.0,Statin,Literature,,Literature
+Salmeterol,CC(C)(C)NCC(C1=CC=CC=C1C(O)=O)O,500.0,60.0,120.0,30.0,200.0,Beta Agonist,Literature,,Literature
+Salsalate,CC(=O)Oc1ccccc1C(=O)Oc1ccccc1C(=O)O,1100.0,150.0,300.0,75.0,500.0,NSAID,Literature,,Literature
+Saxagliptin,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,250.0,500.0,125.0,800.0,DPP-4 Inhibitor,Literature,,Literature
+Secobarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C2=CC=CC=C2,200.0,25.0,50.0,12.5,80.0,Barbiturate,Literature,,Literature
+Selegiline,CC(C)NCC#CC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Antiparkinson,Literature,,Literature
+Semaglutide,SEQUENCE_NOT_SMALL_MOLECULE,500.0,60.0,120.0,30.0,200.0,GLP-1 Agonist,Literature,,Literature
+Sertraline,CN[C@H]1CC(C=CC1=CCl)=C(C#N)C1=CC=C(C=C1)Cl,1000.0,50.0,100.0,25.0,400.0,SSRI,Literature,Rat,Experimental
+Sevoflurane,FC(F)(F)C1=CC=CC(=C1)C(C)O,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature
+Sildenafil,CCCC1=NN(C2=CC=CC=C12)C(=O)NCCC,2000.0,250.0,500.0,125.0,800.0,PDE5 Inhibitor,Literature,,Literature
+Simvastatin,CCC(C)C(=O)OC1CC(C)CC2C3CC=C4CC(O)CC(C)(C)C4C3CCC21C,1500.0,100.0,200.0,50.0,500.0,Statin,Literature,Rat,Experimental
+Sirolimus,CC1CCC2C3CCC4=CC(=O)CCC4(C)C3FCCC21C,50.0,5.0,10.0,2.5,20.0,Immunosuppressant,Literature,,Literature
+Sitagliptin,F[C@H]1C(NC(=O)C1)N1CCn2c(nc2C(F)(F)F)C1,2000.0,250.0,500.0,125.0,800.0,DPP-4 Inhibitor,Literature,,Literature
+Sodium nitroprusside,[Na+].[Fe(C#N)(C#N)(C#N)(C#N)]N,50.0,5.0,10.0,2.5,20.0,Vasodilator,Literature,,Literature
+Sorafenib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Sotalol,CC(CC(N)NS(=O)(=O)C1=CC=C(C=C1)C(C)C)O,260.0,40.0,80.0,20.0,100.0,Beta Blocker,Literature,,Literature
+Spironolactone,CC(=O)SCC1CCC2C3CCC4=CC(=O)CCC4(C)C3FCCC21C,500.0,60.0,120.0,30.0,200.0,Diuretic,Literature,,Literature
+Stiripentol,CC1=CC=C(C=C1)C(=O)NCC(=O)O,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Streptomycin,NC1C(O)OC(C(O)C1OC1OC(C(N)C(O)C1N)C(=O)N)C(=O)N,430.0,60.0,120.0,30.0,200.0,Antibiotic,Literature,,Literature
+Sufentanil,CCC(=O)N(C1=CC=CC=C1)C1=CC=CC=C1,20.0,3.0,6.0,1.5,10.0,Opioid,Literature,,Literature
+Sulfamethoxazole,Cc1cc(-N)C(NS(=O)(=O)c2ccc(N)cc2)=N1,2300.0,300.0,600.0,150.0,1000.0,Antibiotic,Literature,,Literature
+Sulfasalazine,O=Nc1ccc(cc1)N=NC1=CC(=NN1C2=CC=C(C=C2)S(=O)(=O)O)C(=O)O,500.0,60.0,120.0,30.0,200.0,NSAID,Literature,,Literature
+Sulindac,CC(C)C1=CC2=C(C=C1)C(=O)C=C2S(=O)CC,300.0,40.0,80.0,20.0,150.0,NSAID,Literature,,Literature
+Sultiame,CC1=CC=C(C=C1)S(=O)(=O)N,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Sunitinib,CC1=CC(=NO1)C(=O)NC1=CC=C(C=C1)C2=CC=NC3=CC=C(C=C3C2)S(=O)(=O)N,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Tacrolimus,CC1CCC(C(C1)OC(=O)C2C(C(CC3=C2CCC3)OC(=O)C(NC)C)O)O,100.0,10.0,20.0,5.0,40.0,Immunosuppressant,Literature,,Literature
+Tadalafil,CC1=CC=C(C=C1)C1=CC=NN1CC2=CC=CC=C2,2000.0,250.0,500.0,125.0,800.0,PDE5 Inhibitor,Literature,,Literature
+Tamoxifen,CC1=CC=C(C=C1)C(=O)C(C)C,500.0,50.0,100.0,25.0,200.0,SERM,Literature,,Literature
+Tamsulosin,COCC1=CC=C(C=C1)OC(C)CCNC(C)C,500.0,60.0,120.0,30.0,200.0,Alpha Blocker,Literature,,Literature
+Tapentadol,CN(C)CCC=C1C2=CC=CC=C2CCC1,400.0,40.0,80.0,20.0,150.0,Opioid,Literature,,Literature
+Tenofovir,CCCN(CC)C(=O)C(=N)N,500.0,50.0,100.0,25.0,200.0,Antiviral,Literature,,Literature
+Terazosin,CC1=CC=C(C=C1)C1=NN=C(N1)N1CCCC1,500.0,60.0,120.0,30.0,200.0,Alpha Blocker,Literature,,Literature
+Tetrabenazine,CC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,60.0,120.0,30.0,200.0,VMAT Inhibitor,Literature,,Literature
+Tetracycline,CC1C2C(C(C(C(N3C1C(C=C3O)C(=O)N)C(=O)N)O)OC(C)C2O)C(=O)N,800.0,100.0,200.0,50.0,400.0,Antibiotic,Literature,Rat,Experimental
+Thalidomide,O=C1CCC(N2C(=O)C3=CC=CC=C3C2=O)C(=O)N1,500.0,50.0,100.0,25.0,200.0,Immunomodulator,Literature,Rat,Experimental
+Theophylline,Cn1cnc2c1c(=O)n(c(=O)n2C)C,192.0,50.0,100.0,25.0,100.0,Bronchodilator,Literature,,Literature
+Thioridazine,CC1=CC=C(C=C1)C1=CC=CC=N1,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Tiagabine,CC1=CC=C(C=C1)C(=O)NCC(=O)O,1000.0,150.0,300.0,75.0,400.0,Anticonvulsant,Literature,,Literature
+Tiotropium,CC(C)(C)NCC(C1=CC=CC=C1C(O)=O)O,500.0,60.0,120.0,30.0,200.0,Anticholinergic,Literature,,Literature
+Tizanidine,CC1=CC2=C(N1C)N=C(N)S2,250.0,30.0,60.0,15.0,100.0,Muscle Relaxant,Literature,,Literature
+Tolmetin,CC(=O)C1=C(C=CC=C1)C1=CC=NN1C(=O)C,1632.0,200.0,400.0,100.0,500.0,NSAID,Literature,,Literature
+Topiramate,CC1(C)OC(=O)C(O)C(F)(F)C1C(=O)NS(=O)(=O)C,1500.0,200.0,400.0,100.0,500.0,Anticonvulsant,Literature,,Literature
+Topotecan,CC1=CC2=C(C=C1)C(=O)N1C2CCC(O)C1C(=O)O,100.0,10.0,20.0,5.0,40.0,Chemotherapy,Literature,,Literature
+Tramadol,CN(C)C(C)(C)C1=CC=CC2=C1C=CC=C2O,350.0,40.0,80.0,20.0,150.0,Opioid,Literature,Rat,Experimental
+Trametinib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Trazodone,O=C1N(CCCC1)C1=CC=C(CCl)C=C1,610.0,80.0,160.0,40.0,250.0,Antidepressant,Literature,,Literature
+Trifluoperazine,CCN(CC)CCCN1C2=CC=CC=C2SC2=C1C=C(C=C2)Cl,400.0,40.0,80.0,20.0,150.0,Antipsychotic,Literature,,Literature
+Trimethadione,CC1C(=O)OC(=O)C1(C)C,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Trimethoprim,COc1cc(C2C=Nc3ccc(OC)cc3C2)nc(N)n1,2000.0,250.0,500.0,125.0,800.0,Antibiotic,Literature,,Literature
+Valacyclovir,NC1=NC(=O)N2C(C1)C(C2)OCCOC(=O)C(C)C,5000.0,500.0,1000.0,250.0,2000.0,Antiviral,Literature,,Literature
+Valbenazine,CC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,60.0,120.0,30.0,200.0,VMAT Inhibitor,Literature,,Literature
+Valsartan,CC(C)C1=CC=C(C=C1)C(C1=CC=CC=C1)NC(=O)C1=CC=CC=C1C(=O)O,2000.0,250.0,500.0,125.0,800.0,ARB,Literature,,Literature
+Vancomycin,CC1C(C(C(CC1=O)O)N)C2=C3C=C(C=C3NC(=O)C4=C(C5=CC=CC=C5NC4=O)Cl)O2,500.0,100.0,200.0,50.0,250.0,Antibiotic,Literature,Rat,Experimental
+Varenicline,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,60.0,120.0,30.0,200.0,Nicotinic Agonist,Literature,,Literature
+Vemurafenib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature
+Venlafaxine,COCC1=CC=C(C=C1)C(C)CN(C)C,600.0,80.0,160.0,40.0,250.0,SNRI,Literature,,Literature
+Verapamil,CC(C)N(CC)C(C)CCC#CC1=CC=C(C=C1)OC,180.0,20.0,40.0,10.0,80.0,CCB,Literature,,Literature
+Vigabatrin,CC1=CC=C(C=C1)C(=O)NCC(=O)O,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+Vilazodone,CC(N)CC1=CC=CC=C1OC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,SSRI,Literature,,Literature
+Vincristine,CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C,1.5,0.5,1.0,0.25,0.8,Chemotherapy,FDA,Rat,Experimental
+Voriconazole,CC(C)(C)NC1=NC(=O)N(C1)C1=CC=C(C=C1)F,600.0,50.0,100.0,25.0,200.0,Antifungal,Literature,Rat,Experimental
+Vortioxetine,CC(N)CC1=CC=CC=C1OC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,SSRI,Literature,,Literature
+Warfarin,FC(=O)C(C)Cc1c(F)c(F)c(F)c1Cc1c(F)c(F)c(F)c1C(=O)F,323.0,5.0,10.0,2.5,50.0,Anticoagulant,Literature,Rat,Experimental
+Zidovudine,CC1C(C(N1C(=O)N)C(=O)NCO)O,2000.0,250.0,500.0,125.0,800.0,Antiviral,Literature,,Literature
+Ziprasidone,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature
+Zolpidem,CC1=CC=C(C=C1)C(=O)N(C)CCc2cccnc2,370.0,50.0,100.0,25.0,150.0,Sedative,Literature,,Literature
+phensuximide,CCC1(C)NC(=O)CC1,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature
+ prochlorperazine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,400.0,,,,,Antipsychotic,Literature,,Literature
+Abacavir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Abciximab,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Antiplatelet,Literature,,Literature
+Acepromazine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Afatinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Alectinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Alfaprodine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Alosetron,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiemetic,Literature,,Literature
+Ambenonium,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Amisulpride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Amobarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Amphotericin B,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,100.0,,,,,Antifungal,Literature,,Literature
+Anidulafungin,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Antifungal,Literature,,Literature
+Anileridine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Antazoline,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Aprobarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Arsenic Trioxide,O=[As]O[As]=O,14.6,,,,,,FDA/Literature,,Experimental
+Atezolizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Avelumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Belimumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Benperidol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Antipsychotic,Literature,,Literature
+Benralizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Benzphetamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Stimulant,Literature,,Literature
+Benztropine,CC1CCCCC1C2=CC=CC=C2O,500.0,,,,,Antiparkinson,Literature,,Literature
+Betamethasone dipropionate,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Bethanechol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinergic,Literature,,Literature
+Bevacizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Bictegravir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Biperiden,CC1CCCCC1C2=CC=CC=C2,400.0,,,,,Antiparkinson,Literature,,Literature
+Bivalirudin,SEQUENCE_NOT_SMALL_MOLECULE,50.0,,,,,Anticoagulant,Literature,,Literature
+Boceprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Bocyprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Bosutinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Bremazocine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Brigatinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Brodalumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Bromazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Bromperidol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Antipsychotic,Literature,,Literature
+Brompheniramine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Brotizolam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Budesonide,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Butabarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Butalbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Butorphanol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Carfentanil,CCC(=O)N(C1=CC=CC=C1)C1=CC=CC=C1,20.0,,,,,Opioid,Literature,,Literature
+Caspofungin,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Antifungal,Literature,,Literature
+Ceritinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Cetuximab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Ciclesonide,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Cidofovir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Cisapride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Prokinetic,Literature,,Literature
+Citalopram,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,SSRI,Literature,,Literature
+Clarithromycin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antibiotic,Literature,,Literature
+Clemastine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Clobetasol propionate,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Clorazepate,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Clotiazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Clozapine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Codeine,CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)OC,800.0,,,,,,Literature,,Experimental
+Crizotinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Cyclizine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Cyclopentobarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Dalteparin,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Anticoagulant,Literature,,Literature
+Darifenacin,CC1CCC(CC1)(C(=O)OCC2C(O)CC(O)CC2O)N3CCOCC3,1000.0,,,,,Anticholinergic,Literature,,Literature
+Dasabuvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Demecarium,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Desirudin,SEQUENCE_NOT_SMALL_MOLECULE,50.0,,,,,Anticoagulant,Literature,,Literature
+Desmopressin,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Hormone,Literature,,Literature
+Desonide,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Dexchlorpheniramine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Dextromoramide,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Dicyclomine,CC1CCC(CC1)C(=O)OCCCN(CC)CC,620.0,,,,,Anticholinergic,Literature,,Literature
+Didanosine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Diethylpropion,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Stimulant,Literature,,Literature
+Dimetacrine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,TCA,Literature,,Literature
+Diphenoxylate,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Dolasetron,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiemetic,Literature,,Literature
+Dolutegravir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Domperidone,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiemetic,Literature,,Literature
+Doravirine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Droperidol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Antipsychotic,Literature,,Literature
+Dupilumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Durvalumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Eculizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Edrophonium,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Elbasvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Emtricitabine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Enoxaparin,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Anticoagulant,Literature,,Literature
+Eptifibatide,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Antiplatelet,Literature,,Literature
+Erythromycin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antibiotic,Literature,,Literature
+Escitalopram,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,SSRI,Literature,,Literature
+Estazolam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Ethoheptazine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Famciclovir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Flumitrazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Fluocinolone acetonide,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Fluocinonide,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Flurazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Fluspirilene,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Antipsychotic,Literature,,Literature
+Fluticasone,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Fluticasone furoate,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Fluticasone propionate,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Fluvoxamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,SSRI,Literature,,Literature
+Fondaparinux,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Anticoagulant,Literature,,Literature
+Foscarnet,O=P(O)(O)C(=O)O,200.0,,,,,Antiviral,Literature,,Literature
+Galantamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Ganciclovir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Glecaprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Glycopyrrolate,C1CCC(CC1)(C(=O)OCC2C(O)CC(O)CC2O)N3CCOCC3,1000.0,,,,,Anticholinergic,Literature,,Literature
+Granisetron,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiemetic,Literature,,Literature
+Grazoprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Griseofulvin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2500.0,,,,,Antifungal,Literature,,Literature
+Guselkumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Halazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Heparin,SEQUENCE_NOT_SMALL_MOLECULE,50.0,,,,,Anticoagulant,Literature,,Literature
+Heptabarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Hexethal,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Hydroxychloroquine,CCN(CC)C(C)C(C)(C)CC(C)NC(C)C1=CC=NC=C1O,400.0,,,,,,Literature,,Experimental
+Hydroxyzine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Hyoscyamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Anticholinergic,Literature,,Literature
+Ipilimumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Isavuconazole,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antifungal,Literature,,Literature
+Isocarboxazid,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,MAOI,Literature,,Literature
+Itraconazole,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antifungal,Literature,,Literature
+Ixekizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Ledipasvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Lepirudin,SEQUENCE_NOT_SMALL_MOLECULE,50.0,,,,,Anticoagulant,Literature,,Literature
+Levocetirizine,Clc1ccc(C2CCNCC2)cc1C(=O)O,2000.0,,,,,Antihistamine,Literature,,Literature
+Levofloxacin,CC1OC2=C(C(=O)C3=CC(N4C(N1C)=C(C4)F)C=C3)C(=O)N2,1500.0,,,,,,Literature,,Experimental
+Levorphanol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Levosulpride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Loperamide,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Lorlatinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Maraviroc,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Meclizine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Medifoxamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antidepressant,Literature,,Literature
+Meperidine,CN1C(=O)CCC1C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Mepolizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Metazocine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Metronidazole,Cc1nccn1CCO[N+](=O)[O-],2500.0,,,,,,Literature,,Experimental
+Micafungin,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Antifungal,Literature,,Literature
+Moclobemide,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,1000.0,,,,,MAOI,Literature,,Literature
+Mometasone,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Mometasone furoate,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Moxifloxacin,COc1ccc(N2C(=O)C3=CC=CC=C3C2C(=O)O)nc1F,1200.0,,,,,,Literature,,Experimental
+Nalbuphine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Neostigmine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Nilotinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Nimetazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Nitrazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Nivolumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Nomifensine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Antidepressant,Literature,,Literature
+Nystatin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,10000.0,,,,,Antifungal,Literature,,Literature
+Obinutuzumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Ocrelizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Ofatumumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Ombitasvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Osimertinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Oxaflozane,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antidepressant,Literature,,Literature
+Oxazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Oxybutynin,CC1CCC(CC1)(C(=O)OCC2C(O)CC(O)CC2O)N3CCOCC3,1000.0,,,,,Anticholinergic,Literature,,Literature
+Oxytocin,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Hormone,Literature,,Literature
+Paclitaxel,CC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C,15.0,,,,,,FDA,,Experimental
+Palonosetron,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiemetic,Literature,,Literature
+Panitumumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Paracetamol,CC(=O)Nc1ccc(O)cc1,338.0,,,,,,Literature,,Experimental
+Paritaprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Paroxetine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,SSRI,Literature,,Literature
+Pembrolizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Pemoline,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Stimulant,Literature,,Literature
+Penciclovir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Penfluridol,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Penicillin G,CC1(C)S[C@@H]2C(NC(=O)[C@@H](C3=CC=CC=C3)N)C(=O)N2C1=O,250.0,,,,,,Literature,,Experimental
+Pentazocine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Pertuzumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Phenampromide,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Phenazocine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Phendimetrazine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Stimulant,Literature,,Literature
+Phenelzine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,MAOI,Literature,,Literature
+Phentermine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Stimulant,Literature,,Literature
+Pibrentasvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Pimozide,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Pipamperone,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Podophyllotoxin,COc1cc(ccc1C2CC3C(C2OC(=O)C)C4C5CC(OC6OC(C)C(C)C(C6O)O)C6OC4C3C(=O)OC,45.0,,,,,,Literature,,Experimental
+Polistirex,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Ponatinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,500.0,,,,,Chemotherapy,Literature,,Literature
+Posaconazole,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antifungal,Literature,,Literature
+Procyclidine,CC1CCCCC1C2=CC=CC=C2,400.0,,,,,Antiparkinson,Literature,,Literature
+Promazine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Propoxyphene,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Pyridostigmine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Pyrilamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Quazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Raltegravir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Raltitrexed,CC1=CC2=C(C=C1)C(=O)NCC(=O)NC2,500.0,,,,,Chemotherapy,Literature,,Literature
+Ramucirumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Ravulizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Remoxipride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Reslizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Rifampicin,CC1=NC2=C(C=O)C(=O)NC2=C1C3=CC=C(C4=C(C=CC=C4)O)C3=O,600.0,,,,,,Literature,,Experimental
+Rilpivirine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Risankizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Rivastigmine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Cholinesterase Inhibitor,Literature,,Literature
+Roxithromycin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antibiotic,Literature,,Literature
+Scopolamine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Anticholinergic,Literature,,Literature
+Secukinumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Sertindole,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Simeprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Sofosbuvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Solifenacin,CC1CCC(CC1)(C(=O)OCC2C(O)CC(O)CC2O)N3CCOCC3,1000.0,,,,,Anticholinergic,Literature,,Literature
+Spiramycin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antibiotic,Literature,,Literature
+Stavudine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Sulfonamide,NS(=O)(=O)C1=CC=C(N)C=C1,2000.0,,,,,,Literature,,Experimental
+Sulpride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Sultopride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Tacrine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Alzheimer,Literature,,Literature
+Talbutal,CCC(C)C1=C(N)C(=O)NC(=O)C1C,200.0,,,,,Barbiturate,Literature,,Literature
+Telaprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Telithromycin,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antibiotic,Literature,,Literature
+Temazepam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Terbinafine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antifungal,Literature,,Literature
+Terlipressin,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Hormone,Literature,,Literature
+Thenalidine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Tildrakizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Tirofiban,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Antiplatelet,Literature,,Literature
+Tolterodine,CC1CCC(CC1)(C(=O)OCC2C(O)CC(O)CC2O)N3CCOCC3,1000.0,,,,,Anticholinergic,Literature,,Literature
+Traltrexate,CC1=CC2=C(C=C1)C(=O)NCC(=O)NC2,500.0,,,,,Chemotherapy,Literature,,Literature
+Tranylcypromine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,MAOI,Literature,,Literature
+Trastuzumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,,,,,Biologic,Literature,,Literature
+Triamcinolone acetonide,CC1C(C(NC(=O)C1F)N1CCn2c(nc2C(F)(F)F)C1)O,2000.0,,,,,Corticosteroid,Literature,,Literature
+Triazolam,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Benzodiazepine,Literature,,Literature
+Triflupromazine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Trihexyphenidyl,CC1CCCCC1C2=CC=CC=C2,400.0,,,,,Antiparkinson,Literature,,Literature
+Trimeperidine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,200.0,,,,,Opioid,Literature,,Literature
+Trimipramine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,TCA,Literature,,Literature
+Triprolidine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antihistamine,Literature,,Literature
+Tropisetron,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiemetic,Literature,,Literature
+Trospium,CC1CCC(CC1)(C(=O)OCC2C(O)CC(O)CC2O)N3CCOCC3,1000.0,,,,,Anticholinergic,Literature,,Literature
+Valganciclovir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature
+Vaniprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Vasopressin,SEQUENCE_NOT_SMALL_MOLECULE,100.0,,,,,Hormone,Literature,,Literature
+Velpatasvir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Veralipride,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antipsychotic,Literature,,Literature
+Vinblastine,CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C,2.0,,,,,,FDA,,Experimental
+Vorapaxar,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiplatelet,Literature,,Literature
+Voxilaprevir,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,500.0,,,,,Antiviral,Literature,,Literature
+Zalcitabine,CC1C(C(C(C(N1C)CO)O)O)OC(=O)C2=CC=CC=C2,2000.0,,,,,Antiviral,Literature,,Literature

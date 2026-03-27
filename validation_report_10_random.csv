@@ -1,0 +1,11 @@
+Drug,Dataset_LD50,Google_LD50,Corrected_LD50,Notes,Status
+Sirolimus,50,>800 mg/kg,800.0,Pfizer MSDS: Rat Oral LD50 > 800 mg/kg. Our value of 50 seems too low.,❌ NEEDS CORRECTION
+Etoposide,50,1784 mg/kg,1784.0,Pfizer MSDS: Rat Oral LD50 = 1784 mg/kg. Our value of 50 is WAY off!,❌ NEEDS CORRECTION
+Itraconazole,500,>320 mg/kg,320.0,Cayman Chem: Rat Oral LD50 > 320 mg/kg. Close but needs lowering.,⚠️ NEEDS CORRECTION
+Sulfasalazine,500,"15,600 mg/kg",15600.0,"Pfizer MSDS: Rat Oral LD50 = 15,600 mg/kg. Our value of 500 is MASSIVELY wrong!",❌❌ CRITICAL ERROR
+Propranolol,565,1000-1500 mg/kg,1250.0,AstraZeneca: Rat Oral LD50 = 1000-1500 mg/kg. Needs correction upward.,⚠️ NEEDS CORRECTION
+Lorazepam,2000,4500 mg/kg (Rat),4500.0,Pfizer MSDS: Rat Oral LD50 = 4500 mg/kg. Our value is lower.,⚠️ NEEDS CORRECTION
+Mefloquine,1250,880 mg/kg,880.0,DrugBank: Rat oral LD50 = 880 mg/kg. Close but needs lowering.,⚠️ NEEDS CORRECTION
+Veralipride,500,Not widely available,500.0,Limited public data - kept as is,✅ LIKELY OK
+Ramucirumab,500,Biologic - no standard LD50,,Biologic drug - monoclonal antibody. LD50 not applicable in traditional sense.,ℹ️ BIOLOGIC
+Grazoprevir,500,Not widely available,500.0,Limited public toxicity data - kept as is,✅ LIKELY OK

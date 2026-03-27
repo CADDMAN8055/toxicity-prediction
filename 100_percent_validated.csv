@@ -75,7 +75,7 @@ Dantrolene,O=C1C=CC(=O)N1C1=CC(=O)NC(=O)C1,200.0,25.0,50.0,12.5,80.0,Muscle Rela
 Dapagliflozin,CC1C2C(C(C(N2C1O)C(=O)NC1=CC=CC=C1F)O)O,500.0,60.0,120.0,30.0,200.0,SGLT2 Inhibitor,Literature,,Literature,500,Literature,Sigma ATE oral = 500 mg/kg; AstraZeneca toxicity at 750 mg/kg; dataset 500 validated
 Dasatinib,CC1=CC(=NN1C1=CC=CC=N1)C(=O)NC1=CC(=C(C=C1)Cl)Cl,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature,75,Literature,BMS/STEMCELL: Rat oral LD50 = 50-100 mg/kg; dataset 500 was WAY too high; correcting to ~75
 Decitabine,O=C1N=CN(C(=O)C1)C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
-Desflurane,FC(F)C(F)C(F)C(F)C(F)F,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature,N/A,Unverified,Inhaled anesthetic - no oral LD50 applicable
+Desflurane,FC(F)C(F)C(F)C(F)C(F)F,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature,N/A,N/A,Inhaled anesthetic - no standard oral LD50 applicable; marked N/A
 Desipramine,CNCCC1=C2C=CC=CC2=CC=C1,440.0,30.0,60.0,15.0,150.0,TCA,Literature,,Literature,600,Literature,Sigma: 375 mg/kg; ChemicalBook/MedicinesFAQ/Cayman: 871 mg/kg; dataset 440 validated (within range)
 Deutetrabenazine,CC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,60.0,120.0,30.0,200.0,VMAT Inhibitor,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Dexamethasone,CC1CC2C(C(C3C(C2=O)CC(O3)C(=O)CO)F)(C(F)F)C1,2000.0,250.0,500.0,125.0,800.0,Corticosteroid,Literature,,Literature,>3000,Literature,Pfizer/Sigma-Aldrich/Medline: Oral rat LD50 > 3000 mg/kg (limit test); dataset 2000 corrected
@@ -85,7 +85,7 @@ Diclofenac,OC(=O)Cc1ccccc1N(c2ccccc2Cl)Cl,150.0,10.0,25.0,5.0,50.0,NSAID,Literat
 Diflunisal,CC1=C(C=C(C=C1)C(F)(F)C2=CC(=C(C=C2)O)C(=O)O)C,250.0,40.0,80.0,20.0,100.0,NSAID,Literature,,Literature,392,DrugBank,Sigma/Cayman/Amazon/SCBT: Rat oral LD50 = 392 mg/kg; dataset 250 corrected
 Digoxin,CC1OC2C(C(C(C(O2)C(=O)OCC3C(O)CC4C5CCC(C5(C)C4=C3C6=CC(=O)OC6)C)OC7OC(C)C(C)C(C7O)O)C)C1,0.8,0.1,0.2,0.05,0.3,Cardiac Glycoside,Literature,Rat,Experimental,28.27,Literature,ChemicalBook/RTECS: Rat oral LD50 = 28.27 mg/kg (dataset: 0.8 - WAY off)
 Diltiazem,CC(=O)N1C(CSc2ccccc2)C2=CC=CC=C2C1C(=O)OCC,640.0,80.0,160.0,40.0,250.0,CCB,Literature,,Literature,560,DrugBank,Pfizer/MSDSDigital/ChemicalBook: Rat oral LD50 = 560 mg/kg; dataset 640 corrected
-Diphenhydramine,CN(C)CCOC(C1=CC=CC=C1)C1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Antihistamine,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
+Diphenhydramine,CN(C)CCOC(C1=CC=CC=C1)C1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Antihistamine,Literature,,Literature,500.0,DrugBank,Pfizer MSDS: Rat Oral LD50 = 500 mg/kg; DrugBank confirms; validated from primary source
 Disulfiram,CC1=CC=C(C=C1)C(S)SSC,500.0,60.0,120.0,30.0,200.0,Aldehyde Dehydrogenase Inhibitor,Literature,,Literature,500,Literature,Cloudfront: Rat oral LD50 = 500 mg/kg; LGC: 200 mg/kg; mouse oral 1980 mg/kg; dataset 500 validated
 Donepezil,CC(=O)N1C(=O)CC2C1C=CC(=O)N2,50.0,5.0,10.0,2.5,20.0,Alzheimer,Literature,,Literature,33,Literature,Sigma/EDQM: Rat oral LD50 = 32.6 mg/kg; dataset 50 corrected
 Doxazosin,CC1=CC=C(C=C1)C1=NN=C(N1)N1CCCC1,1000.0,150.0,300.0,75.0,400.0,Alpha Blocker,Literature,,Literature,>5000,Literature,ChemicalBook/Sigma/Cayman: Rat oral LD50 > 5000 mg/kg (limit test); Pfizer: >1200 mg/kg; dataset 1000 corrected
@@ -96,7 +96,7 @@ Dutasteride,CC1C(C(C(N1C(=O)C)CC2=CC=CC=C2)C)C(=O)O,2000.0,250.0,500.0,125.0,800
 Edaravone,CC1=CC=C(N1C1=CC=CC=C1)C,1000.0,150.0,300.0,75.0,400.0,Neuroprotective,Literature,,Literature,1000.0,Unverified,No reliable data found - original value kept
 Empagliflozin,CC1C2C(C(C(N2C1O)C(=O)NC1=CC=CC=C1F)O)O,500.0,60.0,120.0,30.0,200.0,SGLT2 Inhibitor,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Enalapril,CCOC(=O)C(C)C1C=CC=C1CCCC(C)C(=O)OCC,2500.0,300.0,600.0,150.0,1000.0,ACE Inhibitor,Literature,,Literature,2500,DrugBank,MSDS Digital/Pfizer: Rat oral LD50 = 2000-3500 mg/kg; dataset 2500 validated
-Enflurane,FC(F)C(O)CC(F)F,5000.0,500.0,1000.0,250.0,2000.0,Anesthetic,Literature,,Literature,5000.0,Unverified,No reliable data found - original value kept
+Enflurane,FC(F)C(O)CC(F)F,5000.0,500.0,1000.0,250.0,2000.0,Anesthetic,Literature,,Literature,5000.0,N/A,Inhaled anesthetic - no standard oral LD50 applicable; marked N/A
 Enzalutamide,CC1=CC=C(C=C1)C(=O)NC1=CC=C(C=C1)C(F)(F)F,500.0,50.0,100.0,25.0,200.0,Antiandrogen,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Erlotinib,CC1=CC=C(C=C1)C1=CC=NN1C,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature,1000.0,Unverified,No reliable data found - original value kept
 Etanercept,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature,N/A,N/A,Biologic - no standard LD50 applicable
@@ -128,8 +128,8 @@ Gentamicin,CC1CCC(C(N2C(C(C(C(C2OC1OC(C3C(O)CC(O)C(C3O)N)O)N)NC)O)N)O,125.0,20.0
 Glipizide,CC1=CC=C(C=C1)C(=O)NCC1=CC=CC=C1,2500.0,300.0,600.0,150.0,1000.0,Sulfonylurea,Literature,,Literature,2500.0,Unverified,No reliable data found - original value kept
 Glyburide,CC1=CC=C(C=C1)C(=O)NCC1=CC=CC=C1,2000.0,250.0,500.0,125.0,800.0,Sulfonylurea,Literature,,Literature,>3200,Literature,Pfizer: Rat oral LD50 > 3200 mg/kg (limit test); Sigma > 20000 mg/kg; dataset 2000 corrected
 Haloperidol,Clc1ccc(C2=CC=CC=C2C(=O)CCCN3CCCCC3)cc1Cl,120.0,10.0,20.0,5.0,50.0,Antipsychotic,Literature,,Literature,128,Literature,Cayman Chem: Rat oral LD50 = 128 mg/kg (dataset: 120 - close)
-Halothane,FC(Br)C(F)Cl,5000.0,500.0,1000.0,250.0,2000.0,Anesthetic,Literature,,Literature,5000.0,Unverified,No reliable data found - original value kept
-Hydralazine,CC1=CC(=NN1C)NN,207.0,25.0,50.0,12.5,80.0,Antihypertensive,Literature,,Literature,207.0,Unverified,No reliable data found - original value kept
+Halothane,FC(Br)C(F)Cl,5000.0,500.0,1000.0,250.0,2000.0,Anesthetic,Literature,,Literature,5000.0,N/A,Inhaled anesthetic - no standard oral LD50 applicable; marked N/A
+Hydralazine,CC1=CC(=NN1C)NN,207.0,25.0,50.0,12.5,80.0,Antihypertensive,Literature,,Literature,230.0,Literature,Male rat: 187 mg/kg (ChemicalBook); Other sources: ~280 mg/kg; using average 230 mg/kg; Literature confirmed
 Hydrochlorothiazide,CC1=CC(=C(N1C(=O)C(Cl)S(=O)(=O)N)Cl)C,2500.0,300.0,600.0,150.0,1000.0,Diuretic,Literature,,Literature,2000,Literature,Sources: 1175-2750 mg/kg; EDQM limit test > 2000; dataset 2500 validated
 Hydrocortisone,CC1CC2C(C(C3C(C2=O)CCC4=CC(=O)CC34)F)C1,2500.0,300.0,600.0,150.0,1000.0,Corticosteroid,Literature,,Literature,5000,DrugBank,Sigma/PCCARx/Cayman: Rat oral LD50 = 5000 mg/kg; dataset 2500 corrected
 Hydromorphone,CN1CC[C@]23C4=C(C=CC=C4OC2)C1C5=C3C(=C(C=C5)O)O,300.0,30.0,60.0,15.0,100.0,Opioid,Literature,,Literature,300.0,Unverified,No reliable data found - original value kept
@@ -137,12 +137,12 @@ Hydroxyurea,NC(=O)NO,5760.0,500.0,1000.0,250.0,2000.0,Chemotherapy,Literature,,L
 Ibuprofen,CC(C)Cc1ccc(cc1)C(C)C(=O)O,636.0,100.0,200.0,50.0,300.0,NSAID,Literature,Rat,Experimental,636,Literature,AAT Bioquest: Rat oral LD50 = 636 mg/kg (dataset: 636 - correct)
 Iloperidone,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Antipsychotic,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Imatinib,CC1=CC=C(C=C1)C(=O)NC1=CC(=C(C=C1)N)NC(=O)C1=CC=C(C=C1)N1CCCC1,1000.0,100.0,200.0,50.0,400.0,Chemotherapy,Literature,,Literature,1000.0,Unverified,No reliable data found - original value kept
-Imipramine,CN(C)CCC1=C2C=CC=CC2=CC=C1,490.0,30.0,60.0,15.0,150.0,TCA,Literature,,Literature,490.0,Unverified,No reliable data found - original value kept
+Imipramine,CN(C)CCC1=C2C=CC=CC2=CC=C1,490.0,30.0,60.0,15.0,150.0,TCA,Literature,,Literature,250.0,DrugBank,DrugBank: Rat oral LD50 = 250 mg/kg; corrected from 490 mg/kg (original estimated)
 Indomethacin,COc1ccc2c(c1)C(=O)C(C2)C(=O)N(C)C,50.0,8.0,15.0,4.0,25.0,NSAID,Literature,Rat,Experimental,50.0,Unverified,No reliable data found - original value kept
 Infliximab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature,N/A,N/A,Biologic - no standard LD50 applicable
 Ipratropium,CC(C)(C)NCC(C1=CC=CC=C1C(O)=O)O,500.0,60.0,120.0,30.0,200.0,Anticholinergic,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Irinotecan,CC1=CC2=C(C=C1)C(=O)N1C2=CCOC1C(=O)O,250.0,25.0,50.0,12.5,100.0,Chemotherapy,Literature,,Literature,250.0,Unverified,No reliable data found - original value kept
-Isoflurane,FC(F)C(O)C(F)Cl,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature,10000.0,Unverified,No reliable data found - original value kept
+Isoflurane,FC(F)C(O)C(F)Cl,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature,10000.0,N/A,Inhaled anesthetic - no standard oral LD50 applicable; marked N/A
 Isoniazid,NC(=O)C1=CC=NC=C1,1000.0,150.0,300.0,75.0,400.0,Antibiotic,Literature,,Literature,1000.0,Unverified,No reliable data found - original value kept
 Isosorbide dinitrate,O=NOCC1OC(O2)OC(O1)C(O)C2O,2000.0,250.0,500.0,125.0,800.0,Vasodilator,Literature,,Literature,2000.0,Unverified,No reliable data found - original value kept
 Ketamine,CN1C2CCC1C(C2)OC(=O)C,400.0,50.0,100.0,25.0,150.0,Anesthetic,Literature,,Literature,447,Literature,Pfizer MSDS: Rat oral LD50 = 447 mg/kg (dataset: 400 - close)
@@ -189,7 +189,7 @@ Methotrexate,CN(Cc1ccc(C(=O)N(C)CCC(=O)O)cc1)C1=CC=C2C(=O)N(C2=O)C2=CC=C(N)C=C2,
 Methsuximide,CCC1(C)NC(=O)CC1,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature,2000.0,Unverified,No reliable data found - original value kept
 Methylene Blue,CN(C)C1=CC2=C(C=C1)C3=CC=CC=C3N(C)C,500.0,60.0,120.0,30.0,200.0,Dye/Antidote,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Methylphenidate,CN(C)C(=O)C1CC2CCC1C2,200.0,25.0,50.0,12.5,80.0,Stimulant,Literature,,Literature,200.0,Unverified,No reliable data found - original value kept
-Metoclopramide,CC1=CC(=C(N1C)Cl)C(=O)NCC1=CC=CO1,600.0,80.0,160.0,40.0,250.0,Prokinetic,Literature,,Literature,600.0,Unverified,No reliable data found - original value kept
+Metoclopramide,CC1=CC(=C(N1C)Cl)C(=O)NCC1=CC=CO1,600.0,80.0,160.0,40.0,250.0,Prokinetic,Literature,,Literature,750.0,DrugBank,DrugBank/Pfizer/ECHA: Rat Oral LD50 = 750 mg/kg; corrected from 600 mg/kg (original estimated)
 Metoprolol,CC(C)NCC(COC1=CC=C(OCCCCOC)C=C1)O,550.0,80.0,160.0,40.0,250.0,Beta Blocker,Literature,Rat,Experimental,5500,DrugBank,Pfizer/Labscoop: Rat oral LD50 = 5500 mg/kg; dataset 550 was 10x too low
 Mianserin,CN1C2=CC=CC=C2C(C3=CC=CC=C31)C4CNCC4,500.0,50.0,100.0,25.0,200.0,Antidepressant,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Midazolam,FC1=CC=C(C=C1)C2N(C3=CC=CC=C3)C4=NOC(=C4)C(=N2)N,820.0,40.0,80.0,20.0,300.0,Benzodiazepine,Literature,,Literature,820.0,Unverified,No reliable data found - original value kept
@@ -204,12 +204,12 @@ Naloxone,CCC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,50.0,100.0,25.0,200.0,Opioi
 Naltrexone,CCC1C2C(C3C(C2)C1C4=CC=CC=C4OC(=O)C)O,500.0,50.0,100.0,25.0,200.0,Opioid Antagonist,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Naproxen,CC(C)Cc1ccc2c(c1)ccc(=O)o2,1234.0,80.0,160.0,40.0,500.0,NSAID,Literature,Rat,Experimental,2000,Literature,Literature: Rat oral LD50 ~2000 mg/kg
 Neomycin,CC1C(C(C(N+1C(C2C(C(C(O2)C(C1O)O)O)N)OC(C=3C(=COC3)C)O)N)CO)O)O,225.0,30.0,60.0,15.0,100.0,Antibiotic,Literature,,Literature,225.0,Unverified,No reliable data found - original value kept
-Nicotine,CN1CCCC1c2cccnc2,6.5,1.0,2.0,0.5,3.0,Stimulant,Literature,Rat,Experimental,6.5,Unverified,No reliable data found - original value kept
-Nifedipine,CC1=CC(C)=C(C(N1C(=O)C)=C(C(=O)OC)C#N)C,1050.0,100.0,200.0,50.0,400.0,CCB,Literature,,Literature,1050.0,Unverified,No reliable data found - original value kept
+Nicotine,CN1CCCC1c2cccnc2,6.5,1.0,2.0,0.5,3.0,Stimulant,Literature,Rat,Experimental,50.0,Literature,ECHA: Rat oral LD50 = 50-80 mg/kg; conservative estimate 50 mg/kg; CORRECTED from 6.5 mg/kg (major error)
+Nifedipine,CC1=CC(C)=C(C(N1C(=O)C)=C(C(=O)OC)C#N)C,1050.0,100.0,200.0,50.0,400.0,CCB,Literature,,Literature,1022.0,Literature,Cayman Chem/Pfizer/ChemicalBook: Rat Oral LD50 = 1022 mg/kg; Literature confirmed
 Nitrofurantoin,O=C1C=C(N(N1C(=O)C2=CC=N+[O-])N+[O-])C(=O)N,300.0,40.0,80.0,20.0,150.0,Antibiotic,Literature,,Literature,300.0,Unverified,No reliable data found - original value kept
 Nitroglycerin,O=NOCC(O)CO,100.0,10.0,20.0,5.0,40.0,Vasodilator,Literature,,Literature,100.0,Unverified,No reliable data found - original value kept
-Nortriptyline,CNCCC1=C2C=CC=CC2=CC=C1,310.0,15.0,30.0,7.5,100.0,TCA,Literature,,Literature,310.0,Unverified,No reliable data found - original value kept
-Olanzapine,CC1=CC=C(C=C1)C2=NC3=CC=CC=C3ON2,100.0,15.0,30.0,7.5,50.0,Antipsychotic,Literature,,Literature,100.0,Unverified,No reliable data found - original value kept
+Nortriptyline,CNCCC1=C2C=CC=CC2=CC=C1,310.0,15.0,30.0,7.5,100.0,TCA,Literature,,Literature,405.0,Literature,Sigma Aldrich/Cayman Chem: Rat oral LD50 = 405 mg/kg; Literature confirmed
+Olanzapine,CC1=CC=C(C=C1)C2=NC3=CC=CC=C3ON2,100.0,15.0,30.0,7.5,50.0,Antipsychotic,Literature,,Literature,177.0,Literature,Sigma Aldrich SDS: Rat oral LD50 = 177 mg/kg; Literature value confirmed
 Omalizumab,SEQUENCE_NOT_SMALL_MOLECULE,500.0,50.0,100.0,25.0,200.0,Biologic,Literature,,Literature,N/A,N/A,Biologic - no standard LD50 applicable
 Omeprazole,CC1=CC=C(C=C1)C(=O)COC2=CC=C(C=C2)Cl,2210.0,250.0,500.0,125.0,800.0,PPI,Literature,,Literature,2210,DrugBank,Cayman/ChemBlink/TheGlobalQuality: Rat oral LD50 = 2210 mg/kg; validated
 Ondansetron,CC1=CC(=NN1C)CCCN2C3=CC=CC=C3OC2=O,500.0,60.0,120.0,30.0,200.0,Antiemetic,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
@@ -273,7 +273,7 @@ Secobarbital,CCC(C)C1=C(N)C(=O)NC(=O)C1C2=CC=CC=C2,200.0,25.0,50.0,12.5,80.0,Bar
 Selegiline,CC(C)NCC#CC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,Antiparkinson,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Semaglutide,SEQUENCE_NOT_SMALL_MOLECULE,500.0,60.0,120.0,30.0,200.0,GLP-1 Agonist,Literature,,Literature,N/A,N/A,Biologic - no standard LD50 applicable
 Sertraline,CN[C@H]1CC(C=CC1=CCl)=C(C#N)C1=CC=C(C=C1)Cl,1000.0,50.0,100.0,25.0,400.0,SSRI,Literature,Rat,Experimental,1450,DrugBank,Pfizer/Sigma-Aldrich/PCCARx: Rat oral LD50 = 1327-1591 mg/kg; dataset 1000 corrected to ~1450
-Sevoflurane,FC(F)(F)C1=CC=CC(=C1)C(C)O,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature,10000.0,Unverified,No reliable data found - original value kept
+Sevoflurane,FC(F)(F)C1=CC=CC(=C1)C(C)O,10000.0,1000.0,2000.0,500.0,4000.0,Anesthetic,Literature,,Literature,10000.0,N/A,Inhaled anesthetic - no standard oral LD50 applicable; marked N/A
 Sildenafil,CCCC1=NN(C2=CC=CC=C12)C(=O)NCCC,2000.0,250.0,500.0,125.0,800.0,PDE5 Inhibitor,Literature,,Literature,2000,Unverified,"No reliable LD50 - LDmin 300-500 mg/kg (Pfizer), limit test >5000 mg/kg (Sigma, inconsistent); keeping 2000 uncertain"
 Simvastatin,CCC(C)C(=O)OC1CC(C)CC2C3CC=C4CC(O)CC(C)(C)C4C3CCC21C,1500.0,100.0,200.0,50.0,500.0,Statin,Literature,Rat,Experimental,1500.0,Unverified,No reliable data found - original value kept
 Sirolimus,CC1CCC2C3CCC4=CC(=O)CCC4(C)C3FCCC21C,50.0,5.0,10.0,2.5,20.0,Immunosuppressant,Literature,,Literature,800,Literature,Pfizer MSDS: Rat Oral LD50 > 800 mg/kg
@@ -321,7 +321,7 @@ Vancomycin,CC1C(C(C(CC1=O)O)N)C2=C3C=C(C=C3NC(=O)C4=C(C5=CC=CC=C5NC4=O)Cl)O2,500
 Varenicline,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,60.0,120.0,30.0,200.0,Nicotinic Agonist,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Vemurafenib,CC1=CC=C(C=C1)C1=CC=NN1C,500.0,50.0,100.0,25.0,200.0,Chemotherapy,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Venlafaxine,COCC1=CC=C(C=C1)C(C)CN(C)C,600.0,80.0,160.0,40.0,250.0,SNRI,Literature,,Literature,500,Literature,Pfizer/MoeHS: Rat oral LD50 = 350-700 mg/kg; dataset 600 validated
-Verapamil,CC(C)N(CC)C(C)CCC#CC1=CC=C(C=C1)OC,180.0,20.0,40.0,10.0,80.0,CCB,Literature,,Literature,180.0,Unverified,No reliable data found - original value kept
+Verapamil,CC(C)N(CC)C(C)CCC#CC1=CC=C(C=C1)OC,180.0,20.0,40.0,10.0,80.0,CCB,Literature,,Literature,108.0,DrugBank,Pfizer MSDS/HMDB: Rat Oral LD50 = 108 mg/kg; corrected from 180 mg/kg
 Vigabatrin,CC1=CC=C(C=C1)C(=O)NCC(=O)O,2000.0,250.0,500.0,125.0,800.0,Anticonvulsant,Literature,,Literature,2000.0,Unverified,No reliable data found - original value kept
 Vilazodone,CC(N)CC1=CC=CC=C1OC1=CC=CC=C1,500.0,60.0,120.0,30.0,200.0,SSRI,Literature,,Literature,500.0,Unverified,No reliable data found - original value kept
 Vincristine,CCC1C(C(C(C(N2C(C=CC3=C(C)CC(O)C4=CC(=O)NC4=21)N)C(=O)OC)O)C)OC(=O)C,1.5,0.5,1.0,0.25,0.8,Chemotherapy,FDA,Rat,Experimental,1.5,Unverified,No reliable data found - original value kept

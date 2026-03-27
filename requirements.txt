@@ -1,0 +1,22 @@
+# Data Collection & ML
+pandas
+numpy
+scikit-learn
+xgboost
+lightgbm
+rdkit
+deepchem
+tensorflow
+torch
+torch-geometric
+transformers
+huggingface_hub
+ requests
+beautifulsoup4
+selenium
+
+# App
+streamlit
+plotly
+joblib
+openpyxl

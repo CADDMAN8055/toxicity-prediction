@@ -359,8 +359,139 @@ with tab1:
     # Run validation
     df_results, metrics = run_validation()
     
-    # Key Metrics Display
-    st.markdown("### 📈 Performance Metrics")
+    # DATA SUMMARY
+    st.markdown("## 📊 VALIDATION DATA SUMMARY")
+    st.markdown(f"""
+    | Metric | Value |
+    |--------|-------|
+    | **Total Data Points** | {metrics['Total_Samples']} compounds |
+    | **Data Sources** | FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature |
+    | **Validation Type** | Binary (Toxic/Non-Toxic) + Multi-class (5 classes) |
+    | **Toxicity Threshold** | LD50 = 500 mg/kg |
+    """)
+    
+    # Large Metrics Display
+    st.markdown("---")
+    st.markdown("## 🎯 CONFUSION MATRIX - TP / TN / FP / FN")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.markdown(f"""
+        <div style='background-color: #d4edda; padding: 20px; border-radius: 10px; text-align: center;'>
+        <h1 style='color: #155724; margin: 0;'>{metrics['TP']}</h1>
+        <p style='color: #155724; margin: 5px 0 0 0;'><b>TRUE POSITIVE</b></p>
+        <p style='color: #155724; margin: 0;'>Correctly predicted TOXIC</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""
+        <div style='background-color: #c3e6cb; padding: 20px; border-radius: 10px; text-align: center;'>
+        <h1 style='color: #0f5132; margin: 0;'>{metrics['TN']}</h1>
+        <p style='color: #0f5132; margin: 5px 0 0 0;'><b>TRUE NEGATIVE</b></p>
+        <p style='color: #0f5132; margin: 0;'>Correctly predicted NON-TOXIC</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        st.markdown(f"""
+        <div style='background-color: #f8d7da; padding: 20px; border-radius: 10px; text-align: center;'>
+        <h1 style='color: #721c24; margin: 0;'>{metrics['FP']}</h1>
+        <p style='color: #721c24; margin: 5px 0 0 0;'><b>FALSE POSITIVE</b></p>
+        <p style='color: #721c24; margin: 0;'>Predicted TOXIC but actually NON-TOXIC</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col4:
+        st.markdown(f"""
+        <div style='background-color: #f5c6cb; padding: 20px; border-radius: 10px; text-align: center;'>
+        <h1 style='color: #721c24; margin: 0;'>{metrics['FN']}</h1>
+        <p style='color: #721c24; margin: 5px 0 0 0;'><b>FALSE NEGATIVE</b></p>
+        <p style='color: #721c24; margin: 0;'>Predicted NON-TOXIC but actually TOXIC</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Confusion Matrix Table
+    st.markdown("### 📊 Confusion Matrix Table")
+    
+    cm_data = {
+        'Metric': ['Predicted TOXIC (LD50 < 500)', 'Predicted NON-TOXIC (LD50 ≥ 500)', 'TOTAL'],
+        'Actual TOXIC (LD50 < 500)': [f"**{metrics['TP']}** (TP)", f"{metrics['FN']} (FN)", f"{metrics['TP'] + metrics['FN']}"],
+        'Actual NON-TOXIC (LD50 ≥ 500)': [f"{metrics['FP']} (FP)", f"**{metrics['TN']}** (TN)", f"{metrics['FP'] + metrics['TN']}"],
+        'TOTAL': [f"{metrics['TP'] + metrics['FP']}", f"{metrics['FN'] + metrics['TN']}", f"{metrics['Total_Samples']}"]
+    }
+    
+    cm_df = pd.DataFrame(cm_data)
+    st.dataframe(cm_df, use_container_width=True, hide_index=True)
+    
+    st.markdown("---")
+    
+    # PERFORMANCE METRICS
+    st.markdown("## 📈 MODEL PERFORMANCE METRICS")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("**ACCURACY**", f"{metrics['Accuracy']}%", help="(TP+TN)/(TP+TN+FP+FN)")
+    with col2:
+        st.metric("**PRECISION**", f"{metrics['Precision']}%", help="TP/(TP+FP)")
+    with col3:
+        st.metric("**RECALL**", f"{metrics['Recall_Sensitivity']}%", help="TP/(TP+FN)")
+    with col4:
+        st.metric("**F1 SCORE**", f"{metrics['F1_Score']}%", help="2×(Precision×Recall)/(Precision+Recall)")
+    
+    col5, col6, col7, col8 = st.columns(4)
+    with col5:
+        st.metric("**SPECIFICITY**", f"{metrics['Specificity']}%", help="TN/(TN+FP)")
+    with col6:
+        st.metric("**CLASS ACCURACY**", f"{metrics['Class_Accuracy']}%", help="Correct toxicity class assignment")
+    with col7:
+        st.metric("**MAE**", f"{metrics['MAE']} mg/kg", help="Mean Absolute Error")
+    with col8:
+        st.metric("**RMSE**", f"{metrics['RMSE']} mg/kg", help="Root Mean Squared Error")
+    
+    st.markdown("---")
+    
+    # Visual Confusion Matrix
+    st.markdown("## 🎨 Visual Confusion Matrix")
+    
+    fig = go.Figure(data=go.Heatmap(
+        z=[[metrics['TP'], metrics['FP']], [metrics['FN'], metrics['TN']]],
+        x=['Predicted TOXIC', 'Predicted NON-TOXIC'],
+        y=['Actual TOXIC', 'Actual NON-TOXIC'],
+        colorscale='RdYlGn',
+        text=[[f'{metrics["TP"]}', f'{metrics["FP"]}'], [f'{metrics["FN"]}', f'{metrics["TN"]}']],
+        texttemplate='%{text}',
+        textfont={"size": 30},
+        hovertemplate='%{y}<br>%{x}<br>Count: %{text}<extra></extra>'
+    ))
+    fig.update_layout(height=350, width=450, title="Confusion Matrix Heatmap")
+    st.plotly_chart(fig, use_container_width=True)
+    
+    st.markdown("---")
+    
+    # Error Analysis
+    st.markdown("## 📉 Error Analysis")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("#### Mean Absolute Error (MAE)")
+        st.markdown(f"""
+        - **Value:** {metrics['MAE']} mg/kg
+        - **Meaning:** Average prediction error
+        - **Interpretation:** On average, predictions deviate by {metrics['MAE']} mg/kg from actual
+        """)
+    
+    with col2:
+        st.markdown("#### Mean Absolute Percentage Error (MAPE)")
+        st.markdown(f"""
+        - **Value:** {metrics['MAPE']}%
+        - **Meaning:** Average percentage error
+        - **Interpretation:** Predictions are off by {metrics['MAPE']}% on average
+        """)
+    
+    st.markdown("---")
+    
+    # Class-wise Performance
+    st.markdown("## 📊 Per-Toxicity-Class Performance")
     
     col1, col2, col3, col4 = st.columns(4)
     with col1:
@@ -618,53 +749,101 @@ with tab3:
 # ============================================================
 
 with tab4:
-    st.subheader("📥 Download Data & Reports")
+    st.subheader("📥 Download Complete Data & Reports")
+    
+    # DATA SUMMARY
+    st.markdown("## 📊 DATA SUMMARY")
+    st.markdown(f"""
+    | Metric | Value |
+    |--------|-------|
+    | **Total Data Points** | {len(df_results)} compounds |
+    | **Data Sources** | FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature |
+    | **Toxicity Values** | Actual LD50 (mg/kg) from experimental studies |
+    | **Predictions** | Model predicted LD50 using QSAR |
+    """)
+    
+    st.markdown("---")
     
     # Complete dataset
     st.markdown("### 📋 Complete Validated Dataset")
-    st.markdown(f"**{len(df_results)} compounds** with actual and predicted toxicity values")
+    st.markdown(f"**All {len(df_results)} compounds** with actual LD50, predicted LD50, and all molecular descriptors")
+    
+    # Full dataframe preview
+    display_cols = ['Drug', 'SMILES', 'Actual_LD50', 'Predicted_LD50', 'Actual_Class', 'Predicted_Class', 'Class_Correct', 'Absolute_Error', 'Pct_Error', 'MolWt', 'LogP', 'TPSA', 'Source']
+    st.dataframe(df_results[display_cols], use_container_width=True)
     
     csv = df_results.to_csv(index=False)
-    st.download_button("📥 Download Dataset (CSV)", csv, "toxicity_validated_data.csv", "text/csv")
+    st.download_button("📥 Download Complete Dataset (CSV)", csv, "toxicity_validated_data.csv", "text/csv")
+    
+    st.markdown("---")
     
     # Excel with multiple sheets
-    st.markdown("### 📊 Excel Report (Multiple Sheets)")
+    st.markdown("### 📊 Excel Report - Complete Analysis")
     
-    output_excel = "toxicity_prediction_report.xlsx"
+    output_excel = "toxicity_prediction_complete_report.xlsx"
     
-    # Create Excel writer
     from io import BytesIO
     
     buffer = BytesIO()
     with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-        # Sheet 1: Complete data
-        df_results.to_excel(writer, sheet_name='Validated_Data', index=False)
+        # Sheet 1: Complete Validation Data
+        df_results.to_excel(writer, sheet_name='1_Complete_Data', index=False)
         
-        # Sheet 2: Metrics summary
-        metrics_df = pd.DataFrame([metrics])
-        metrics_df.to_excel(writer, sheet_name='Metrics', index=False)
+        # Sheet 2: Metrics Summary
+        metrics_data = {
+            'Metric': ['Total Samples', 'True Positive (TP)', 'True Negative (TN)', 
+                      'False Positive (FP)', 'False Negative (FN)',
+                      'Accuracy (%)', 'Precision (%)', 'Recall/Sensitivity (%)', 
+                      'Specificity (%)', 'F1 Score (%)', 'Class Accuracy (%)',
+                      'MAE (mg/kg)', 'MAPE (%)', 'RMSE (mg/kg)'],
+            'Value': [metrics['Total_Samples'], metrics['TP'], metrics['TN'],
+                     metrics['FP'], metrics['FN'],
+                     metrics['Accuracy'], metrics['Precision'], metrics['Recall_Sensitivity'],
+                     metrics['Specificity'], metrics['F1_Score'], metrics['Class_Accuracy'],
+                     metrics['MAE'], metrics['MAPE'], metrics['RMSE']]
+        }
+        pd.DataFrame(metrics_data).to_excel(writer, sheet_name='2_Metrics', index=False)
         
         # Sheet 3: Confusion Matrix
-        cm_list = [
-            ['Predicted_TOXIC', 'Predicted_NON-TOXIC', 'Total'],
-            ['Actual_TOXIC', tp, fp, tp+fp],
-            ['Actual_NON-TOXIC', fn, tn, fn+tn],
-            ['Total', tp+fp, fn+tn, tp+tn+fp+fn]
-        ]
-        cm_df = pd.DataFrame(cm_list)
-        cm_df.to_excel(writer, sheet_name='Confusion_Matrix', index=False, header=False)
+        cm_data = {
+            '': ['Actual TOXIC', 'Actual NON-TOXIC', 'TOTAL'],
+            'Predicted TOXIC': [metrics['TP'], metrics['FP'], metrics['TP'] + metrics['FP']],
+            'Predicted NON-TOXIC': [metrics['FN'], metrics['TN'], metrics['FN'] + metrics['TN']],
+            'TOTAL': [metrics['TP'] + metrics['FN'], metrics['FP'] + metrics['TN'], metrics['Total_Samples']]
+        }
+        pd.DataFrame(cm_data).to_excel(writer, sheet_name='3_Confusion_Matrix', index=False)
         
-        # Sheet 4: Error analysis
+        # Sheet 4: Error Analysis
         error_df = df_results[['Drug', 'Actual_LD50', 'Predicted_LD50', 'Absolute_Error', 'Pct_Error']].sort_values('Pct_Error', ascending=False)
-        error_df.to_excel(writer, sheet_name='Error_Analysis', index=False)
+        error_df.to_excel(writer, sheet_name='4_Error_Analysis', index=False)
+        
+        # Sheet 5: Drug List with SMILES
+        drug_list = df_results[['Drug', 'SMILES', 'Actual_Class']].copy()
+        drug_list.to_excel(writer, sheet_name='5_Drug_SMILES', index=False)
     
     buffer.seek(0)
-    st.download_button("📥 Download Excel Report", buffer, output_excel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    st.download_button("📥 Download Complete Excel Report (5 Sheets)", buffer, output_excel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    
+    st.markdown("---")
     
     # Raw SMILES list
     st.markdown("### 📄 SMILES List Only")
-    smiles_csv = df_results[['Drug', 'SMILES']].to_csv(index=False)
-    st.download_button("📥 Download SMILES (CSV)", smiles_csv, "smiles_list.csv", "text/csv")
+    smiles_csv = df_results[['Drug', 'SMILES', 'Actual_LD50', 'Actual_Class']].to_csv(index=False)
+    st.download_button("📥 Download SMILES List (CSV)", smiles_csv, "drug_smiles_list.csv", "text/csv")
+    
+    st.markdown("---")
+    
+    # Performance Summary Box
+    st.markdown("## 🎯 PERFORMANCE SUMMARY")
+    st.markdown(f"""
+    | Metric | Value | Formula |
+    |--------|-------|---------|
+    | **Accuracy** | {metrics['Accuracy']}% | (TP+TN) / Total |
+    | **Precision** | {metrics['Precision']}% | TP / (TP+FP) |
+    | **Recall** | {metrics['Recall_Sensitivity']}% | TP / (TP+FN) |
+    | **F1 Score** | {metrics['F1_Score']}% | 2 × (Precision × Recall) / (Precision + Recall) |
+    | **Specificity** | {metrics['Specificity']}% | TN / (TN+FP) |
+    """)
 
 # ============================================================
 # TAB 5: INFO

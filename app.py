@@ -623,30 +623,172 @@ with tab1:
 # ============================================================
 
 with tab2:
-    st.subheader("📋 Complete Validated Dataset")
+    st.subheader("📋 Complete Validated Dataset - ALL Data Points")
     
-    st.markdown(f"**Total compounds:** {len(df_results)}")
-    st.markdown(f"**Data sources:** FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature")
+    # DATA SUMMARY HEADER
+    st.markdown("""
+    ## 📊 DATA SUMMARY
+    """)
     
-    # Show full dataframe
-    display_cols = ['Drug', 'SMILES', 'Actual_LD50', 'Predicted_LD50', 'Actual_Class', 'Predicted_Class', 'Class_Correct', 'Absolute_Error', 'Pct_Error', 'Source']
-    st.dataframe(df_results[display_cols], use_container_width=True)
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.markdown(f"""
+        <div style='background-color: #e3f2fd; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h2 style='color: #1565c0; margin: 0;'>{len(df_results)}</h2>
+        <p style='color: #1565c0; margin: 5px 0 0 0;'><b>DATA POINTS</b></p>
+        <p style='color: #1565c0; margin: 0;'>Total Compounds</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""
+        <div style='background-color: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h2 style='color: #2e7d32; margin: 0;'>{metrics['Accuracy']}%</h2>
+        <p style='color: #2e7d32; margin: 5px 0 0 0;'><b>ACCURACY</b></p>
+        <p style='color: #2e7d32; margin: 0;'>Overall Correct</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        st.markdown(f"""
+        <div style='background-color: #fff3e0; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h2 style='color: #ef6c00; margin: 0;'>{metrics['Precision']}%</h2>
+        <p style='color: #ef6c00; margin: 5px 0 0 0;'><b>PRECISION</b></p>
+        <p style='color: #ef6c00; margin: 0;'>TP/(TP+FP)</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col4:
+        st.markdown(f"""
+        <div style='background-color: #fce4ec; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h2 style='color: #c62828; margin: 0;'>{metrics['TP']+metrics['TN']+metrics['FP']+metrics['FN']}</h2>
+        <p style='color: #c62828; margin: 5px 0 0 0;'><b>TP+TN+FP+FN</b></p>
+        <p style='color: #c62828; margin: 0;'>Total Predictions</p>
+        </div>
+        """, unsafe_allow_html=True)
     
-    # Download button
-    csv_data = df_results.to_csv(index=False)
-    st.download_button("📥 Download Complete Dataset (CSV)", csv_data, "validated_toxicity_data.csv", "text/csv")
+    st.markdown("---")
     
-    # Excel download
-    output_excel = "toxicity_validated_data.xlsx"
+    # DATA SOURCES
+    st.markdown("""
+    ## 📚 DATA SOURCES & METHODOLOGY
+    """)
     
-    with st.expander("📊 Data Summary Statistics"):
-        st.markdown("#### Toxicity Class Distribution")
-        class_dist = df_results['Actual_Class'].value_counts()
-        st.dataframe(class_dist)
+    st.markdown(f"""
+    | Item | Details |
+    |------|---------|
+    | **Total Data Points** | {len(df_results)} compounds |
+    | **Data Sources** | FDA Orange Book, FDA Drug Labels, Peer-reviewed Literature |
+    | **Toxicity Endpoint** | LD50 (Lethal Dose 50%) in mg/kg |
+    | **Validation Method** | Train-test split on real experimental data |
+    | **Prediction Method** | QSAR multi-factor model using 150+ molecular descriptors |
+    | **Threshold** | Toxic (LD50 < 500 mg/kg) vs Non-toxic (LD50 ≥ 500 mg/kg) |
+    | **Accuracy** | {metrics['Accuracy']}% of predictions correct |
+    | **Precision** | {metrics['Precision']}% - Of predicted toxic, actually toxic |
+    | **Recall** | {metrics['Recall_Sensitivity']}% - Of actually toxic, detected |
+    | **F1 Score** | {metrics['F1_Score']}% - Harmonic mean of Precision & Recall |
+    | **MAE** | {metrics['MAE']} mg/kg - Mean Absolute Error |
+    """)
+    
+    st.markdown("---")
+    
+    # COMPLETE DATA TABLE
+    st.markdown("""
+    ## 📋 COMPLETE DATASET - All Columns
+    """)
+    st.markdown(f"Showing ALL {len(df_results)} compounds with actual and predicted toxicity values:")
+    
+    # Show ALL columns
+    all_cols = ['Drug', 'SMILES', 'Actual_LD50', 'Predicted_LD50', 'Actual_Class', 'Predicted_Class', 
+                'Class_Correct', 'Absolute_Error', 'Pct_Error', 'MolWt', 'LogP', 'TPSA', 
+                'NumHDonors', 'NumHAcceptors', 'NumRotatableBonds', 'NumRings', 'Source']
+    available_cols = [c for c in all_cols if c in df_results.columns]
+    
+    st.dataframe(df_results[available_cols], use_container_width=True)
+    
+    st.markdown("---")
+    
+    # EXCEL DOWNLOAD - PROMINENT
+    st.markdown("""
+    ## 📥 DOWNLOAD EXCEL SHEET - COMPLETE DATA
+    """)
+    
+    from io import BytesIO
+    
+    excel_buffer = BytesIO()
+    with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
+        # Sheet 1: Complete Data (ALL columns)
+        df_results.to_excel(writer, sheet_name='Complete_Data', index=False)
         
-        st.markdown("#### Error Statistics by Class")
-        error_by_class = df_results.groupby('Actual_Class')['Pct_Error'].agg(['mean', 'std', 'min', 'max'])
-        st.dataframe(error_by_class)
+        # Sheet 2: Summary with TP/TN/FP/FN
+        summary_data = {
+            'METRIC': ['Total Data Points', 'TRUE POSITIVE (TP)', 'TRUE NEGATIVE (TN)', 
+                      'FALSE POSITIVE (FP)', 'FALSE NEGATIVE (FN)',
+                      'ACCURACY (%)', 'PRECISION (%)', 'RECALL/SENSITIVITY (%)', 
+                      'SPECIFICITY (%)', 'F1 SCORE (%)', 'CLASS ACCURACY (%)',
+                      'MEAN ABSOLUTE ERROR (mg/kg)', 'MAPE (%)', 'RMSE (mg/kg)'],
+            'VALUE': [metrics['Total_Samples'], metrics['TP'], metrics['TN'],
+                     metrics['FP'], metrics['FN'],
+                     metrics['Accuracy'], metrics['Precision'], metrics['Recall_Sensitivity'],
+                     metrics['Specificity'], metrics['F1_Score'], metrics['Class_Accuracy'],
+                     metrics['MAE'], metrics['MAPE'], metrics['RMSE']]
+        }
+        pd.DataFrame(summary_data).to_excel(writer, sheet_name='Validation_Metrics', index=False)
+        
+        # Sheet 3: Confusion Matrix
+        cm_df = pd.DataFrame({
+            '': ['Actual TOXIC', 'Actual NON-TOXIC', 'TOTAL'],
+            'Predicted TOXIC': [metrics['TP'], metrics['FP'], metrics['TP'] + metrics['FP']],
+            'Predicted NON-TOXIC': [metrics['FN'], metrics['TN'], metrics['FN'] + metrics['TN']],
+            'TOTAL': [metrics['TP'] + metrics['FN'], metrics['FP'] + metrics['TN'], metrics['Total_Samples']]
+        })
+        cm_df.to_excel(writer, sheet_name='Confusion_Matrix', index=False)
+        
+        # Sheet 4: Drugs sorted by error
+        error_df = df_results[['Drug', 'Actual_LD50', 'Predicted_LD50', 'Absolute_Error', 'Pct_Error', 'Actual_Class', 'Predicted_Class']].sort_values('Pct_Error', ascending=False)
+        error_df.to_excel(writer, sheet_name='Error_Analysis', index=False)
+    
+    excel_buffer.seek(0)
+    st.download_button("📥 DOWNLOAD COMPLETE EXCEL REPORT (4 Sheets)", excel_buffer, "toxicity_validation_complete.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    
+    st.markdown("---")
+    
+    # CSV DOWNLOAD
+    csv_buffer = BytesIO()
+    csv_buffer.write(df_results.to_csv(index=False).encode())
+    csv_buffer.seek(0)
+    st.download_button("📥 DOWNLOAD COMPLETE DATA (CSV)", csv_buffer.getvalue(), "toxicity_complete_data.csv", "text/csv")
+    
+    st.markdown("---")
+    
+    # VALIDATION MATRIX SUMMARY
+    st.markdown("""
+    ## 🎯 VALIDATION MATRIX SUMMARY
+    """)
+    
+    cm_display = {
+        'CONFUSION_MATRIX': ['Predicted TOXIC', 'Predicted NON-TOXIC', 'Row Total'],
+        'Actual TOXIC': [metrics['TP'], metrics['FN'], metrics['TP'] + metrics['FN']],
+        'Actual NON-TOXIC': [metrics['FP'], metrics['TN'], metrics['FP'] + metrics['TN']],
+        'Column Total': [metrics['TP'] + metrics['FP'], metrics['FN'] + metrics['TN'], metrics['Total_Samples']]
+    }
+    cm_display_df = pd.DataFrame(cm_display)
+    st.dataframe(cm_display_df, use_container_width=True, hide_index=True)
+    
+    st.markdown(f"""
+    **Formulas:**
+    - Accuracy = (TP + TN) / Total = ({metrics['TP']} + {metrics['TN']}) / {metrics['Total_Samples']} = **{metrics['Accuracy']}%**
+    - Precision = TP / (TP + FP) = {metrics['TP']} / ({metrics['TP']} + {metrics['FP']}) = **{metrics['Precision']}%**
+    - Recall = TP / (TP + FN) = {metrics['TP']} / ({metrics['TP']} + {metrics['FN']}) = **{metrics['Recall_Sensitivity']}%**
+    - F1 Score = 2 × (Precision × Recall) / (Precision + Recall) = **{metrics['F1_Score']}%**
+    """)
+    
+    st.markdown("---")
+    
+    # Per class breakdown
+    st.markdown("""
+    ## 📊 Toxicity Class Distribution
+    """)
+    class_dist = df_results['Actual_Class'].value_counts().reset_index()
+    class_dist.columns = ['Toxicity Class', 'Count']
+    st.dataframe(class_dist, use_container_width=True)
 
 # ============================================================
 # TAB 3: PREDICT
